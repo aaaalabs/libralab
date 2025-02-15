@@ -1,0 +1,281 @@
+{
+  "location": {
+    "description": "Charmantes Wohnhaus in Omes, nahe Innsbruck, mit spektakulärem Bergblick. Direkt am Steilhang gelegen bietet das Haus auf drei Ebenen insgesamt 244,13m² Wohnfläche und 160,25m² Nebenflächen.",
+    "highlights": [
+      "244,13m² Wohnfläche auf drei Ebenen",
+      "160,25m² Nebenflächen",
+      "Großer Garten mit 900m²",
+      "Spektakuläre Aussicht auf die Berge",
+      "Ruhige Lage am Steilhang"
+    ],
+    "address": "Omes, nahe Innsbruck",
+    "images": [
+      "/images/epicwg/IMG_0593.webp",
+      "/images/epicwg/IMG_0828.webp",
+      "/images/epicwg/IMG_0601.webp",
+      "/images/epicwg/IMG_0669.webp"
+    ],
+    "features": {
+      "grundstueck": {
+        "flaeche": 900,
+        "typ": "Hanggrundstück",
+        "besonderheiten": [
+          "Naturbelassen",
+          "Terrassiert",
+          "Sonnige Lage"
+        ]
+      },
+      "gebaeude": {
+        "baujahr": 1973,
+        "zustand": "Gepflegt",
+        "bauweise": "Massivbauweise",
+        "energieausweis": {
+          "typ": "Bedarfsausweis",
+          "kennwert": "156 kWh/(m²·a)",
+          "klasse": "E"
+        },
+        "heizung": {
+          "typ": "Zentralheizung",
+          "energietraeger": "Gas"
+        }
+      },
+      "ausstattung": [
+        "Kabelanschluss",
+        "DSL/Glasfaser",
+        "Waschküche",
+        "Fahrradabstellplatz",
+        "Gartennutzung",
+        "Kellerraum"
+      ]
+    },
+    "infrastruktur": {
+      "entfernungen": {
+        "zentrum": 2.5,
+        "bahnhof": 1.8,
+        "autobahn": 3.2,
+        "supermarkt": 0.8,
+        "schule": 1.2,
+        "kindergarten": 1.0
+      },
+      "verkehr": [
+        "Bushaltestelle in 300m",
+        "Bahnhof in 1.8km",
+        "Gute Radweganbindung"
+      ],
+      "umgebung": [
+        "Naherholungsgebiet",
+        "Wanderwege",
+        "Mountainbike-Strecken",
+        "Cafés und Restaurants"
+      ]
+    }
+  },
+  "rooms": [
+    {
+      "id": "keller-1",
+      "title": "Kellerzimmer 1",
+      "description": "Geräumiges Zimmer im Untergeschoss mit eigenem Zugang",
+      "size": 24.82,
+      "price": 550,
+      "floor": -1,
+      "amenities": ["Tageslicht", "Separater Eingang", "Heizung"],
+      "available": true,
+      "images": ["/images/epicwg/IMG_0593.webp"]
+    },
+    {
+      "id": "keller-2",
+      "title": "Kellerzimmer 2",
+      "description": "Gemütliches Zimmer im Untergeschoss",
+      "size": 15.26,
+      "price": 450,
+      "floor": -1,
+      "amenities": ["Tageslicht", "Heizung"],
+      "available": true,
+      "images": ["/images/epicwg/IMG_0828.webp"]
+    },
+    {
+      "id": "eg-wohn",
+      "title": "Wohnzimmer EG",
+      "description": "Helles Wohnzimmer mit großen Fenstern",
+      "size": 24.82,
+      "price": 650,
+      "floor": 0,
+      "amenities": ["Große Fenster", "Zentrale Lage", "Gemeinschaftsraum"],
+      "available": true,
+      "images": ["/images/epicwg/IMG_0601.webp"]
+    },
+    {
+      "id": "eg-1",
+      "title": "Zimmer EG 1",
+      "description": "Großzügiges Zimmer im Erdgeschoss",
+      "size": 21.89,
+      "price": 600,
+      "floor": 0,
+      "amenities": ["Tageslicht", "Nähe zur Küche", "Zentrale Lage"],
+      "available": true,
+      "images": ["/images/epicwg/IMG_0669.webp"]
+    },
+    {
+      "id": "eg-2",
+      "title": "Zimmer EG 2",
+      "description": "Komfortables Zimmer im Erdgeschoss",
+      "size": 15.22,
+      "price": 450,
+      "floor": 0,
+      "amenities": ["Tageslicht", "Ruhige Lage"],
+      "available": true,
+      "images": []
+    },
+    {
+      "id": "dg-1",
+      "title": "Dachzimmer 1",
+      "description": "Großes Zimmer mit Dachschräge und tollem Ausblick",
+      "size": 28.50,
+      "price": 700,
+      "floor": 1,
+      "amenities": ["Dachfenster", "Beste Aussicht", "Ruhige Lage"],
+      "available": true,
+      "images": []
+    },
+    {
+      "id": "dg-2",
+      "title": "Dachzimmer 2",
+      "description": "Helles Zimmer im Dachgeschoss",
+      "size": 21.57,
+      "price": 600,
+      "floor": 1,
+      "amenities": ["Dachfenster", "Gute Aussicht"],
+      "available": true,
+      "images": []
+    },
+    {
+      "id": "dg-3",
+      "title": "Dachzimmer 3",
+      "description": "Gemütliches Zimmer unter dem Dach",
+      "size": 18.83,
+      "price": 550,
+      "floor": 1,
+      "amenities": ["Dachfenster", "Ruhige Lage"],
+      "available": true,
+      "images": []
+    }
+  ],
+  "commonAreas": [
+    {
+      "id": "keller-kueche",
+      "title": "Kellerküche",
+      "description": "Zusätzliche Küche im Untergeschoss",
+      "size": 10.43,
+      "features": ["Kochgelegenheit", "Stauraum"],
+      "type": "Küche",
+      "floor": -1,
+      "images": []
+    },
+    {
+      "id": "eg-kueche",
+      "title": "Hauptküche",
+      "description": "Große, zentrale Küche im Erdgeschoss",
+      "size": 6.94,
+      "features": ["Voll ausgestattet", "Gemeinsamer Treffpunkt"],
+      "type": "Küche",
+      "floor": 0,
+      "images": []
+    },
+    {
+      "id": "eg-bad-1",
+      "title": "Bad EG 1",
+      "description": "Modernes Badezimmer im Erdgeschoss",
+      "size": 4.10,
+      "features": ["Dusche", "WC", "Waschbecken"],
+      "type": "Bad",
+      "floor": 0,
+      "images": []
+    },
+    {
+      "id": "eg-bad-2",
+      "title": "Bad EG 2",
+      "description": "Zweites Badezimmer im Erdgeschoss",
+      "size": 4.10,
+      "features": ["Dusche", "WC", "Waschbecken"],
+      "type": "Bad",
+      "floor": 0,
+      "images": []
+    },
+    {
+      "id": "dg-bad",
+      "title": "Dachgeschoss Bad",
+      "description": "Helles Badezimmer unterm Dach",
+      "size": 2.88,
+      "features": ["Dusche", "WC", "Waschbecken"],
+      "type": "Bad",
+      "floor": 1,
+      "images": []
+    },
+    {
+      "id": "dg-diele",
+      "title": "Diele DG",
+      "description": "Großzügiger Eingangsbereich im Dachgeschoss",
+      "size": 10.60,
+      "features": ["Garderobe", "Verteilerfunktion"],
+      "type": "Flur",
+      "floor": 1,
+      "images": []
+    }
+  ],
+  "nebenflaechen": {
+    "keller": [
+      { "titel": "Keller", "groesse": 7.50 },
+      { "titel": "Keller", "groesse": 9.84 },
+      { "titel": "Keller", "groesse": 15.19 },
+      { "titel": "Heizung", "groesse": 7.51 },
+      { "titel": "Koks", "groesse": 3.61 }
+    ],
+    "erdgeschoss": [
+      { "titel": "Keller", "groesse": 16.15 },
+      { "titel": "Keller", "groesse": 7.56 },
+      { "titel": "Keller", "groesse": 2.38 },
+      { "titel": "Keller", "groesse": 10.24 },
+      { "titel": "Keller", "groesse": 4.18 },
+      { "titel": "Keller", "groesse": 12.25 },
+      { "titel": "Vorrat", "groesse": 12.60 }
+    ],
+    "dachgeschoss": [
+      { "titel": "Garage", "groesse": 19.44 },
+      { "titel": "Garage", "groesse": 31.80 }
+    ]
+  },
+  "wohnflaechen": {
+    "keller": [
+      { "titel": "Zimmer", "groesse": 24.82 },
+      { "titel": "Zimmer", "groesse": 15.26 },
+      { "titel": "Küche", "groesse": 10.43 },
+      { "titel": "Gang", "groesse": 3.60 },
+      { "titel": "Brause", "groesse": 3.24 },
+      { "titel": "WC", "groesse": 1.06 }
+    ],
+    "erdgeschoss": [
+      { "titel": "Wohnzimmer", "groesse": 24.82 },
+      { "titel": "Zimmer", "groesse": 21.89 },
+      { "titel": "Zimmer", "groesse": 15.22 },
+      { "titel": "Küche", "groesse": 6.94 },
+      { "titel": "Gang", "groesse": 4.96 },
+      { "titel": "Bad", "groesse": 4.10 },
+      { "titel": "Bad", "groesse": 4.10 },
+      { "titel": "Gang", "groesse": 3.72 },
+      { "titel": "Abstellraum", "groesse": 2.69 },
+      { "titel": "WC", "groesse": 1.56 },
+      { "titel": "Vorraum", "groesse": 1.56 },
+      { "titel": "WC", "groesse": 1.15 }
+    ],
+    "dachgeschoss": [
+      { "titel": "Zimmer", "groesse": 28.50 },
+      { "titel": "Zimmer", "groesse": 21.57 },
+      { "titel": "Zimmer", "groesse": 18.83 },
+      { "titel": "Diele", "groesse": 10.60 },
+      { "titel": "Gang", "groesse": 5.80 },
+      { "titel": "Garderobe", "groesse": 3.78 },
+      { "titel": "Bad", "groesse": 2.88 },
+      { "titel": "WC", "groesse": 1.05 }
+    ]
+  }
+}

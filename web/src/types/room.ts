@@ -4,6 +4,7 @@ export interface Room {
   description: string;
   size: number;
   price: number;
+  floor: number;
   available: boolean;
   amenities: string[];
   images: string[];
@@ -15,5 +16,7 @@ export interface RoomApplication {
   email: string;
   phone: string;
   message: string;
-  submittedAt: Date;
+  occupation: string;
+  moveInDate: string;
+  submittedAt: string;
 }
