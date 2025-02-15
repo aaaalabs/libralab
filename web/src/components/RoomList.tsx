@@ -1,17 +1,6 @@
 import { Grid, Title, Card } from "@tremor/react";
 import { RoomCard } from "./RoomCard";
-
-interface Room {
-  id: string;
-  title: string;
-  description: string;
-  size: number;
-  price: number;
-  floor: number;
-  available: boolean;
-  amenities: string[];
-  images: string[];
-}
+import { Room } from "../types/room";
 
 interface RoomListProps {
   rooms: Room[];
@@ -54,7 +43,9 @@ export function RoomList({ rooms, onApply }: RoomListProps) {
           <Title className="mb-4">{getFloorName(floor)}</Title>
           <Grid numItems={1} numItemsSm={2} numItemsLg={3} className="gap-6">
             {roomsByFloor[floor].map((room) => (
-              <RoomCard key={room.id} room={room} onApply={onApply} />
+              <div key={room.id} className="!cursor-zoom-in">
+                <RoomCard room={room} onApply={onApply} />
+              </div>
             ))}
           </Grid>
         </Card>

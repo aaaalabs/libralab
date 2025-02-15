@@ -1,6 +1,10 @@
-import { Card, Text, Badge, Button } from "@tremor/react";
+'use client';
+
+import { Text, Badge } from "@tremor/react";
 import { Room } from "../types/room";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import { IconWifi, IconMapPin, IconHome, IconZoomIn } from "@tabler/icons-react";
 
 interface RoomCardProps {
   room: Room;
@@ -8,54 +12,147 @@ interface RoomCardProps {
 }
 
 export function RoomCard({ room, onApply }: RoomCardProps) {
+  const defaultImage = "/images/rooms/zimmer1.webp";
+  
   return (
-    <Card className="max-w-sm mx-auto">
-      <div className="relative h-48 mb-4">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="group relative aspect-square cursor-zoom-in"
+      onClick={(e) => {
+        e.stopPropagation();
+        onApply(room.id);
+      }}
+    >
+      <div className="absolute inset-0 rounded-xl overflow-hidden shadow-lg">
         {room.images[0] ? (
           <Image
             src={room.images[0]}
             alt={room.title}
             fill
-            className="rounded-lg object-cover"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
-            <Text className="text-gray-400">Kein Bild verfügbar</Text>
-          </div>
+          <Image
+            src={defaultImage}
+            alt={room.title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />
         )}
-      </div>
-      
-      <div className="space-y-2">
-        <div className="flex justify-between items-center">
-          <Text className="font-bold">{room.title}</Text>
-          <Badge color={room.available ? "green" : "red"}>
-            {room.available ? "Verfügbar" : "Belegt"}
-          </Badge>
-        </div>
+        {/* Gradient Overlay - nur unteres Drittel */}
+        <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent" />
         
-        <Text>{room.description}</Text>
-        
-        <div className="flex justify-between items-center mt-4">
-          <Text className="font-semibold">€{room.price}/Monat</Text>
-          <Text>{room.size}m²</Text>
+        {/* Content der bei Hover ausgeblendet wird */}
+        <div className="absolute inset-0 flex flex-col justify-between p-4 z-10 transition-opacity duration-300 group-hover:opacity-0">
+          {/* Top Bar */}
+          <div className="flex justify-between items-start">
+            <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm rounded-lg px-3 py-1.5">
+              <IconWifi className="w-4 h-4 text-white" />
+              <Text className="text-sm font-medium text-white">1000 Mbps</Text>
+            </div>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              className="p-2 rounded-lg bg-black/40 backdrop-blur-sm hover:bg-black/60 transition-colors"
+            >
+              <IconHome className="w-4 h-4 text-white" />
+            </motion.div>
+          </div>
+
+          {/* Bottom Content */}
+          <div>
+            <Text className="text-2xl font-bold text-white mb-1 drop-shadow-lg">
+              {room.title}
+            </Text>
+            <div className="flex items-center gap-2 mb-2">
+              <IconMapPin className="w-4 h-4 text-white/90" />
+              <Text className="text-sm text-white/90">Innsbruck, Austria</Text>
+            </div>
+            <div className="flex items-baseline gap-1">
+              <Text className="text-3xl font-bold text-white drop-shadow-lg">€{room.price}</Text>
+              <Text className="text-sm text-white/80">/mo</Text>
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-wrap gap-2 mt-2">
-          {room.amenities.map((amenity) => (
-            <Badge key={amenity} color="blue">
-              {amenity}
-            </Badge>
-          ))}
-        </div>
+        {/* Hover Stats Overlay */}
+        <div className="absolute inset-0 bg-black/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="p-4 space-y-6">
+            {/* Internet Speed */}
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-1.5 w-fit">
+              <IconWifi className="w-4 h-4 text-white" />
+              <Text className="text-sm font-medium text-white">1000 Mbps</Text>
+            </div>
 
-        <Button 
-          className="w-full mt-4"
-          onClick={() => onApply(room.id)}
-          disabled={!room.available}
-        >
-          Jetzt bewerben
-        </Button>
+            {/* Stats */}
+            <div className="space-y-8">
+              {/* Overall Rating */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between mb-2">
+                  <Text className="text-white/90 font-medium text-lg">⭐ Overall</Text>
+                  <Text className="text-white/90 font-medium text-lg">{room.rating}/10</Text>
+                </div>
+                <div className="h-4 bg-white/10 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-yellow-400 rounded-full transition-all duration-500" 
+                    style={{ width: `${(room.rating/10) * 100}%` }} 
+                  />
+                </div>
+              </div>
+              
+              {/* Cost Rating */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between mb-2">
+                  <Text className="text-white/90 font-medium text-lg">💰 Cost</Text>
+                  <Text className="text-white/90 font-medium text-lg">{room.costRating}/10</Text>
+                </div>
+                <div className="h-4 bg-white/10 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-green-400 rounded-full transition-all duration-500" 
+                    style={{ width: `${(room.costRating/10) * 100}%` }} 
+                  />
+                </div>
+              </div>
+              
+              {/* Size Rating */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between mb-2">
+                  <Text className="text-white/90 font-medium text-lg">📏 Size</Text>
+                  <Text className="text-white/90 font-medium text-lg">{room.size}m²</Text>
+                </div>
+                <div className="h-4 bg-white/10 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-blue-400 rounded-full transition-all duration-500" 
+                    style={{ width: `${(room.size/30) * 100}%` }} 
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Amenities */}
+            <div className="flex flex-wrap gap-2">
+              {room.amenities.slice(0, 3).map((amenity) => (
+                <Badge 
+                  key={amenity}
+                  className="bg-white/10 backdrop-blur-sm text-white text-xs px-3 py-1.5 font-medium"
+                >
+                  {amenity}
+                </Badge>
+              ))}
+              {room.amenities.length > 3 && (
+                <Badge className="bg-white/10 backdrop-blur-sm text-white text-xs px-3 py-1.5 font-medium">
+                  +{room.amenities.length - 3}
+                </Badge>
+              )}
+            </div>
+
+            {/* Zoom Icon */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <IconZoomIn className="w-12 h-12 text-white/80" />
+            </div>
+          </div>
+        </div>
       </div>
-    </Card>
+    </motion.div>
   );
 }

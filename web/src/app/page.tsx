@@ -14,6 +14,9 @@ interface Room {
   available: boolean;
   amenities: string[];
   images: string[];
+  rating: number;
+  costRating: number;
+  features: string[];
 }
 
 interface CommonArea {
@@ -54,7 +57,15 @@ export default function Home() {
         const areasData = await areasRes.json();
         const locationData = await locationRes.json();
 
-        setRooms(roomsData.rooms);
+        // Transform rooms data to include required properties
+        const transformedRooms: Room[] = roomsData.rooms.map((room: any) => ({
+          ...room,
+          rating: room.rating || 4.0, // Default rating if not provided
+          costRating: room.costRating || 3.5, // Default cost rating if not provided
+          features: room.features || [], // Default empty features array if not provided
+        }));
+
+        setRooms(transformedRooms);
         setCommonAreas(areasData.commonAreas);
         setLocation(locationData.location);
       } catch (err) {

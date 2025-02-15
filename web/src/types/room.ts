@@ -8,6 +8,9 @@ export interface Room {
   available: boolean;
   amenities: string[];
   images: string[];
+  rating?: number;
+  costRating?: number;
+  features?: string[];
 }
 
 export interface RoomApplication {

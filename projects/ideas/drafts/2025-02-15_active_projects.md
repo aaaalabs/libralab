@@ -1,69 +1,36 @@
-# Aktive Projekte 2025
-
-## Projektübersicht
-
-Für jedes Projekt werden folgende Metriken erfasst:
-
-### RICE-Kennzahlen
-- **R**each: Zielgruppengröße und Marktreichweite (0-10)
-- **I**mpact: Potentieller Einfluss aufs Geschäft (0-10)
-- **C**onfidence: Sicherheit in der Schätzung (0-100%)
-- **E**ffort: Benötigter Aufwand (Personentage)
-
-### ROI-Berechnungen
-- Startinvestition (€)
-- Mtl. Zeitersparnis (Stunden)
-- Laufende Kosten (€/Monat)
-- Geschätzter Umsatz (€/Monat)
-
-### Weitere Kennzahlen
-- Time to Market (Tage)
-- Synergiepotenzial (0-10)
-- Strategischer Wert (0-10)
-
+---
+titel: ""
+datum: ""
+version: "draft"
+autor: ""
+tags: []
 ---
 
-## Projekt 1: [Projektname]
+# Projektidee: [Titel]
 
-### Status
-- [ ] Ideation
-- [ ] Planning
-- [ ] Development
-- [ ] Testing
-- [ ] Deployed
+## Basisdaten
+- **Erstellungsdatum:** [YYYY-MM-DD]
+- **Letzte Aktualisierung:** [YYYY-MM-DD]
+- **Status:** Draft
 
-### Beschreibung
-[Kurze Projektbeschreibung]
+## Kurzbeschreibung
+[Eine kurze, prägnante Beschreibung der Projektidee in 2-3 Sätzen]
 
-### Metriken
-#### RICE
-- Reach: 
-- Impact: 
-- Confidence: 
-- Effort: 
+## Problem & Motivation
+[Welches Problem soll gelöst werden? Warum ist dieses Projekt wichtig?]
 
-#### ROI
-- Startinvestition: 
-- Mtl. Zeitersparnis: 
-- Laufende Kosten: 
-- Geschätzter Umsatz: 
+## Lösungsansatz
+[Grober Ansatz zur Lösung des Problems]
 
-#### Weitere
-- Time to Market: 
-- Synergiepotenzial: 
-- Strategischer Wert: 
+## Erste Gedanken
+- **Zielgruppe:** [Wer profitiert von diesem Projekt?]
+- **Hauptvorteile:** [Wichtigste Benefits]
+- **Herausforderungen:** [Mögliche Hindernisse]
 
-### Nächste Schritte
-1. 
-2. 
-3. 
+## Nächste Schritte
+- [ ] Detaillierte Analyse durchführen
+- [ ] Evaluierungsfragen beantworten
+- [ ] Finale Version erstellen
 
-### Risiken & Mitigation
-- Risiko 1:
-  - Mitigation:
-- Risiko 2:
-  - Mitigation:
-
----
-
-[Kopieren Sie diesen Block für weitere Projekte]
+## Notizen
+[Zusätzliche Gedanken, Links, Referenzen]
