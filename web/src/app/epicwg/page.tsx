@@ -192,21 +192,6 @@ const features = [
   },
 ];
 
-const mockRoom: Room = {
-  id: "1",
-  title: "Gemütliches WG-Zimmer",
-  description: "Ein helles und freundliches Zimmer in unserer Gemeinschaft",
-  size: 18,
-  price: 450,
-  floor: 2,
-  amenities: ["Balkon", "Möbliert", "Gemeinschaftsküche"],
-  available: true,
-  images: ["/images/rooms/zimmer1.webp", "/images/rooms/zimmer2.webp"],
-  rating: 4.5,
-  costRating: 4.0,
-  features: ["Südausrichtung", "Holzböden", "Großes Fenster"]
-};
-
 export default function EpicWGPage() {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [showApplicationModal, setShowApplicationModal] = useState(false);
@@ -492,7 +477,7 @@ export default function EpicWGPage() {
         <div id="rooms" className="scroll-mt-8 mb-16">
           <Title className="text-2xl font-bold mb-8" id="rooms">Verfügbare Zimmer</Title>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[mockRoom, ...epicwgData.rooms].map((room) => (
+            {epicwgData.rooms.map((room) => (
               <RoomCard 
                 key={room.id} 
                 room={room} 

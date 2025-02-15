@@ -1,14 +1,14 @@
 {
   "location": {
-    "description": "Charmantes Wohnhaus in Omes, nahe Innsbruck, mit spektakulärem Bergblick. Direkt am Steilhang gelegen bietet das Haus auf drei Ebenen insgesamt 244,13m² Wohnfläche und 160,25m² Nebenflächen.",
+    "description": "Charming residential house in Omes, near Innsbruck, with spectacular mountain views. Located directly on the hillside, the house offers a total of 244.13m² of living space and 160.25m² of additional space across three levels.",
     "highlights": [
-      "244,13m² Wohnfläche auf drei Ebenen",
-      "160,25m² Nebenflächen",
-      "Großer Garten mit 900m²",
-      "Spektakuläre Aussicht auf die Berge",
-      "Ruhige Lage am Steilhang"
+      "244.13m² living space on three levels",
+      "160.25m² additional space",
+      "Large garden with 900m²",
+      "Spectacular mountain views",
+      "Quiet hillside location"
     ],
-    "address": "Omes, nahe Innsbruck",
+    "address": "Omes, near Innsbruck",
     "images": [
       "/images/epicwg/IMG_0906.webp",
       "/images/epicwg/IMG_0828.webp",
@@ -18,34 +18,34 @@
     "features": {
       "grundstueck": {
         "flaeche": 900,
-        "typ": "Hanggrundstück",
+        "typ": "Hillside property",
         "besonderheiten": [
-          "Naturbelassen",
-          "Terrassiert",
-          "Sonnige Lage"
+          "Natural state",
+          "Terraced",
+          "Sunny location"
         ]
       },
       "gebaeude": {
         "baujahr": 1973,
-        "zustand": "Gepflegt",
-        "bauweise": "Massivbauweise",
+        "zustand": "Well-maintained",
+        "bauweise": "Solid construction",
         "energieausweis": {
-          "typ": "Bedarfsausweis",
+          "typ": "Energy performance certificate",
           "kennwert": "156 kWh/(m²·a)",
           "klasse": "E"
         },
         "heizung": {
-          "typ": "Zentralheizung",
+          "typ": "Central heating",
           "energietraeger": "Gas"
         }
       },
       "ausstattung": [
-        "Kabelanschluss",
-        "DSL/Glasfaser",
-        "Waschküche",
-        "Fahrradabstellplatz",
-        "Gartennutzung",
-        "Kellerraum"
+        "Cable connection",
+        "DSL/Fiber optic",
+        "Laundry room",
+        "Bicycle storage",
+        "Garden access",
+        "Basement storage"
       ]
     },
     "infrastruktur": {
@@ -58,210 +58,230 @@
         "kindergarten": 1.0
       },
       "verkehr": [
-        "Bushaltestelle in 300m",
-        "Bahnhof in 1.8km",
-        "Gute Radweganbindung"
+        "Bus stop within 300m",
+        "Train station 1.8km away",
+        "Good cycling connections"
       ],
       "umgebung": [
-        "Naherholungsgebiet",
-        "Wanderwege",
-        "Mountainbike-Strecken",
-        "Cafés und Restaurants"
+        "Local recreation area",
+        "Hiking trails",
+        "Mountain bike trails",
+        "Cafés and restaurants"
       ]
     }
   },
   "rooms": [
     {
       "id": "keller-1",
-      "title": "Gemütlicher Kellerraum",
-      "description": "Heller Kellerraum mit separatem Eingang",
+      "title": "Cozy Basement Room",
+      "description": "Bright basement room with separate entrance",
       "size": 15,
       "price": 350,
       "floor": -1,
-      "amenities": ["Tageslicht", "Separater Eingang", "Heizung"],
+      "amenities": ["Natural light", "Separate entrance", "Heating"],
       "available": true,
-      "images": ["/images/rooms/zimmer1.webp", "/images/rooms/zimmer2.webp"],
+      "images": ["/images/rooms/zimmer1.webp"],
       "rating": 4.5,
       "costRating": 4.0,
-      "features": ["Südausrichtung", "Holzböden", "Großes Fenster"]
+      "features": ["South-facing", "Wooden floors", "Large window"]
     },
     {
       "id": "keller-2",
-      "title": "Heller Kellerraum",
-      "description": "Geräumiger Kellerraum mit viel Tageslicht",
+      "title": "Bright Basement Room",
+      "description": "Spacious basement room with plenty of natural light",
       "size": 18,
       "price": 380,
       "floor": -1,
-      "amenities": ["Tageslicht", "Heizung"],
+      "amenities": ["Natural light", "Heating"],
       "available": true,
-      "images": ["/images/rooms/zimmer3.webp", "/images/rooms/zimmer4.webp"],
+      "images": ["/images/rooms/zimmer2.webp"],
       "rating": 4.2,
       "costRating": 4.5,
-      "features": ["Gartenzugang", "Laminatboden", "Einbauschrank"]
+      "features": ["Garden access", "Laminate flooring", "Built-in wardrobe"]
     },
     {
       "id": "eg-wohn",
-      "title": "Großes Wohnzimmer",
-      "description": "Helles Wohnzimmer im Erdgeschoss",
+      "title": "Large Living Room",
+      "description": "Bright living room on the ground floor",
       "size": 25,
       "price": 500,
       "floor": 0,
-      "amenities": ["Große Fenster", "Zentrale Lage", "Gemeinschaftsraum"],
+      "amenities": ["Large windows", "Central location", "Common room"],
       "available": true,
-      "images": ["/images/rooms/zimmer5.webp", "/images/rooms/zimmer6.webp"],
+      "images": ["/images/rooms/zimmer3.webp"],
       "rating": 4.5,
       "costRating": 4.0,
-      "features": ["Südausrichtung", "Holzböden", "Großes Fenster"]
+      "features": ["South-facing", "Wooden floors", "Large window"]
     },
     {
       "id": "eg-1",
-      "title": "Zimmer im Erdgeschoss",
-      "description": "Praktisches Zimmer nahe der Küche",
+      "title": "Ground Floor Room",
+      "description": "Practical room near the kitchen",
       "size": 16,
       "price": 420,
       "floor": 0,
-      "amenities": ["Tageslicht", "Nähe zur Küche", "Zentrale Lage"],
+      "amenities": ["Natural light", "Near kitchen", "Central location"],
       "available": true,
-      "images": ["/images/rooms/zimmer7.webp", "/images/rooms/zimmer8.webp"],
+      "images": ["/images/rooms/zimmer4.webp"],
       "rating": 4.2,
       "costRating": 4.5,
-      "features": ["Gartenzugang", "Laminatboden", "Einbauschrank"]
+      "features": ["Garden access", "Laminate flooring", "Built-in wardrobe"]
     },
     {
       "id": "eg-2",
-      "title": "Ruhiges Zimmer",
-      "description": "Entspanntes Zimmer im Erdgeschoss",
+      "title": "Quiet Room",
+      "description": "Relaxing room on the ground floor",
       "size": 14,
       "price": 380,
       "floor": 0,
-      "amenities": ["Tageslicht", "Ruhige Lage"],
+      "amenities": ["Natural light", "Quiet location"],
       "available": true,
-      "images": ["/images/rooms/zimmer9.webp", "/images/rooms/zimmer10.webp"],
+      "images": ["/images/rooms/zimmer5.webp"],
       "rating": 4.5,
       "costRating": 4.0,
-      "features": ["Südausrichtung", "Holzböden", "Großes Fenster"]
+      "features": ["South-facing", "Wooden floors", "Large window"]
     },
     {
       "id": "dg-1",
-      "title": "Dachgeschoss mit Aussicht",
-      "description": "Traumhaftes Zimmer unter dem Dach",
+      "title": "Attic Room with View",
+      "description": "Dream room under the roof",
       "size": 20,
       "price": 480,
       "floor": 1,
-      "amenities": ["Dachfenster", "Beste Aussicht", "Ruhige Lage"],
+      "amenities": ["Skylight", "Best view", "Quiet location"],
       "available": true,
-      "images": ["/images/rooms/zimmer11.webp", "/images/rooms/zimmer12.webp"],
+      "images": ["/images/rooms/zimmer6.webp"],
       "rating": 4.2,
       "costRating": 4.5,
-      "features": ["Gartenzugang", "Laminatboden", "Einbauschrank"]
+      "features": ["Garden access", "Laminate flooring", "Built-in wardrobe"]
     },
     {
       "id": "dg-2",
-      "title": "Helles Dachzimmer",
-      "description": "Großes Zimmer im Dachgeschoss",
+      "title": "Bright Attic Room",
+      "description": "Large room in the attic",
       "size": 22,
       "price": 520,
       "floor": 1,
-      "amenities": ["Dachfenster", "Gute Aussicht"],
+      "amenities": ["Skylight", "Good view"],
       "available": true,
-      "images": ["/images/rooms/zimmer1.webp", "/images/rooms/zimmer2.webp"],
+      "images": ["/images/rooms/zimmer7.webp"],
       "rating": 4.5,
       "costRating": 4.0,
-      "features": ["Südausrichtung", "Holzböden", "Großes Fenster"]
+      "features": ["South-facing", "Wooden floors", "Large window"]
     },
     {
       "id": "dg-3",
-      "title": "Gemütliches Dachzimmer",
-      "description": "Kleines, aber feines Zimmer unter dem Dach",
+      "title": "Cozy Attic Room",
+      "description": "Small but fine room under the roof",
       "size": 19,
       "price": 460,
       "floor": 1,
-      "amenities": ["Dachfenster", "Ruhige Lage"],
+      "amenities": ["Skylight", "Quiet location"],
       "available": true,
-      "images": ["/images/rooms/zimmer3.webp", "/images/rooms/zimmer4.webp"],
+      "images": ["/images/rooms/zimmer8.webp"],
       "rating": 4.2,
       "costRating": 4.5,
-      "features": ["Gartenzugang", "Laminatboden", "Einbauschrank"]
+      "features": ["Garden access", "Laminate flooring", "Built-in wardrobe"]
     }
   ],
   "commonAreas": [
     {
       "id": "keller-kueche",
-      "title": "Kellerküche",
-      "description": "Zusätzliche Küche im Untergeschoss",
+      "title": "Coworking Space",
+      "description": "Spacious coworking area in the basement with kitchen facilities",
       "size": 10.43,
-      "features": ["Kochgelegenheit", "Stauraum"],
-      "type": "Küche",
+      "features": [
+        "High-speed internet",
+        "Multiple workstations",
+        "Coffee station",
+        "Meeting area",
+        "Kitchen facilities"
+      ],
+      "type": "CommunitySpace",
       "floor": -1,
-      "images": []
+      "images": ["/images/rooms/gemeinschaftsraum1.webp"],
+      "isSpecial": true,
+      "included": true,
+      "rating": 4.8,
+      "amenities": ["24/7 access", "High-speed WiFi", "Coffee & Tea"]
     },
     {
       "id": "eg-kueche",
-      "title": "Hauptküche",
-      "description": "Große, zentrale Küche im Erdgeschoss",
+      "title": "Community Kitchen",
+      "description": "Modern, fully equipped kitchen and social hub",
       "size": 6.94,
-      "features": ["Voll ausgestattet", "Gemeinsamer Treffpunkt"],
-      "type": "Küche",
+      "features": [
+        "Professional appliances",
+        "Dining area",
+        "Social space",
+        "Storage space",
+        "Coffee bar"
+      ],
+      "type": "CommunitySpace",
       "floor": 0,
-      "images": []
+      "images": ["/images/rooms/gemeinschaftsraum2.webp"],
+      "isSpecial": true,
+      "included": true,
+      "rating": 4.9,
+      "amenities": ["Full equipment", "Social events", "Storage space"]
     },
     {
       "id": "eg-bad-1",
-      "title": "Bad EG 1",
-      "description": "Modernes Badezimmer im Erdgeschoss",
-      "size": 4.10,
-      "features": ["Dusche", "WC", "Waschbecken"],
-      "type": "Bad",
+      "title": "Ground Floor Bathroom 1",
+      "description": "Modern bathroom on the ground floor",
+      "size": 4.1,
+      "features": ["Shower", "WC", "Sink"],
+      "type": "Bathroom",
       "floor": 0,
-      "images": []
+      "images": ["/images/rooms/zimmer11.webp"]
     },
     {
       "id": "eg-bad-2",
-      "title": "Bad EG 2",
-      "description": "Zweites Badezimmer im Erdgeschoss",
-      "size": 4.10,
-      "features": ["Dusche", "WC", "Waschbecken"],
-      "type": "Bad",
+      "title": "Ground Floor Bathroom 2",
+      "description": "Second bathroom on the ground floor",
+      "size": 4.1,
+      "features": ["Shower", "WC", "Sink"],
+      "type": "Bathroom",
       "floor": 0,
-      "images": []
+      "images": ["/images/rooms/zimmer12.webp"]
     },
     {
       "id": "dg-bad",
-      "title": "Dachgeschoss Bad",
-      "description": "Helles Badezimmer unterm Dach",
+      "title": "Attic Bathroom",
+      "description": "Bright bathroom under the roof",
       "size": 2.88,
-      "features": ["Dusche", "WC", "Waschbecken"],
-      "type": "Bad",
+      "features": ["Shower", "WC", "Sink"],
+      "type": "Bathroom",
       "floor": 1,
-      "images": []
+      "images": ["/images/rooms/gemeinschaftsraum1.webp"]
     },
     {
       "id": "dg-diele",
-      "title": "Diele DG",
-      "description": "Großzügiger Eingangsbereich im Dachgeschoss",
-      "size": 10.60,
-      "features": ["Garderobe", "Verteilerfunktion"],
-      "type": "Flur",
+      "title": "Attic Hallway",
+      "description": "Spacious entrance area in the attic",
+      "size": 10.6,
+      "features": ["Wardrobe", "Distribution area"],
+      "type": "Hallway",
       "floor": 1,
-      "images": []
+      "images": ["/images/rooms/gemeinschaftsraum2.webp"]
     }
   ],
   "nebenflaechen": {
     "keller": [
-      { "titel": "Keller", "groesse": 7.50 },
-      { "titel": "Keller", "groesse": 9.84 },
-      { "titel": "Keller", "groesse": 15.19 },
-      { "titel": "Heizung", "groesse": 7.51 },
-      { "titel": "Koks", "groesse": 3.61 }
+      { "titel": "Basement", "groesse": 7.50 },
+      { "titel": "Basement", "groesse": 9.84 },
+      { "titel": "Basement", "groesse": 15.19 },
+      { "titel": "Heating", "groesse": 7.51 },
+      { "titel": "Storage", "groesse": 3.61 }
     ],
     "erdgeschoss": [
-      { "titel": "Keller", "groesse": 16.15 },
-      { "titel": "Keller", "groesse": 7.56 },
-      { "titel": "Keller", "groesse": 2.38 },
-      { "titel": "Keller", "groesse": 10.24 },
-      { "titel": "Keller", "groesse": 4.18 },
-      { "titel": "Keller", "groesse": 12.25 },
-      { "titel": "Vorrat", "groesse": 12.60 }
+      { "titel": "Basement", "groesse": 16.15 },
+      { "titel": "Basement", "groesse": 7.56 },
+      { "titel": "Basement", "groesse": 2.38 },
+      { "titel": "Basement", "groesse": 10.24 },
+      { "titel": "Basement", "groesse": 4.18 },
+      { "titel": "Basement", "groesse": 12.25 },
+      { "titel": "Storage", "groesse": 12.60 }
     ],
     "dachgeschoss": [
       { "titel": "Garage", "groesse": 19.44 },
@@ -270,36 +290,104 @@
   },
   "wohnflaechen": {
     "keller": [
-      { "titel": "Zimmer", "groesse": 24.82 },
-      { "titel": "Zimmer", "groesse": 15.26 },
-      { "titel": "Küche", "groesse": 10.43 },
-      { "titel": "Gang", "groesse": 3.60 },
-      { "titel": "Brause", "groesse": 3.24 },
+      { "titel": "Room", "groesse": 24.82 },
+      { "titel": "Room", "groesse": 15.26 },
+      { "titel": "Kitchen", "groesse": 10.43 },
+      { "titel": "Hallway", "groesse": 3.60 },
+      { "titel": "Shower", "groesse": 3.24 },
       { "titel": "WC", "groesse": 1.06 }
     ],
     "erdgeschoss": [
-      { "titel": "Wohnzimmer", "groesse": 24.82 },
-      { "titel": "Zimmer", "groesse": 21.89 },
-      { "titel": "Zimmer", "groesse": 15.22 },
-      { "titel": "Küche", "groesse": 6.94 },
-      { "titel": "Gang", "groesse": 4.96 },
-      { "titel": "Bad", "groesse": 4.10 },
-      { "titel": "Bad", "groesse": 4.10 },
-      { "titel": "Gang", "groesse": 3.72 },
-      { "titel": "Abstellraum", "groesse": 2.69 },
+      { "titel": "Living Room", "groesse": 24.82 },
+      { "titel": "Room", "groesse": 21.89 },
+      { "titel": "Room", "groesse": 15.22 },
+      { "titel": "Kitchen", "groesse": 6.94 },
+      { "titel": "Hallway", "groesse": 4.96 },
+      { "titel": "Bathroom", "groesse": 4.10 },
+      { "titel": "Bathroom", "groesse": 4.10 },
+      { "titel": "Hallway", "groesse": 3.72 },
+      { "titel": "Storage", "groesse": 2.69 },
       { "titel": "WC", "groesse": 1.56 },
-      { "titel": "Vorraum", "groesse": 1.56 },
+      { "titel": "Entrance", "groesse": 1.56 },
       { "titel": "WC", "groesse": 1.15 }
     ],
     "dachgeschoss": [
-      { "titel": "Zimmer", "groesse": 28.50 },
-      { "titel": "Zimmer", "groesse": 21.57 },
-      { "titel": "Zimmer", "groesse": 18.83 },
-      { "titel": "Diele", "groesse": 10.60 },
-      { "titel": "Gang", "groesse": 5.80 },
-      { "titel": "Garderobe", "groesse": 3.78 },
-      { "titel": "Bad", "groesse": 2.88 },
+      { "titel": "Room", "groesse": 28.50 },
+      { "titel": "Room", "groesse": 21.57 },
+      { "titel": "Room", "groesse": 18.83 },
+      { "titel": "Hallway", "groesse": 10.60 },
+      { "titel": "Hallway", "groesse": 5.80 },
+      { "titel": "Wardrobe", "groesse": 3.78 },
+      { "titel": "Bathroom", "groesse": 2.88 },
       { "titel": "WC", "groesse": 1.05 }
+    ]
+  },
+  "earlyBirdCampaign": {
+    "goal": 8000,
+    "currentAmount": 0,
+    "endDate": "2025-03-31T23:59:59+02:00",
+    "startDate": "2025-02-15T00:00:00+01:00",
+    "tiers": [
+      {
+        "id": "pioneer",
+        "title": "EpicWG Pioneer",
+        "minDeposit": 500,
+        "discount": 15,
+        "maxSlots": 5,
+        "remainingSlots": 5,
+        "perks": [
+          "15% off monthly rent for 6 months",
+          "Priority room selection",
+          "Exclusive Pioneer community events",
+          "Free laundry for 6 months",
+          "Limited edition EpicWG merch pack"
+        ]
+      },
+      {
+        "id": "early-adopter",
+        "title": "Early Adopter",
+        "minDeposit": 300,
+        "discount": 10,
+        "maxSlots": 8,
+        "remainingSlots": 8,
+        "perks": [
+          "10% off monthly rent for 4 months",
+          "Early room selection after Pioneers",
+          "Free laundry for 3 months",
+          "EpicWG welcome pack"
+        ]
+      },
+      {
+        "id": "community",
+        "title": "Community Member",
+        "minDeposit": 200,
+        "discount": 5,
+        "maxSlots": 12,
+        "remainingSlots": 12,
+        "perks": [
+          "5% off monthly rent for 3 months",
+          "Free laundry for 1 month",
+          "EpicWG sticker pack"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How does the deposit work?",
+        "answer": "Your deposit secures your spot and will be deducted from your first month's rent. It's fully refundable until March 31st, 2025."
+      },
+      {
+        "question": "When do I choose my room?",
+        "answer": "Room selection starts in order of tier level (Pioneer first) and deposit date within each tier."
+      },
+      {
+        "question": "What happens if the campaign goal isn't reached?",
+        "answer": "All deposits will be fully refunded if we don't reach our €8,000 goal by March 31st, 2025."
+      },
+      {
+        "question": "Can I upgrade my tier later?",
+        "answer": "Yes, you can upgrade to a higher tier if slots are still available, paying only the difference in deposit."
+      }
     ]
   }
 }

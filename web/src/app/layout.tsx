@@ -1,12 +1,10 @@
+'use client';
+
 import './globals.css';
 import { Inter } from 'next/font/google';
+import { CampaignProvider } from '../context/CampaignContext';
 
 const inter = Inter({ subsets: ['latin'] });
-
-export const metadata = {
-  title: 'EpicWG Omes - Dein neues Zuhause mit Bergblick',
-  description: 'Entdecke einzigartige WG-Zimmer in Omes mit spektakulärem Bergblick, großzügigen Gemeinschaftsräumen und einer lebendigen Community.',
-};
 
 export default function RootLayout({
   children,
@@ -14,9 +12,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de">
+    <html lang="en">
       <body className={inter.className}>
-        {children}
+        <CampaignProvider initialAmount={400}>
+          {children}
+        </CampaignProvider>
       </body>
     </html>
   );

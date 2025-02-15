@@ -1,14 +1,26 @@
 'use client';
 
 import { Text, Badge } from "@tremor/react";
-import { Room } from "../types/room";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { IconWifi, IconMapPin, IconHome, IconZoomIn } from "@tabler/icons-react";
+import { IconWifi, IconMapPin, IconCircleFilled, IconStar, IconCurrencyEuro } from "@tabler/icons-react";
 
 interface RoomCardProps {
-  room: Room;
-  onApply: (roomId: string) => void;
+  room: {
+    id: string;
+    title: string;
+    description: string;
+    size: number;
+    price: number;
+    floor: number;
+    amenities: string[];
+    available: boolean;
+    images: string[];
+    rating?: number;
+    costRating?: number;
+    features: string[];
+  };
+  onApply?: (roomId: string) => void;
 }
 
 export function RoomCard({ room, onApply }: RoomCardProps) {
@@ -21,7 +33,7 @@ export function RoomCard({ room, onApply }: RoomCardProps) {
       className="group relative aspect-square cursor-zoom-in"
       onClick={(e) => {
         e.stopPropagation();
-        onApply(room.id);
+        onApply?.(room.id);
       }}
     >
       <div className="absolute inset-0 rounded-xl overflow-hidden shadow-lg">
@@ -53,9 +65,12 @@ export function RoomCard({ room, onApply }: RoomCardProps) {
             </div>
             <motion.div
               whileHover={{ scale: 1.1 }}
-              className="p-2 rounded-lg bg-black/40 backdrop-blur-sm hover:bg-black/60 transition-colors"
+              className="flex items-center gap-2 bg-black/40 backdrop-blur-sm rounded-lg px-3 py-1.5 hover:bg-black/60 transition-colors"
             >
-              <IconHome className="w-4 h-4 text-white" />
+              <IconCircleFilled className={`w-4 h-4 ${room.available ? 'text-green-400' : 'text-red-400'}`} />
+              <Text className="text-white font-medium">
+                {room.available ? 'Noch frei' : 'Reserviert'}
+              </Text>
             </motion.div>
           </div>
 
@@ -86,33 +101,33 @@ export function RoomCard({ room, onApply }: RoomCardProps) {
 
             {/* Stats */}
             <div className="space-y-8">
-              {/* Overall Rating */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between mb-2">
-                  <Text className="text-white/90 font-medium text-lg">⭐ Overall</Text>
-                  <Text className="text-white/90 font-medium text-lg">{room.rating}/10</Text>
+              {/* Rating Stars */}
+              {room.rating !== undefined && (
+                <div className="flex items-center gap-1 mb-2">
+                  {[...Array(5)].map((_, index) => (
+                    <IconStar
+                      key={index}
+                      className={`w-4 h-4 ${
+                        index < (room.rating || 0) ? 'text-yellow-400' : 'text-gray-300'
+                      }`}
+                    />
+                  ))}
                 </div>
-                <div className="h-4 bg-white/10 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-yellow-400 rounded-full transition-all duration-500" 
-                    style={{ width: `${(room.rating/10) * 100}%` }} 
-                  />
-                </div>
-              </div>
-              
+              )}
+
               {/* Cost Rating */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between mb-2">
-                  <Text className="text-white/90 font-medium text-lg">💰 Cost</Text>
-                  <Text className="text-white/90 font-medium text-lg">{room.costRating}/10</Text>
+              {room.costRating !== undefined && (
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(3)].map((_, index) => (
+                    <IconCurrencyEuro
+                      key={index}
+                      className={`w-4 h-4 ${
+                        index < (room.costRating || 0) ? 'text-green-500' : 'text-gray-300'
+                      }`}
+                    />
+                  ))}
                 </div>
-                <div className="h-4 bg-white/10 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-green-400 rounded-full transition-all duration-500" 
-                    style={{ width: `${(room.costRating/10) * 100}%` }} 
-                  />
-                </div>
-              </div>
+              )}
               
               {/* Size Rating */}
               <div className="space-y-2">
@@ -148,7 +163,7 @@ export function RoomCard({ room, onApply }: RoomCardProps) {
 
             {/* Zoom Icon */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <IconZoomIn className="w-12 h-12 text-white/80" />
+              <IconCircleFilled className="w-12 h-12 text-white/80" />
             </div>
           </div>
         </div>
