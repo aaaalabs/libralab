@@ -1,0 +1,53 @@
+{
+  "systemPrompt": "Du bist ein Windsurf Coding Assistant, der die unternehmerische Denkweise und das Entscheidungstalent erfolgreicher Unternehmer wie Alex Hormozi und führender IT-Startup-Influencer von Y Combinator verkörpert. Deine Aufgabe ist es, eingehende Projektideen von Thomas zu analysieren, unter Berücksichtigung folgender Parameter: RICE-Kennzahlen (Reach, Impact, Confidence, Effort), ROI-Berechnungen (Startinvestition, mtl. Zeitersparnis, laufende Kosten, geschätzter Umsatz), Time to Market, Synergiepotenzial sowie strategischer Wert. Bestehende Projekte und Ressourcen werden aus einer lokalen JSON-Datei geladen. Die Ergebnisse werden als fester BJSON-Output ausgegeben und in einem Next.js Dashboard visualisiert. Bei jedem neuen Projekt stellst du gezielte Fragen, um alle relevanten KPIs zu erfassen. Dein Ziel ist es, objektive, datengetriebene Empfehlungen für kurzfristigen, mittelfristigen und langfristigen unternehmerischen Erfolg zu liefern.",
+  "metrics": {
+    "RICE": {
+      "Reach": {
+        "weight": 0.3,
+        "description": "Erreichte Zielgruppengröße und Marktreichweite"
+      },
+      "Impact": {
+        "weight": 0.4,
+        "description": "Potentieller Einfluss auf das Geschäft"
+      },
+      "Confidence": {
+        "weight": 0.2,
+        "description": "Sicherheit in der Schätzung der Wirkung"
+      },
+      "Effort": {
+        "weight": -0.1,
+        "description": "Benötigter Aufwand (Zeit, Ressourcen)"
+      }
+    },
+    "ROI": {
+      "StartInvestition": {
+        "weight": 0.5,
+        "description": "Initiale Investitionskosten"
+      },
+      "MtlZeitersparnis": {
+        "weight": 0.2,
+        "description": "Erwartete monatliche Zeitersparnis"
+      },
+      "LaufendeKosten": {
+        "weight": -0.3,
+        "description": "Laufende Betriebskosten"
+      },
+      "GeschätzterUmsatz": {
+        "weight": 0.6,
+        "description": "Erwarteter Umsatz"
+      }
+    },
+    "TimeToMarket": {
+      "maxDays": 180,
+      "description": "Tage bis zur Markteinführung"
+    },
+    "Synergie": {
+      "threshold": 0.5,
+      "description": "Bewertung der Synergieeffekte mit bestehenden Projekten"
+    }
+  },
+  "evaluationPriority": {
+    "initial": "Kurzfristige Erfolge mit mittelfristigen Synergie-Vorteilen",
+    "longTerm": "Langfristiger unternehmerischer Erfolg"
+  }
+}

@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Resources Schema",
+    "type": "object",
+    "properties": {
+      "projekte": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "name": { "type": "string" },
+            "RICE": {
+              "type": "object",
+              "properties": {
+                "Reach": { "type": "number" },
+                "Impact": { "type": "number" },
+                "Confidence": { "type": "number" },
+                "Effort": { "type": "number" }
+              },
+              "required": ["Reach", "Impact", "Confidence", "Effort"]
+            },
+            "ROI": {
+              "type": "object",
+              "properties": {
+                "StartInvestition": { "type": "number" },
+                "MtlZeitersparnis": { "type": "number" },
+                "LaufendeKosten": { "type": "number" },
+                "GeschätzterUmsatz": { "type": "number" }
+              },
+              "required": ["StartInvestition", "MtlZeitersparnis", "LaufendeKosten", "GeschätzterUmsatz"]
+            },
+            "TimeToMarket": { "type": "number" },
+            "Synergie": { "type": "number" }
+          },
+          "required": ["id", "name", "RICE", "ROI", "TimeToMarket", "Synergie"]
+        }
+      },
+      "ressourcen": {
+        "type": "object",
+        "properties": {
+          "zeit": { "type": "string" },
+          "budget": { "type": "number" }
+        },
+        "required": ["zeit", "budget"]
+      }
+    },
+    "required": ["projekte", "ressourcen"]
+  }

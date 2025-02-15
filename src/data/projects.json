@@ -1,0 +1,133 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "name": "E-Commerce Platform",
+      "description": "Online-Handelsplattform für digitale Produkte",
+      "createdAt": "2025-02-15T00:00:00Z",
+      "updatedAt": "2025-02-15T00:00:00Z",
+      "status": "pending",
+      "metrics": {
+        "RICE": {
+          "Reach": {
+            "weight": 0.3,
+            "value": 85,
+            "description": "Große potenzielle Nutzerbasis"
+          },
+          "Impact": {
+            "weight": 0.4,
+            "value": 90,
+            "description": "Hoher Geschäftseinfluss"
+          },
+          "Confidence": {
+            "weight": 0.2,
+            "value": 75,
+            "description": "Gute Marktkenntnisse"
+          },
+          "Effort": {
+            "weight": -0.1,
+            "value": 60,
+            "description": "Mittlerer Entwicklungsaufwand"
+          }
+        },
+        "ROI": {
+          "StartInvestition": {
+            "weight": 0.5,
+            "value": 40,
+            "description": "Moderate Anfangsinvestition"
+          },
+          "MtlZeitersparnis": {
+            "weight": 0.2,
+            "value": 70,
+            "description": "Signifikante Automatisierung"
+          },
+          "LaufendeKosten": {
+            "weight": -0.3,
+            "value": 30,
+            "description": "Geringe laufende Kosten"
+          },
+          "GeschätzterUmsatz": {
+            "weight": 0.6,
+            "value": 85,
+            "description": "Hohes Umsatzpotenzial"
+          }
+        },
+        "TimeToMarket": {
+          "maxDays": 180,
+          "value": 90,
+          "description": "Mittlere Entwicklungszeit"
+        },
+        "Synergie": {
+          "threshold": 0.5,
+          "value": 0.8,
+          "description": "Hohe Synergie mit bestehenden Systemen"
+        }
+      }
+    },
+    {
+      "id": "EPICWG-2025-02",
+      "name": "Epic Workflow Generator",
+      "description": "KI-gestütztes System zur automatischen Generierung und Optimierung von Arbeitsabläufen",
+      "createdAt": "2025-02-15T00:00:00Z",
+      "updatedAt": "2025-02-15T00:00:00Z",
+      "status": "pending",
+      "metrics": {
+        "RICE": {
+          "Reach": {
+            "weight": 0.3,
+            "value": 85,
+            "description": "Hohe Skalierbarkeit durch breite Anwendbarkeit"
+          },
+          "Impact": {
+            "weight": 0.4,
+            "value": 90,
+            "description": "Signifikante Effizienzsteigerung und Kosteneinsparung"
+          },
+          "Confidence": {
+            "weight": 0.2,
+            "value": 75,
+            "description": "Starke technische Basis, moderate Komplexität"
+          },
+          "Effort": {
+            "weight": -0.1,
+            "value": 60,
+            "description": "Moderater Entwicklungsaufwand"
+          }
+        },
+        "ROI": {
+          "StartInvestition": {
+            "weight": 0.5,
+            "value": 40,
+            "description": "40.000€ Initialinvestition"
+          },
+          "MtlZeitersparnis": {
+            "weight": 0.2,
+            "value": 70,
+            "description": "120 Stunden pro Team/Monat"
+          },
+          "LaufendeKosten": {
+            "weight": -0.3,
+            "value": 25,
+            "description": "2.500€ monatlich"
+          },
+          "GeschätzterUmsatz": {
+            "weight": 0.6,
+            "value": 85,
+            "description": "15.000€ monatlich erwartet"
+          }
+        },
+        "TimeToMarket": {
+          "maxDays": 180,
+          "value": 90,
+          "description": "3 Monate bis zur Markteinführung"
+        },
+        "Synergie": {
+          "threshold": 0.5,
+          "value": 0.8,
+          "description": "Hohe Synergien mit bestehenden Tools"
+        }
+      },
+      "notes": "Empfehlung: Sofort umsetzen aufgrund hoher Scores und starker Synergieeffekte"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "projectConfig": {
+    "name": "libralab-dashboard",
+    "version": "1.0.0",
+    "environment": "development"
+  },
+  "services": {
+    "hosting": {
+      "provider": "local",
+      "config": {
+        "framework": "next.js",
+        "port": 3000
+      }
+    },
+    "storage": {
+      "type": "local",
+      "config": {
+        "dataPath": "src/data",
+        "format": "json"
+      }
+    },
+    "visualization": {
+      "libraries": {
+        "recharts": {
+          "version": "^2.10.0",
+          "components": ["LineChart", "BarChart", "PieChart", "AreaChart"]
+        },
+        "tremor": {
+          "version": "^3.0.0",
+          "components": ["Card", "Metric", "BarList", "DonutChart"]
+        }
+      }
+    }
+  },
+  "development": {
+    "typescript": {
+      "strict": true,
+      "target": "es2022",
+      "lib": ["dom", "dom.iterable", "esnext"],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
+    }
+  }
+}

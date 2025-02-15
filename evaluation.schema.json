@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Evaluation Output Schema",
+    "type": "object",
+    "properties": {
+      "projektId": { "type": "string" },
+      "evaluationsDatum": { "type": "string", "format": "date-time" },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "RICE": {
+            "type": "object",
+            "properties": {
+              "Reach": { "type": "number" },
+              "Impact": { "type": "number" },
+              "Confidence": { "type": "number" },
+              "Effort": { "type": "number" }
+            },
+            "required": ["Reach", "Impact", "Confidence", "Effort"]
+          },
+          "ROI": {
+            "type": "object",
+            "properties": {
+              "StartInvestition": { "type": "number" },
+              "MtlZeitersparnis": { "type": "number" },
+              "LaufendeKosten": { "type": "number" },
+              "GeschätzterUmsatz": { "type": "number" }
+            },
+            "required": ["StartInvestition", "MtlZeitersparnis", "LaufendeKosten", "GeschätzterUmsatz"]
+          },
+          "TimeToMarket": { "type": "number" },
+          "Synergie": { "type": "number" },
+          "gesamtScore": { "type": "number" }
+        },
+        "required": ["RICE", "ROI", "TimeToMarket", "Synergie", "gesamtScore"]
+      },
+      "empfehlung": {
+        "type": "object",
+        "properties": {
+          "kurzfristig": { "type": "string" },
+          "mittelfristig": { "type": "string" },
+          "langfristig": { "type": "string" }
+        },
+        "required": ["kurzfristig", "mittelfristig", "langfristig"]
+      }
+    },
+    "required": ["projektId", "evaluationsDatum", "metrics", "empfehlung"]
+  }
