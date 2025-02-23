@@ -31,10 +31,10 @@ export function TopNav() {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
     >
       <nav className={`navbar-transparent ${isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-sm' : 'bg-transparent'} ${isScrolled ? 'scrolled' : ''}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto pl-4 sm:pl-6 lg:pl-8 pr-4 sm:pr-6 lg:pr-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center">
               <div className="relative h-8 w-32">
                 {/* Dark mode logo - visible when not scrolled */}
                 <Image

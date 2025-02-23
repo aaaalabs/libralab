@@ -29,7 +29,7 @@ export function AnimatedHero() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight"
           >
-            <span className="text-[#EBDBC3]">{t('hero.more_than_a')} </span>
+            <span className="text-[#EBDBC3] block">{t('hero.more_than_a')} </span>
             <FlipWords 
               words={words} 
               className="text-[#D09467] drop-shadow-lg"
