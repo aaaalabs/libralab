@@ -3,7 +3,7 @@
 import { Text, Badge } from "@tremor/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { IconWifi, IconMapPin, IconCircleFilled, IconStar, IconCurrencyEuro, IconZoomIn, IconRuler } from "@tabler/icons-react";
+import { IconMapPin, IconCircleFilled, IconStar, IconCurrencyEuro, IconZoomIn, IconRuler } from "@tabler/icons-react";
 
 interface RoomCardProps {
   room: {
@@ -15,11 +15,13 @@ interface RoomCardProps {
     floor: string;
     amenities: string[];
     available: boolean;
+    availableFrom?: string;
     images: string[];
     rating?: number;
     costRating?: number;
     features: string[];
   };
+  onSelect?: () => void;
   onApply?: (roomId: string) => void;
 }
 
@@ -37,9 +39,20 @@ const getLocationDescription = (room: RoomCardProps['room']) => {
   return location;
 };
 
-export function RoomCard({ room, onApply }: RoomCardProps) {
+export function RoomCard({ room, onSelect, onApply }: RoomCardProps) {
   const defaultImage = "/images/rooms/zimmer1.webp";
-  
+
+  // Format the date if available
+  const formatAvailableDate = (date?: string) => {
+    if (!date) return "Available";
+    const formattedDate = new Date(date).toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+    return `Available from ${formattedDate}`;
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -47,6 +60,7 @@ export function RoomCard({ room, onApply }: RoomCardProps) {
       className="group relative aspect-square cursor-zoom-in"
       onClick={(e) => {
         e.stopPropagation();
+        onSelect?.();
         onApply?.(room.id);
       }}
     >
@@ -72,18 +86,14 @@ export function RoomCard({ room, onApply }: RoomCardProps) {
         {/* Front Side Content */}
         <div className="absolute inset-0 flex flex-col justify-between p-4 z-10 transition-opacity duration-300 group-hover:opacity-0">
           {/* Top Bar */}
-          <div className="flex justify-between items-start">
-            <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm rounded-lg px-3 py-1.5">
-              <IconWifi className="w-4 h-4 text-white" />
-              <Text className="text-sm font-medium text-white">1000 Mbps</Text>
-            </div>
+          <div className="flex justify-end items-start">
             <motion.div
               whileHover={{ scale: 1.1 }}
               className="flex items-center gap-2 bg-black/40 backdrop-blur-sm rounded-lg px-3 py-1.5 hover:bg-black/60 transition-colors"
             >
               <IconCircleFilled className={`w-4 h-4 ${room.available ? 'text-green-400' : 'text-red-400'}`} />
               <Text className="text-white font-medium">
-                {room.available ? 'Available' : 'Booked'}
+                {room.available ? formatAvailableDate(room.availableFrom) : 'Booked'}
               </Text>
             </motion.div>
           </div>

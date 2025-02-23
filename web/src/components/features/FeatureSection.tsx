@@ -83,8 +83,8 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
                 src={imageUrl}
                 alt={title}
                 className="rounded-2xl shadow-2xl w-full h-full object-cover"
-                width={1200}
-                height={510}
+                fill={true}
+                priority={true}
               />
             </motion.div>
           )}

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   IconMenu2,
   IconX,
@@ -16,6 +17,7 @@ import {
 export const FloatingNav = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,8 +31,8 @@ export const FloatingNav = () => {
 
   const navItems = [
     {
-      label: 'Limited Time Offer',
-      href: '/offer',
+      label: 'Pre-Seed Investment',
+      href: '/preseed',
       icon: IconStarsFilled,
       highlight: true
     },
@@ -80,7 +82,10 @@ export const FloatingNav = () => {
                       <Link
                         key={item.label}
                         href={item.href}
+                        onClick={() => setIsOpen(false)}
                         className={`flex items-center gap-3 px-6 py-3 hover:bg-gray-50 transition-colors ${
+                          pathname === item.href ? 'bg-gray-50' : ''
+                        } ${
                           item.highlight ? 'text-blue-600 font-medium' : 'text-gray-700'
                         }`}
                       >

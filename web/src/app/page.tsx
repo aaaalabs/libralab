@@ -1,5 +1,6 @@
 'use client';
 
+// Start IMPORTS COMPONENT
 import { useState } from 'react';
 import { useCampaign } from '../context/CampaignContext';
 import { Card, Text, Metric, Button, Badge, Title, AreaChart, DonutChart, BarList, Color } from "@tremor/react";
@@ -41,19 +42,19 @@ import { IconButton } from "../components/ui/icon-button";
 import { RoomCard } from "../components/RoomCard";
 import { CampaignProgress } from "../components/ui/campaign-progress";
 import { useToast } from "../components/ui/use-toast";
-import { FoundersEliteCard } from "../components/FoundersEliteCard";
 import { useTranslation } from '@/context/TranslationContext';
 import { TranslationKeys } from '@/types/i18n';
-import { TierSlot } from '../types/tier';
 import { AiFaq } from '@/components/AiFaq';
-import { BenefitValues } from '@/components/BenefitValues';
 import { VideoBackground } from "../components/ui/video-background";
 import { FeatureSection } from '@/components/features/FeatureSection';
 import { features } from '@/data/features';
-import { FloatingNav } from '@/components/navigation/FloatingNav';
 import Link from 'next/link';
 import { VideoPlayer } from "../components/ui/video-player";
+import { Footer } from "../components/layout/Footer";
+import { StickyNav } from '@/components/navigation/StickyNav';
+// End IMPORTS COMPONENT
 
+// Start ANIMATION VARIANTS COMPONENT
 // Animation Variants
 const containerVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -66,7 +67,9 @@ const containerVariants = {
     }
   }
 };
+// End ANIMATION VARIANTS COMPONENT
 
+// Start DATA COMPONENT
 const aiTrends = [
   { label: "#MultimodalAI", color: "bg-indigo-500" },
   { label: "#AIAgents", color: "bg-purple-500" },
@@ -162,7 +165,9 @@ const featureData = [
     cta: "View calendar"
   },
 ];
+// End DATA COMPONENT
 
+// Start TYPES COMPONENT
 type Tier = {
   id: string;
   title: string;
@@ -177,17 +182,21 @@ type Tier = {
   availableNow: boolean;
   tag: string;
 };
+// End TYPES COMPONENT
 
 export default function EpicWGPage() {
+  // Start STATE AND HOOKS COMPONENT
   const { t, currentLanguage, isLoading: isTranslationLoading } = useTranslation();
   const { toast } = useToast();
-  const [selectedTier, setSelectedTier] = useState<Tier | null>(null);
-  const { currentAmount, addDeposit, isLoading: isLoadingCampaign, tierSlots } = useCampaign();
+  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
+  const { currentAmount, addDeposit, isLoading: isLoadingCampaign } = useCampaign();
   const [isProcessing, setIsProcessing] = useState(false);
   const [showApplicationModal, setShowApplicationModal] = useState(false);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  // End STATE AND HOOKS COMPONENT
 
+  // Start HANDLERS COMPONENT
   const toggleCard = (cardId: string) => {
     setExpandedCard(expandedCard === cardId ? null : cardId);
   };
@@ -197,7 +206,7 @@ export default function EpicWGPage() {
     try {
       const success = await addDeposit(tier.id, tier.deposit);
       if (success) {
-        setSelectedTier(tier);
+        setSelectedRoom(null);
         setShowApplicationModal(true);
       } else {
         toast({
@@ -218,10 +227,10 @@ export default function EpicWGPage() {
   };
 
   const handleConfirmReservation = async () => {
-    if (!selectedTier) return;
+    if (!selectedRoom) return;
     
     setIsProcessing(true);
-    const success = await addDeposit(selectedTier.id, selectedTier.deposit);
+    const success = await addDeposit(selectedRoom.id, selectedRoom.deposit);
     setIsProcessing(false);
     
     if (success) {
@@ -234,8 +243,10 @@ export default function EpicWGPage() {
       });
     }
   };
+  // End HANDLERS COMPONENT
 
   return (
+    // Start MAIN LAYOUT COMPONENT
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section - Improved */}
       <div className="relative h-screen">
@@ -245,64 +256,6 @@ export default function EpicWGPage() {
         />
         
         <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-8 md:px-12 lg:px-16">
-          {/* Top Navigation Bar */}
-          <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-6 sm:px-8 md:px-12 lg:px-16 py-6">
-            <Link href="/" className="flex items-center gap-2">
-              <Image
-                src="/sync_logo03.svg"
-                alt="Libra Lab Logo"
-                width={64}
-                height={64}
-                className="w-16 h-16"
-              />
-            </Link>
-            <LanguagePicker />
-          </div>
-
-          {/* Sticky Navigation */}
-          <motion.div
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            className="fixed top-0 left-0 right-0 z-50 hidden"
-            style={{
-              backdropFilter: 'blur(10px)',
-              backgroundColor: 'rgba(255, 255, 255, 0.8)',
-            }}
-            id="stickyNav"
-          >
-            <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-              <Link href="/" className="flex items-center gap-2">
-                <Image
-                  src="/sync_logo02.svg"
-                  alt="Libra Lab Logo"
-                  width={64}
-                  height={64}
-                  className="w-16 h-16"
-                />
-              </Link>
-              
-              <div className="flex items-center gap-6">
-                <nav className="hidden md:flex items-center gap-6">
-                  <Link href="#tiers" className="text-sm font-medium text-gray-700 hover:text-gray-900">
-                    Pricing
-                  </Link>
-                  <Link href="#rooms" className="text-sm font-medium text-gray-700 hover:text-gray-900">
-                    Rooms
-                  </Link>
-                  <Link href="#tech-hub" className="text-sm font-medium text-gray-700 hover:text-gray-900">
-                    Tech Hub
-                  </Link>
-                </nav>
-                <Link
-                  href="#rooms"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-                >
-                  Explore rooms
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-
           {/* Main Value Proposition */}
           <div className="max-w-4xl mx-auto text-center text-white">
             <motion.div
@@ -372,26 +325,13 @@ export default function EpicWGPage() {
         </div>
       </div>
 
-      {/* Add scroll listener for sticky nav */}
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          window.addEventListener('scroll', () => {
-            const nav = document.getElementById('stickyNav');
-            if (nav) {
-              if (window.scrollY > window.innerHeight - 100) {
-                nav.classList.remove('hidden');
-              } else {
-                nav.classList.add('hidden');
-              }
-            }
-          });
-        `
-      }} />
+      {/* Sticky Navigation */}
+      <StickyNav />
 
       {/* Featured Rooms Section */}
-      <div className="py-24 px-6 sm:px-8 md:px-12 lg:px-16 bg-white">
+      <div className="py-16 px-6 sm:px-8 md:px-12 lg:px-16 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-end mb-12">
+          <div className="flex justify-between items-end mb-8">
             <div>
               <h2 className="text-3xl font-bold mb-4">Featured Spaces</h2>
               <p className="text-gray-600">Handpicked rooms for tech professionals</p>
@@ -405,7 +345,7 @@ export default function EpicWGPage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {epicwgData.rooms.slice(0, 3).map((room, index) => (
               <motion.div
                 key={room.id}
@@ -473,11 +413,11 @@ export default function EpicWGPage() {
       </div>
 
       {/* Tech Innovation Hub Section */}
-      <div className="py-24 px-6 sm:px-8 md:px-12 lg:px-16 bg-gradient-to-b from-gray-50 to-white">
+      <div className="py-16 px-6 sm:px-8 md:px-12 lg:px-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <motion.h2 
-              className="text-4xl md:text-5xl font-bold mb-6"
+              className="text-4xl font-bold mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
@@ -494,14 +434,14 @@ export default function EpicWGPage() {
           </div>
 
           {/* Tech Community Stats - Integrated with Context */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {communityStats.map((stat, index) => (
               <motion.div
                 key={stat.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + index * 0.1 }}
-                className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100"
+                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
               >
                 <div className="flex items-start gap-4 mb-4">
                   <div className="p-3 rounded-lg bg-blue-50">
@@ -518,14 +458,14 @@ export default function EpicWGPage() {
           </div>
 
           {/* Tech Benefits Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featureData.map((feature, index) => (
               <motion.div
                 key={feature.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-3 rounded-lg bg-blue-50">
@@ -550,48 +490,70 @@ export default function EpicWGPage() {
       {/* Feature Sections */}
       <div className="mb-32">
         {features.map((feature, index) => {
-          // Special handling for Innsbruck section with video
-          if (feature.title.includes("Innsbruck")) {
+          // Special handling for video sections
+          const videoMap = {
+            "Deep Work, Maximum Focus": "/videos/deepwork.mp4",
+            "AI Innovation Hub & Tech Community": "/videos/startup.mp4",
+            "Innsbruck – Where Innovation Meets Adventure": "/videos/scenic/alps-ski.mp4"
+          };
+          
+          const videoSrc = videoMap[feature.title];
+          if (videoSrc) {
+            const isMiddleSection = feature.title === "AI Innovation Hub & Tech Community";
+            
             return (
               <div key={feature.title} className="py-24 overflow-hidden">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5 }}
-                      className="space-y-6"
-                    >
-                      <h2 className="text-3xl font-bold">{feature.title}</h2>
-                      <p className="text-gray-600 text-lg">{feature.description}</p>
-                      <div className="grid sm:grid-cols-2 gap-8 mt-8">
-                        {feature.groups.map((group) => (
-                          <div key={group.title}>
-                            <h3 className="font-semibold mb-4">{group.title}</h3>
+                <div className="container mx-auto px-4">
+                  <div className={`flex flex-col lg:flex-row items-center gap-12 ${isMiddleSection ? 'lg:flex-row-reverse' : ''}`}>
+                    {/* Content */}
+                    <div className="flex-1 space-y-8">
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <h2 className="text-3xl font-bold mb-4">{feature.title}</h2>
+                        <p className="text-gray-600 text-lg mb-8">{feature.description}</p>
+                      </motion.div>
+
+                      <div className="grid sm:grid-cols-2 gap-8">
+                        {feature.groups.map((group, idx) => (
+                          <motion.div
+                            key={group.title}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            className="space-y-4"
+                          >
+                            <h3 className="text-xl font-semibold text-gray-800">{group.title}</h3>
                             <ul className="space-y-3">
-                              {group.features.map((item) => (
-                                <li key={item.title} className="flex items-center gap-2">
-                                  {item.icon && <item.icon className="w-5 h-5 text-blue-500" />}
-                                  <span>{item.title}</span>
+                              {group.features.map((item, featureIdx) => (
+                                <li key={featureIdx} className="flex items-start gap-2">
+                                  {item.icon && <item.icon className="w-5 h-5 text-blue-500 mt-1" />}
+                                  <span className="text-gray-600">{item.title}</span>
                                 </li>
                               ))}
                             </ul>
-                          </div>
+                          </motion.div>
                         ))}
                       </div>
-                    </motion.div>
-                    
+                    </div>
+
+                    {/* Video */}
                     <motion.div
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
+                      transition={{ duration: 0.5 }}
+                      className="relative flex-1"
+                      style={{ aspectRatio: '2.35/1' }}
                     >
                       <VideoPlayer
-                        src="/videos/scenic/alps-ski.mp4"
+                        src={videoSrc}
                         aspectRatio="2.35:1"
-                        className="shadow-2xl rounded-2xl overflow-hidden"
+                        className="rounded-2xl shadow-2xl w-full h-full"
                       />
                     </motion.div>
                   </div>
@@ -611,121 +573,79 @@ export default function EpicWGPage() {
         })}
       </div>
 
-      {/* Community Benefits */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="container mx-auto px-4 sm:px-6 lg:px-8 py-24"
-      >
-        <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-          Unsere Benefits
-        </h2>
-        <BenefitValues />
-      </motion.div>
+      {/* Pre-Seed Investment Round */}
+      <div className="relative bg-[#2E4555] py-10 sm:py-14">
+        <div className="absolute inset-0 bg-grid-white/5 bg-[size:16px] contrast-50 opacity-10" />
+        <div className="container relative mx-auto max-w-4xl px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <Badge 
+              color="amber" 
+              className="mb-3 ring-1 ring-amber-500/30"
+            >
+              Limited Time Opportunity
+            </Badge>
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Join Our Pre-Seed Investment Round
+            </h2>
+            <p className="text-lg text-gray-300 mb-6 max-w-2xl mx-auto">
+              Become a founding member and secure exclusive lifetime benefits worth €11,600+
+            </p>
+          </motion.div>
+          
+          <motion.div 
+            className="max-w-lg mx-auto mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <CampaignProgress 
+              goal={8000}
+              currentAmount={400}
+              endDate="2025-03-31T23:59:59+02:00"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+          >
+            <Link 
+              href="/preseed" 
+              className="group inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300"
+            >
+              View Pre-Seed Offer
+              <IconArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
+        </div>
+      </div>
 
       {/* Pricing Section */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-          Pricing
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">
+          Choose Your Room
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {epicwgData.rooms.map((room) => (
-            <RoomCard 
-              key={room.id} 
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {epicwgData.rooms.map((room: Room) => (
+            <RoomCard
+              key={room.id}
               room={room}
+              onSelect={() => setSelectedRoom(room)}
             />
           ))}
         </div>
       </div>
 
-      {/* Early Bird Section */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="mb-16 bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <Badge color="blue" size="xl" className="mb-4">{isTranslationLoading ? '...' : t(TranslationKeys.LIMITED_TIME_OFFER)}</Badge>
-                <Title className="text-3xl mb-2">{isTranslationLoading ? '...' : t(TranslationKeys.EARLY_BIRD_PRE_BOOKING)}</Title>
-                <Text className="mb-6">
-                  {isTranslationLoading ? '...' : t(TranslationKeys.EARLY_BIRD_DESCRIPTION)}
-                </Text>
-              </div>
-              <div className="text-right">
-                <Text className="text-sm text-gray-500">{isTranslationLoading ? '...' : t(TranslationKeys.CAMPAIGN_ENDS)}</Text>
-                <Text className="text-xl font-semibold text-gray-900">March 31st, 2025</Text>
-              </div>
-            </div>
-
-            {/* Progress Bar */}
-            <CampaignProgress 
-              currentAmount={currentAmount}
-              goal={epicwgData.earlyBirdCampaign.goal}
-              endDate={epicwgData.earlyBirdCampaign.endDate}
-              isLoading={isLoadingCampaign}
-            />
-
-            {/* Tier Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              {epicwgData.earlyBirdCampaign.tiers.map((tier: Tier) => {
-                const tierSlot = tierSlots.find((slot) => slot.tierId === tier.id);
-                const isSoldOut = tierSlot ? tierSlot.usedSlots >= tierSlot.maxSlots : false;
-                const remainingSlots = tierSlot ? tierSlot.maxSlots - tierSlot.usedSlots : tier.maxSlots;
-
-                return (
-                  <Card 
-                    key={tier.id}
-                    className={`overflow-hidden transition-all duration-200 ${
-                      tier.id === 'pioneer' ? 'border-2 border-blue-500 shadow-lg' : ''
-                    } ${isSoldOut ? 'opacity-50' : ''}`}
-                  >
-                    {tier.id === 'pioneer' && (
-                      <div className="bg-blue-500 text-white text-center text-sm py-1">
-                        {isTranslationLoading ? '...' : t(TranslationKeys.BEST_VALUE)}
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <Title className="text-xl mb-2">{tier.title}</Title>
-                      <div className="flex items-baseline mb-4">
-                        <Text className="text-3xl font-bold">€{tier.deposit}</Text>
-                        <Text className="text-gray-500 ml-2">{isTranslationLoading ? '...' : t(TranslationKeys.DEPOSIT)}</Text>
-                      </div>
-                      <div className="mb-4">
-                        <Badge color="green" className="mb-2">{tier.discount}% {isTranslationLoading ? '...' : t(TranslationKeys.OFF_RENT)}</Badge>
-                        <Text className={`text-sm ${isSoldOut ? 'text-red-500 font-bold' : 'text-gray-500'}`}>
-                          {isSoldOut ? isTranslationLoading ? '...' : t(TranslationKeys.SOLD_OUT) : `${remainingSlots} of ${tierSlot?.maxSlots || tier.maxSlots} spots left`}
-                        </Text>
-                      </div>
-                      <div className="space-y-2 mb-6">
-                        {tier.benefits.map((benefit: string, index: number) => (
-                          <div key={index} className="flex items-start gap-2">
-                            <IconChevronRight className="w-4 h-4 text-blue-500 mt-1" />
-                            <Text className="text-sm text-gray-600">{benefit}</Text>
-                          </div>
-                        ))}
-                      </div>
-                      <Button 
-                        size="lg" 
-                        color={tier.id === 'pioneer' ? 'blue' : 'gray'}
-                        className="w-full"
-                        onClick={() => handleReserve(tier)}
-                        disabled={isSoldOut || isProcessing}
-                      >
-                        {isSoldOut ? isTranslationLoading ? '...' : t(TranslationKeys.SOLD_OUT) : isTranslationLoading ? '...' : t(TranslationKeys.RESERVE_NOW)}
-                      </Button>
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
-
-          </div>
-        </div>
-      </div>
-
       {/* AI FAQ section */}
-      <section className="relative py-24 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden rounded-3xl mx-4 mb-32">
+      <section className="relative py-16 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden rounded-3xl mx-4 mb-32">
         <div className="absolute inset-0 bg-grid-white/5 bg-[size:32px] contrast-50 opacity-10 rounded-3xl" />
         <div className="relative h-full">
           <div className="w-full h-full bg-gray-900/80 backdrop-blur-sm -my-24">
@@ -735,7 +655,7 @@ export default function EpicWGPage() {
       </section>
 
       {/* Common Areas */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {epicwgData.commonAreas.map((area) => (
             <Card 
@@ -762,26 +682,15 @@ export default function EpicWGPage() {
           ))}
         </div>
       </div>
+ 
 
-      {/* Available Rooms */}
-      <div id="rooms" className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {epicwgData.rooms.map((room) => (
-            <RoomCard 
-              key={room.id} 
-              room={room}
-            />
-          ))}
-        </div>
-      </div>
-
-      {showApplicationModal && selectedTier && (
+      {showApplicationModal && selectedRoom && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <Card className="w-full max-w-lg mx-4">
             <div className="p-6">
               <Title className="text-2xl mb-4">{isTranslationLoading ? '...' : t(TranslationKeys.CONFIRM_RESERVATION)}</Title>
               <Text className="mb-6">
-                {isTranslationLoading ? '...' : t(TranslationKeys.CONFIRM_RESERVATION_DESCRIPTION, { tier: selectedTier.title, deposit: selectedTier.deposit })}
+                {isTranslationLoading ? '...' : t(TranslationKeys.CONFIRM_RESERVATION_DESCRIPTION, { tier: selectedRoom.title, deposit: selectedRoom.deposit })}
               </Text>
               <div className="flex justify-end gap-4">
                 <Button
@@ -803,29 +712,8 @@ export default function EpicWGPage() {
           </Card>
         </div>
       )}
-      <footer className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col items-center justify-center gap-4">
-            {/* Social icons for mobile */}
-            <div className="flex md:hidden gap-6 mb-4">
-              <IconButton icon={<IconBrandGithub />} href="https://github.com/epicwg" />
-              <IconButton icon={<IconBrandDiscord />} href="https://discord.gg/epicwg" />
-              <IconButton icon={<IconBrandInstagram />} href="https://instagram.com/epicwg" />
-            </div>
-            <div className="flex items-center justify-center text-gray-500 text-sm">
-              <Image 
-                src="/libralab.svg" 
-                alt="libralab" 
-                width={16} 
-                height={16} 
-                className="mr-2 opacity-70" 
-              />
-              <span>{new Date().getFullYear()} - {isTranslationLoading ? '...' : t(TranslationKeys.POWERED_BY)} libra innovation flexco</span>
-            </div>
-          </div>
-        </div>
-      </footer>
-      <FloatingNav />
+      <Footer />
     </div>
+    // End MAIN LAYOUT COMPONENT
   );
 }

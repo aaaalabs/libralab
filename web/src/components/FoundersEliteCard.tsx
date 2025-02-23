@@ -3,114 +3,134 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { Card, Text, Button } from "@tremor/react";
-import { IconCrown, IconCheck } from "@tabler/icons-react";
+import { IconCrown, IconCheck, IconChevronDown } from "@tabler/icons-react";
 import { useState } from "react";
 import { useTranslation } from "../context/TranslationContext";
 import type { TranslationKey } from "../types/i18n";
 
 interface FoundersEliteProps {
   onApply: () => void;
+  className?: string;
 }
 
-export function FoundersEliteCard({ onApply }: FoundersEliteProps) {
+export function FoundersEliteCard({ onApply, className = '' }: FoundersEliteProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t, isLoading: isTranslationLoading } = useTranslation();
 
   const benefits = [
     {
       key: 'benefit.interior_design' as const,
-      icon: <IconCheck className="w-4 h-4 text-amber-400 flex-shrink-0" />
+      value: '€3,000',
+      description: 'Custom Interior Design Consultation'
     },
     {
       key: 'benefit.community' as const,
-      icon: <IconCheck className="w-4 h-4 text-amber-400 flex-shrink-0" />
+      value: '€1,200/Jahr',
+      description: 'Lifetime AI-Shift Community Membership'
     },
     {
       key: 'benefit.priority' as const,
-      icon: <IconCheck className="w-4 h-4 text-amber-400 flex-shrink-0" />
+      value: '€600',
+      description: 'Priority Room Alert: Get notified when your designed room is about to be booked (1 year)'
     },
     {
       key: 'benefit.revenue_share' as const,
-      icon: <IconCheck className="w-4 h-4 text-amber-400 flex-shrink-0" />
+      value: '€2,400',
+      description: 'Earn 20% revenue share from your designed room bookings (1 year)'
     },
     {
       key: 'benefit.ai_consulting' as const,
-      icon: <IconCheck className="w-4 h-4 text-amber-400 flex-shrink-0" />
+      value: '€2,000',
+      description: '1:1 AI Consulting Sessions with Libralab CTO during your stay'
     },
     {
       key: 'benefit.etrike' as const,
-      icon: <IconCheck className="w-4 h-4 text-amber-400 flex-shrink-0" />
+      value: '€2,400/Jahr',
+      description: 'E-Trike Carsharing Mini'
     }
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="w-full max-w-md mx-auto"
+    <Card 
+      className={`relative overflow-hidden transition-all duration-300 bg-gradient-to-br from-gray-900 to-black cursor-pointer ${className}`}
+      onClick={() => setIsExpanded(!isExpanded)}
     >
-      <Card 
-        className={`relative overflow-hidden transition-all duration-300 ${
-          isExpanded ? 'bg-gradient-to-br from-black to-gray-900' : 'bg-black/5 hover:bg-black/10'
-        }`}
-      >
-        {/* Compact View */}
-        <div className="flex items-center justify-between cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
-          <div className="flex items-center gap-3">
-            <IconCrown className={`w-5 h-5 ${isExpanded ? 'text-amber-400' : 'text-gray-600'}`} />
+      <div className="p-8">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-start gap-4">
+            <IconCrown className="w-8 h-8 text-amber-400 flex-shrink-0 mt-2" />
             <div>
-              <Text className={`font-semibold ${isExpanded ? 'text-amber-400' : 'text-gray-800'}`}>
+              <h2 className="text-4xl font-bold text-amber-400 tracking-tight mb-2">
                 {isTranslationLoading ? '...' : t('founders_elite_title')}
-              </Text>
-              <div className="flex flex-col gap-1">
-                <Text className="text-gray-600">
-                  {isTranslationLoading ? '...' : t('founders_elite_price_month')}
+              </h2>
+              <div className="flex items-center gap-4">
+                <Text className="text-gray-400">
+                  2 spots left
                 </Text>
-                <Text className="text-amber-500 text-sm">
-                  {isTranslationLoading ? '...' : t('founders_elite_value')}
-                </Text>
-                <Text className="text-amber-500 text-sm">
-                  {isTranslationLoading ? '...' : t('founders_elite_spots_left')}
+                <Text className="text-amber-400">
+                  €8,999 one-time investment
                 </Text>
               </div>
             </div>
           </div>
+          <motion.div
+            animate={{ rotate: isExpanded ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <IconChevronDown className="w-6 h-6 text-amber-400" />
+          </motion.div>
         </div>
 
-        {/* Expanded View */}
+        {/* Value Proposition */}
+        <div className="mb-4">
+          <Text className="text-amber-400 text-xl font-medium">
+            Total Value: €11,600+ (first year)
+          </Text>
+          <Text className="text-gray-300 mt-1">
+            Looking for visionary founders
+          </Text>
+        </div>
+
+        {/* Expanded Content */}
         <motion.div
           initial={false}
-          animate={{ height: isExpanded ? 'auto' : 0 }}
+          animate={{ 
+            height: isExpanded ? 'auto' : 0,
+            opacity: isExpanded ? 1 : 0
+          }}
+          transition={{ duration: 0.3 }}
           className="overflow-hidden"
         >
-          <div className="pt-4 space-y-4">
-            <Text className="text-gray-400">
-              {isTranslationLoading ? '...' : t('founders_elite_looking_for')}
-            </Text>
-            
-            <div className="space-y-2">
-              {benefits.map((benefit) => (
-                <div key={benefit.key} className="flex items-center gap-2">
-                  {benefit.icon}
-                  <Text className="text-gray-300 text-sm">
-                    {isTranslationLoading ? '...' : t(benefit.key)}
+          <div className="space-y-3">
+            {benefits.map((benefit) => (
+              <div key={benefit.key} className="flex items-center justify-between gap-4 p-3 rounded-lg bg-gray-800/50">
+                <div className="flex items-center gap-3 flex-1">
+                  <IconCheck className="w-5 h-5 text-amber-400 flex-shrink-0" />
+                  <Text className="text-gray-200">
+                    {benefit.description}
                   </Text>
                 </div>
-              ))}
-            </div>
+                <Text className="text-amber-400 font-medium whitespace-nowrap">
+                  {benefit.value}
+                </Text>
+              </div>
+            ))}
+          </div>
 
+          <div className="mt-6">
             <Button
-              className="w-full bg-amber-500 hover:bg-amber-600 text-white"
-              onClick={() => {
+              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-lg text-lg"
+              onClick={(e) => {
+                e.stopPropagation();
                 onApply();
               }}
             >
-              {isTranslationLoading ? '...' : t('founders_elite_apply_now')}
+              Jetzt Investieren
             </Button>
           </div>
         </motion.div>
-      </Card>
-    </motion.div>
+      </div>
+    </Card>
   );
 }

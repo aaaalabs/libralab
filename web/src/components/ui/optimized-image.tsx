@@ -7,6 +7,9 @@ interface OptimizedImageProps {
   alt: string;
   className?: string;
   priority?: boolean;
+  width?: number;
+  height?: number;
+  fill?: boolean;
 }
 
 export const OptimizedImage: React.FC<OptimizedImageProps> = ({
@@ -14,28 +17,34 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   alt,
   className = '',
   priority = false,
+  width,
+  height,
+  fill = false,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
+      <Image
+        src={src}
+        alt={alt}
+        className={`
+          duration-700 ease-in-out
+          ${isLoading ? 'scale-110 blur-2xl grayscale' : 'scale-100 blur-0 grayscale-0'}
+        `}
+        onLoadingComplete={() => setIsLoading(false)}
+        priority={priority}
+        fill={fill}
+        width={width}
+        height={height}
+      />
       {isLoading && (
-        <div className="absolute inset-0 bg-gray-100 animate-pulse" />
-      )}
-      <motion.div
-        animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-cover"
-          onLoadingComplete={() => setIsLoading(false)}
-          priority={priority}
-          sizes="(max-width: 768px) 100vw, 50vw"
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="absolute inset-0 bg-gray-200 animate-pulse"
         />
-      </motion.div>
+      )}
     </div>
   );
 };

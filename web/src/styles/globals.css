@@ -1,0 +1,156 @@
+/* Import base.css */
+@import './base.css';
+
+/* Import color system */
+@import './colors.css';
+ 
+@layer base {
+  body {
+    background-color: var(--color-background-primary);
+    color: var(--color-text-primary);
+  }
+}
+
+@layer components {
+  /* Navbar styles */
+  .navbar-transparent {
+    background: none;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-transparent.scrolled {
+    background: white;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+
+  /* Navigation link */
+  .nav-link {
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 400;
+    padding: 0.5rem;
+    transition: all 0.2s ease;
+    opacity: 0.85;
+  }
+
+  .scrolled .nav-link {
+    color: rgb(55, 65, 81);
+    opacity: 1;
+  }
+
+  .nav-link:hover {
+    opacity: 1;
+  }
+
+  /* Language selector */
+  .lang-selector {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
+    font-weight: 400;
+    padding: 0.5rem 0.25rem;
+    transition: all 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .scrolled .lang-selector {
+    color: rgba(55, 65, 81, 0.5);
+  }
+
+  .lang-selector:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .scrolled .lang-selector:hover {
+    color: rgba(55, 65, 81, 0.8);
+  }
+
+  .lang-selector.active {
+    color: white;
+  }
+
+  .scrolled .lang-selector.active {
+    color: rgb(55, 65, 81);
+  }
+
+  /* Navigation buttons */
+  .nav-button {
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 400;
+    padding: 0.5rem;
+    transition: all 0.2s ease;
+    opacity: 0.85;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .scrolled .nav-button {
+    color: rgb(55, 65, 81);
+    opacity: 1;
+  }
+
+  .nav-button:hover {
+    opacity: 1;
+  }
+
+  /* CTA Button */
+  .cta-button {
+    background: rgb(219, 181, 99);
+    color: rgb(18, 18, 18);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    transition: background 0.2s ease;
+  }
+
+  .cta-button:hover {
+    background: rgb(235, 197, 115);
+  }
+
+  /* Other button styles */
+  .btn-primary {
+    background-color: var(--color-interactive-primary);
+    color: var(--color-text-onDark);
+    transition: all 0.2s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-interactive-primaryHover);
+  }
+  
+  .btn-primary:active {
+    background-color: var(--color-interactive-primaryActive);
+  }
+  
+  .btn-secondary {
+    background-color: var(--color-interactive-secondary);
+    color: var(--color-text-onDark);
+    transition: all 0.2s ease;
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--color-interactive-secondaryHover);
+  }
+  
+  .btn-secondary:active {
+    background-color: var(--color-interactive-secondaryActive);
+  }
+
+  .card {
+    background-color: var(--color-background-elevated);
+    border: 1px solid var(--color-border-light);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+}

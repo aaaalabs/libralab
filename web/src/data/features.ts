@@ -8,7 +8,22 @@ import {
   IconBike
 } from '@tabler/icons-react';
 
-export const features = [
+type FeatureTitle = "Deep Work, Maximum Focus" | "AI Innovation Hub & Tech Community" | "Innsbruck – Where Innovation Meets Adventure";
+
+interface Feature {
+  title: FeatureTitle;
+  description: string;
+  imageUrl: string;
+  groups: {
+    title: string;
+    features: {
+      title: string;
+      icon?: typeof IconBrain | typeof IconMountain | typeof IconDevices | typeof IconHome | typeof IconUsers | typeof IconCalendarEvent | typeof IconBike;
+    }[];
+  }[];
+}
+
+export const features: Feature[] = [
   {
     title: "Deep Work, Maximum Focus",
     description: "Productivity starts with the right environment. At EpicWG, you get a space designed for deep work, creativity, and high-level innovation.",

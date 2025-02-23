@@ -1,0 +1,55 @@
+/* Generated from colors.ts */
+:root {
+  /* Light mode variables */
+  --color-background-primary: white;
+  --color-background-secondary: #F4E8D6;
+  --color-background-tertiary: #F9F5EE;
+  --color-background-elevated: white;
+  --color-background-dark: #2E4555;
+
+  --color-text-primary: #2E4555;
+  --color-text-secondary: #5D615A;
+  --color-text-tertiary: #979C94;
+  --color-text-onDark: white;
+
+  --color-interactive-primary: #D09467;
+  --color-interactive-primaryHover: #B87F54;
+  --color-interactive-primaryActive: #9A6841;
+  --color-interactive-secondary: #2E4555;
+  --color-interactive-secondaryHover: #243744;
+  --color-interactive-secondaryActive: #1B2933;
+
+  --color-border-light: #F4E8D6;
+  --color-border-medium: #EBDBC3;
+  --color-border-heavy: #D9C4A5;
+
+  --color-state-success: #4CAF50;
+  --color-state-warning: #FFC107;
+  --color-state-error: #DC3545;
+  --color-state-info: #2196F3;
+}
+
+.dark {
+  /* Dark mode variables */
+  --color-background-primary: #121C22;
+  --color-background-secondary: #1B2933;
+  --color-background-tertiary: #243744;
+  --color-background-elevated: #1B2933;
+  --color-background-dark: #2E4555;
+
+  --color-text-primary: #F9F5EE;
+  --color-text-secondary: #ADB1A9;
+  --color-text-tertiary: #979C94;
+  --color-text-onDark: #F9F5EE;
+
+  --color-interactive-primary: #D09467;
+  --color-interactive-primaryHover: #E1B588;
+  --color-interactive-primaryActive: #EBD3BC;
+  --color-interactive-secondary: #EBDBC3;
+  --color-interactive-secondaryHover: #F4E8D6;
+  --color-interactive-secondaryActive: #F9F5EE;
+
+  --color-border-light: #243744;
+  --color-border-medium: #2E4555;
+  --color-border-heavy: #708599;
+}
