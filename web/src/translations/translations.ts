@@ -1,0 +1,120 @@
+export const translations = {
+  en: {
+    hero: {
+      more_than_a: "More than a",
+      forget_hostels: "Forget random hostels and spotty WiFi.",
+      join_community: "Join a curated community of AI innovators",
+      in_alps: "in the heart of the Alps.",
+      apply_now: "Apply Now"
+    },
+    nav: {
+      discover_room: "Discover Room",
+      invest: "Invest Now"
+    },
+    founders_elite: {
+      title: "Founders Elite",
+      description: "Join our exclusive early-bird program"
+    },
+    founders_elite_title: "Founders Elite",
+    early_bird_pre_booking: "Early Bird Pre-Booking",
+    early_bird_description: "Be among the first to secure your spot",
+    raised: "Raised",
+    campaign_ends: "Campaign Ends",
+    off_rent: "Off Regular Rent",
+    reserve_now: "Reserve Now",
+    spots_left: "spots left",
+    sold_out: "Sold Out",
+    confirm_reservation: "Confirm Reservation",
+    confirm_reservation_description: "You are about to reserve {{tier}} with a deposit of €{{deposit}}. Would you like to proceed?",
+    cancel: "Cancel",
+    processing: "Processing...",
+    ai_faq_error: "Sorry, I couldn't process your question. Please try again.",
+    ai_faq_loading: "Thinking...",
+    benefit: {
+      interior_design: "Premium Interior Design",
+      interior_design_description: "Custom Interior Design Consultation",
+      community: "Curated Community",
+      community_description: "Lifetime AI-Shift Community Membership",
+      workspace: "Professional Workspace",
+      workspace_description: "Dedicated workspace with high-speed internet",
+      location: "Prime Location",
+      location_description: "Located in the heart of Innsbruck",
+      title: "Benefits",
+      priority: "Priority Access",
+      priority_description: "Priority Room Alert: Get notified when your designed room is about to be booked",
+      ai_consulting: "AI Consulting & Support",
+      ai_consulting_description: "1:1 AI Consulting Sessions with Libralab CTO during your stay",
+      events: "Exclusive Events & Meetups",
+      events_description: "Regular tech talks, networking events, and founder meetups",
+      revenue_share: "Revenue Share",
+      revenue_share_description: "Earn 20% revenue share from your designed room bookings",
+      etrike: "E-Trike Carsharing",
+      etrike_description: "E-Trike Carsharing Mini",
+      pioneer: "Pioneer Status",
+      pioneer_description: "Be among the first members and shape the community",
+      parking: "Dedicated Parking Space",
+      parking_description: "Your own reserved parking spot",
+      cleaning: "Professional Cleaning Service",
+      cleaning_description: "Regular professional cleaning of your space"
+    }
+  },
+  de: {
+    hero: {
+      more_than_a: "Mehr als nur",
+      forget_hostels: "Vergessen Sie zufällige Hostels und unzuverlässiges WLAN.",
+      join_community: "Werden Sie Teil einer ausgewählten KI-Innovatoren-Community",
+      in_alps: "im Herzen der Alpen.",
+      apply_now: "Jetzt Bewerben"
+    },
+    nav: {
+      discover_room: "Zimmer Entdecken",
+      invest: "Jetzt Investieren"
+    },
+    founders_elite: {
+      title: "Gründer Elite",
+      description: "Treten Sie unserem exklusiven Early-Bird-Programm bei"
+    },
+    founders_elite_title: "Gründer Elite",
+    early_bird_pre_booking: "Early Bird Vorbestellung",
+    early_bird_description: "Seien Sie unter den Ersten, die sich ihren Platz sichern",
+    raised: "Gesammelt",
+    campaign_ends: "Kampagne endet",
+    off_rent: "Rabatt auf reguläre Miete",
+    reserve_now: "Jetzt Reservieren",
+    spots_left: "Plätze übrig",
+    sold_out: "Ausverkauft",
+    confirm_reservation: "Reservierung bestätigen",
+    confirm_reservation_description: "Sie sind dabei, {{tier}} mit einer Anzahlung von €{{deposit}} zu reservieren. Möchten Sie fortfahren?",
+    cancel: "Abbrechen",
+    processing: "Verarbeitung...",
+    ai_faq_error: "Entschuldigung, ich konnte Ihre Frage nicht verarbeiten. Bitte versuchen Sie es erneut.",
+    ai_faq_loading: "Denke nach...",
+    benefit: {
+      interior_design: "Premium Innenausstattung",
+      interior_design_description: "Individuelle Innenarchitektur-Beratung",
+      community: "Kuratierte Community",
+      community_description: "Lebenslange AI-Shift Community Mitgliedschaft",
+      workspace: "Professioneller Arbeitsplatz",
+      workspace_description: "Dedizierter Arbeitsplatz mit Hochgeschwindigkeits-Internet",
+      location: "Erstklassige Lage",
+      location_description: "Im Herzen von Innsbruck gelegen",
+      title: "Vorteile",
+      priority: "Bevorzugter Zugang",
+      priority_description: "Zimmer-Benachrichtigung: Erhalten Sie eine Nachricht, wenn Ihr gestaltetes Zimmer gebucht werden soll",
+      ai_consulting: "KI-Beratung & Unterstützung",
+      ai_consulting_description: "1:1 KI-Beratung mit dem Libralab CTO während Ihres Aufenthalts",
+      events: "Exklusive Events & Meetups",
+      events_description: "Regelmäßige Tech-Talks, Networking-Events und Gründer-Treffen",
+      revenue_share: "Umsatzbeteiligung",
+      revenue_share_description: "Verdienen Sie 20% Umsatzbeteiligung aus Ihren gestalteten Zimmerbuchungen",
+      etrike: "E-Trike Carsharing",
+      etrike_description: "E-Trike Carsharing Mini",
+      pioneer: "Pionier-Status",
+      pioneer_description: "Seien Sie eines der ersten Mitglieder und gestalten Sie die Community mit",
+      parking: "Reservierter Parkplatz",
+      parking_description: "Ihr eigener reservierter Parkplatz",
+      cleaning: "Professioneller Reinigungsservice",
+      cleaning_description: "Regelmäßige professionelle Reinigung Ihres Bereichs"
+    }
+  }
+};

@@ -82,7 +82,7 @@ export function AiFaq() {
       setResponse(data.answer);
     } catch (error) {
       console.error('Error details:', error);
-      setResponse(t('AI_FAQ_ERROR'));
+      setResponse(t('ai_faq_error'));
     } finally {
       setIsLoading(false);
     }
@@ -143,7 +143,7 @@ export function AiFaq() {
                 exit={{ opacity: 0 }}
                 className="text-amber-200/70"
               >
-                {t('AI_FAQ_LOADING')}
+                {t('ai_faq_loading')}
               </motion.div>
             )}
           </AnimatePresence>

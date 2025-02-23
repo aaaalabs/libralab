@@ -51,7 +51,8 @@ import { features } from '@/data/features';
 import Link from 'next/link';
 import { VideoPlayer } from "../components/ui/video-player";
 import { Footer } from "../components/layout/Footer";
-import { StickyNav } from '@/components/navigation/StickyNav';
+import { TopNav } from '@/components/navigation/TopNav';
+import { AnimatedHero } from "@/components/hero/AnimatedHero";
 // End IMPORTS COMPONENT
 
 // Start ANIMATION VARIANTS COMPONENT
@@ -248,86 +249,8 @@ export default function EpicWGPage() {
   return (
     // Start MAIN LAYOUT COMPONENT
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section - Improved */}
-      <div className="relative h-screen">
-        <VideoBackground
-          sources={['/videos/scenic/alps-sunset.mp4']}
-          gradient={true}
-        />
-        
-        <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-8 md:px-12 lg:px-16">
-          {/* Main Value Proposition */}
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-8"
-            >
-              <motion.h1 
-                className="text-5xl md:text-7xl lg:text-[90px] font-bold mb-8 tracking-tight leading-[1.1]"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                <span className="block">Where</span>
-                <motion.span 
-                  className="bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text inline-block"
-                  animate={{ 
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  }}
-                  transition={{ 
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                >
-                  AI Innovators
-                </motion.span>
-                <span className="block">Shape Tomorrow's Living</span>
-              </motion.h1>
-              <motion.p 
-                className="text-xl md:text-2xl lg:text-3xl text-white/90 font-light max-w-3xl mx-auto mb-12"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                A tech-powered coliving space in the heart of the Alps
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="flex flex-wrap justify-center gap-3"
-              >
-                {aiTrends.slice(0, 3).map((trend, index) => (
-                  <motion.span
-                    key={trend.label}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.4 + index * 0.1 }}
-                    className="px-4 py-1 rounded-full text-sm bg-white/10 backdrop-blur-sm border border-white/20"
-                  >
-                    {trend.label}
-                  </motion.span>
-                ))}
-              </motion.div>
-            </motion.div>
-          </div>
-
-          {/* Scroll Indicator */}
-          <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/80 cursor-pointer"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-          >
-            <IconChevronDown className="w-6 h-6" />
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Sticky Navigation */}
-      <StickyNav />
-
+      <TopNav />
+      <AnimatedHero />
       {/* Featured Rooms Section */}
       <div className="py-16 px-6 sm:px-8 md:px-12 lg:px-16 bg-white">
         <div className="max-w-7xl mx-auto">

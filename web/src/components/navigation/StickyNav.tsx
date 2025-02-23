@@ -7,7 +7,7 @@ import { useTranslation } from '@/context/TranslationContext';
 import { motion } from 'framer-motion';
 
 export function StickyNav() {
-  const { language, setLanguage } = useTranslation();
+  const { currentLanguage: language, setLanguage } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

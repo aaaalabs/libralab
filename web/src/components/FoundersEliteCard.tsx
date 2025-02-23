@@ -20,33 +20,33 @@ export function FoundersEliteCard({ onApply, className = '' }: FoundersEliteProp
   const benefits = [
     {
       key: 'benefit.interior_design' as const,
-      value: '€3,000',
-      description: 'Custom Interior Design Consultation'
+      descriptionKey: 'benefit.interior_design_description' as const,
+      value: '€3,000'
     },
     {
       key: 'benefit.community' as const,
-      value: '€1,200/Jahr',
-      description: 'Lifetime AI-Shift Community Membership'
+      descriptionKey: 'benefit.community_description' as const,
+      value: '€1,200/Jahr'
     },
     {
       key: 'benefit.priority' as const,
-      value: '€600',
-      description: 'Priority Room Alert: Get notified when your designed room is about to be booked (1 year)'
+      descriptionKey: 'benefit.priority_description' as const,
+      value: '€600'
     },
     {
       key: 'benefit.revenue_share' as const,
-      value: '€2,400',
-      description: 'Earn 20% revenue share from your designed room bookings (1 year)'
+      descriptionKey: 'benefit.revenue_share_description' as const,
+      value: '€2,400'
     },
     {
       key: 'benefit.ai_consulting' as const,
-      value: '€2,000',
-      description: '1:1 AI Consulting Sessions with Libralab CTO during your stay'
+      descriptionKey: 'benefit.ai_consulting_description' as const,
+      value: '€2,000'
     },
     {
       key: 'benefit.etrike' as const,
-      value: '€2,400/Jahr',
-      description: 'E-Trike Carsharing Mini'
+      descriptionKey: 'benefit.etrike_description' as const,
+      value: '€2,400/Jahr'
     }
   ];
 
@@ -108,7 +108,7 @@ export function FoundersEliteCard({ onApply, className = '' }: FoundersEliteProp
                 <div className="flex items-center gap-3 flex-1">
                   <IconCheck className="w-5 h-5 text-amber-400 flex-shrink-0" />
                   <Text className="text-gray-200">
-                    {benefit.description}
+                    {isTranslationLoading ? '...' : t(benefit.descriptionKey)}
                   </Text>
                 </div>
                 <Text className="text-amber-400 font-medium whitespace-nowrap">
