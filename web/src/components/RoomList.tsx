@@ -7,17 +7,16 @@ interface RoomListProps {
   onApply: (roomId: string) => void;
 }
 
-function getFloorName(floor: number): string {
-  switch (floor) {
-    case -1:
-      return "Keller";
-    case 0:
-      return "Erdgeschoss";
-    case 1:
-      return "Dachgeschoss";
-    default:
-      return `${floor}. Stock`;
-  }
+type FloorType = "Dachgeschoß" | "Erdgeschoß" | "Untergeschoß";
+
+const floorOrder: Record<FloorType, number> = {
+  "Dachgeschoß": 2,
+  "Erdgeschoß": 1,
+  "Untergeschoß": 0
+};
+
+function getFloorName(floor: string): string {
+  return floor;
 }
 
 export function RoomList({ rooms, onApply }: RoomListProps) {
@@ -29,12 +28,15 @@ export function RoomList({ rooms, onApply }: RoomListProps) {
     }
     acc[floor].push(room);
     return acc;
-  }, {} as Record<number, Room[]>);
+  }, {} as Record<string, Room[]>);
 
   // Sortiere Stockwerke von oben nach unten
   const sortedFloors = Object.keys(roomsByFloor)
-    .map(Number)
-    .sort((a, b) => b - a);
+    .sort((a, b) => {
+      const orderA = floorOrder[a as FloorType] ?? -1;
+      const orderB = floorOrder[b as FloorType] ?? -1;
+      return orderB - orderA;
+    });
 
   return (
     <div className="space-y-8">
@@ -44,7 +46,7 @@ export function RoomList({ rooms, onApply }: RoomListProps) {
           <Grid numItems={1} numItemsSm={2} numItemsLg={3} className="gap-6">
             {roomsByFloor[floor].map((room) => (
               <div key={room.id} className="!cursor-zoom-in">
-                <RoomCard room={room} onApply={onApply} />
+                <RoomCard room={{ ...room, features: Array.isArray(room.features) ? room.features : [] }} onApply={onApply} />
               </div>
             ))}
           </Grid>

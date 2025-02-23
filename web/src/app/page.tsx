@@ -3,12 +3,13 @@
 import { useState } from 'react';
 import { useCampaign } from '../context/CampaignContext';
 import { Card, Text, Metric, Button, Badge, Title, AreaChart, DonutChart, BarList, Color } from "@tremor/react";
+import { LanguagePicker } from "../components/ui/language-picker";
 import { Room } from "../types/room";
 import { ApplicationModal } from "../components/rooms/ApplicationModal";
 import Image from "next/image";
 import { 
   IconMapPin, 
-  IconWifi, 
+  IconWifi,
   IconMountain, 
   IconTrain, 
   IconBuildingCommunity, 
@@ -21,7 +22,11 @@ import {
   IconBrandInstagram, 
   IconChevronDown, 
   IconChevronUp, 
-  IconChevronRight 
+  IconChevronRight,
+  IconBrain,
+  IconCar,
+  IconCalendarEvent,
+  IconRuler 
 } from '@tabler/icons-react';
 import epicwgData from '../data/epicwg.json';
 import { BentoCard, BentoGrid } from "../components/ui/bento-grid";
@@ -30,6 +35,16 @@ import { IconButton } from "../components/ui/icon-button";
 import { RoomCard } from "../components/RoomCard";
 import { CampaignProgress } from "../components/ui/campaign-progress";
 import { useToast } from "../components/ui/use-toast";
+import { FoundersEliteCard } from "../components/FoundersEliteCard";
+import { useTranslation } from '@/context/TranslationContext';
+import { TranslationKeys } from '@/types/i18n';
+import { TierSlot } from '../types/tier';
+import { AiFaq } from '@/components/AiFaq';
+import { BenefitValues } from '@/components/BenefitValues';
+import { VideoBackground } from "../components/ui/video-background";
+import { FeatureSection } from '@/components/features/FeatureSection';
+import { features } from '@/data/features';
+import { FloatingNav } from '@/components/navigation/FloatingNav';
 
 // Animation Variants
 const containerVariants = {
@@ -74,7 +89,7 @@ const communityStats = [
   { name: 'Successes', value: '5+', description: 'Successful Startups' },
 ];
 
-// Beispieldaten für Charts
+// Example data for charts
 const monthlyStats = [
   { month: "Jan 24", "Community Events": 4, "Coworking Sessions": 12 },
   { month: "Feb 24", "Community Events": 6, "Coworking Sessions": 18 },
@@ -88,14 +103,7 @@ const roomTypeData = [
   { name: "Deluxe", value: 1 },
 ];
 
-const amenityStats = [
-  { name: "Gigabit Internet", value: 1000, icon: IconWifi },
-  { name: "Workspaces", value: 6, icon: IconDeviceLaptop },
-  { name: "Community Size", value: 12, icon: IconUsers },
-  { name: "Available Rooms", value: epicwgData.rooms.filter(r => r.available).length, icon: IconHome },
-];
-
-const features = [
+const featureData = [
   {
     Icon: IconDeviceLaptop,
     name: "Remote Work Ready",
@@ -108,94 +116,97 @@ const features = [
     className: "lg:col-span-2 lg:row-span-1",
   },
   {
-    Icon: IconBuildingCommunity,
-    name: "Tech Community",
-    description: "Connect with other developers, founders, and digital nomads. Weekly meetups and skill-sharing events.",
-    href: "#community",
-    cta: "Meet the community",
+    Icon: IconBrain,
+    name: "AI Innovation",
+    description: "Access to cutting-edge AI tools and regular tech workshops to stay ahead.",
+    href: "#ai-tools",
+    cta: "Explore AI tools",
     background: (
       <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-900/10" />
     ),
     className: "lg:row-span-2",
   },
   {
-    Icon: IconChartBar,
-    name: "Community Activity",
-    description: "Growing number of events and coworking sessions",
-    href: "#stats",
-    cta: "View statistics",
+    Icon: IconUsers,
+    name: "Tech Community",
+    description: "Join a vibrant community of tech enthusiasts, founders, and innovators.",
+    href: "#community",
+    cta: "Meet the community",
     background: (
-      <div className="absolute inset-0">
-        <AreaChart
-          className="h-full mt-4 opacity-30"
-          data={monthlyStats}
-          index="month"
-          categories={["Community Events", "Coworking Sessions"]}
-          colors={["purple", "blue"]}
-          showXAxis={false}
-          showYAxis={false}
-          showLegend={false}
-          showGridLines={false}
-        />
-      </div>
-    ),
-    className: "lg:col-span-2 lg:row-span-2",
-  },
-  {
-    Icon: IconHome,
-    name: "Room Overview",
-    description: "Various room types for different needs",
-    href: "#rooms",
-    cta: "View details",
-    background: (
-      <div className="absolute inset-0 flex items-center justify-center opacity-30">
-        <DonutChart
-          data={roomTypeData}
-          category="value"
-          index="name"
-          colors={["blue", "cyan", "indigo"]}
-          variant="pie"
-          valueFormatter={(value) => value.toString()}
-          showAnimation={true}
-          label={`${roomTypeData.reduce((acc, curr) => acc + curr.value, 0)} Total`}
-        />
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-900/10" />
     ),
     className: "lg:row-span-2",
   },
   {
-    Icon: IconWifi,
-    name: "Amenities",
-    description: "Modern infrastructure for productive work",
-    href: "#amenities",
+    Icon: IconBuildingCommunity,
+    name: "Living Space",
+    description: "Modern, comfortable living spaces designed for tech professionals.",
+    href: "#rooms",
+    cta: "View details",
+    background: (
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-900/10" />
+    ),
+    className: "lg:row-span-2",
+  },
+  {
+    Icon: IconCar,
+    name: "Mobility",
+    description: "Eco-friendly E-Trike sharing and excellent public transport connections.",
+    href: "#mobility",
     cta: "Learn more",
     background: (
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-900/10">
-        <div className="p-6 pt-16 opacity-30">
-          <BarList data={amenityStats} className="mt-2" />
-        </div>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-900/10" />
     ),
     className: "lg:col-span-3 lg:row-span-1",
   },
+  {
+    Icon: IconCalendarEvent,
+    name: "Events",
+    description: "Regular tech talks, networking events, and founder meetups.",
+    href: "#events",
+    cta: "View events",
+    background: (
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-900/10" />
+    ),
+    className: "lg:col-span-2 lg:row-span-2",
+  },
 ];
 
+type Tier = {
+  id: string;
+  title: string;
+  price: number;
+  deposit: number;
+  maxSlots: number;
+  remainingSlots: number;
+  discount: number;
+  description: string;
+  heroFeatures: string[];
+  benefits: string[];
+  availableNow: boolean;
+  tag: string;
+};
+
 export default function EpicWGPage() {
+  const { t, currentLanguage, isLoading: isTranslationLoading } = useTranslation();
   const { toast } = useToast();
-  const [selectedTier, setSelectedTier] = useState<typeof epicwgData.earlyBirdCampaign.tiers[0] | null>(null);
-  const { currentAmount, addDeposit, isLoading, tierSlots } = useCampaign();
+  const [selectedTier, setSelectedTier] = useState<Tier | null>(null);
+  const { currentAmount, addDeposit, isLoading: isLoadingCampaign, tierSlots } = useCampaign();
   const [isProcessing, setIsProcessing] = useState(false);
   const [showApplicationModal, setShowApplicationModal] = useState(false);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+
+  console.log('Page rendering with language:', currentLanguage, 'isLoading:', isTranslationLoading);
 
   const toggleCard = (cardId: string) => {
     setExpandedCard(expandedCard === cardId ? null : cardId);
   };
 
-  const handleReserve = async (tier: typeof epicwgData.earlyBirdCampaign.tiers[0]) => {
+  const handleReserve = async (tier: Tier) => {
     setIsProcessing(true);
     try {
-      const success = await addDeposit(tier.id, tier.minDeposit);
+      const success = await addDeposit(tier.id, tier.deposit);
       if (success) {
         setSelectedTier(tier);
         setShowApplicationModal(true);
@@ -221,7 +232,7 @@ export default function EpicWGPage() {
     if (!selectedTier) return;
     
     setIsProcessing(true);
-    const success = await addDeposit(selectedTier.id, selectedTier.minDeposit);
+    const success = await addDeposit(selectedTier.id, selectedTier.deposit);
     setIsProcessing(false);
     
     if (success) {
@@ -234,99 +245,74 @@ export default function EpicWGPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto p-4 md:p-8">
+      {/* Hero Section */}
+      <div className="relative h-screen">
         <motion.div 
-          className="relative overflow-hidden rounded-3xl mb-12"
+          className="absolute inset-0 w-full h-full"
         >
           {/* Video Background */}
-          <div className="absolute inset-0 w-full h-full">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover"
-            >
-              <source src="/videos/pano_01.mp4" type="video/mp4" />
-            </video>
-          </div>
+          <VideoBackground
+            sources={[
+              '/videos/scenic/alps-sunset.mp4'
+            ]}
+            gradient={true}
+          />
 
-          {/* Animated colorful gradient with transparency */}
-          <motion.div 
-            className="absolute inset-0"
-            animate={{
-              background: [
-                "linear-gradient(15deg, rgba(0, 190, 130, 1) 0%, rgba(54, 190, 218, 1) 40%, rgba(0, 71, 225, 0) 100%)",
-                "linear-gradient(30deg, rgba(0, 71, 225, 1) 0%, rgba(0, 190, 130, 1) 40%, rgba(54, 190, 218, 0) 100%)",
-                "linear-gradient(45deg, rgba(54, 190, 218, 1) 0%, rgba(0, 71, 225, 1) 40%, rgba(0, 190, 130, 0) 100%)",
-                "linear-gradient(30deg, rgba(0, 190, 130, 1) 0%, rgba(54, 190, 218, 1) 40%, rgba(0, 71, 225, 0) 100%)",
-                "linear-gradient(15deg, rgba(0, 71, 225, 1) 0%, rgba(0, 190, 130, 1) 40%, rgba(54, 190, 218, 0) 100%)"
-              ]
-            }}
-            initial={{
-              background: "linear-gradient(15deg, rgba(0, 190, 130, 1) 0%, rgba(54, 190, 218, 1) 40%, rgba(0, 71, 225, 0) 100%)"
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }}
-          >
-            <div className="gradient-shimmer" />
-          </motion.div>
-          
-          <motion.div 
-            className="relative z-10 px-8 py-24 text-white"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.p
-              className="text-sm font-medium mb-2 opacity-80"
-              variants={containerVariants}
-            >
-              libra innovation flexco  
-            </motion.p>
-            <motion.h1 
-              className="text-5xl font-bold mb-6"
-              variants={containerVariants}
-            >
-              EpicWG Innsbruck
-            </motion.h1>
+          {/* Content */}
+          <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-8 md:px-12 lg:px-16">
+            {/* Language Picker */}
+            <div className="absolute top-6 right-6 sm:top-8 sm:right-8 md:top-12 md:right-12">
+              <LanguagePicker />
+            </div>
+
+            {/* Social Proof - with placeholder avatars */}
+            <div className="container mx-auto px-4">
+              <div className="mb-6">
+                <div className="flex items-center gap-3 text-white/90">
+                  <div className="flex -space-x-3">
+                    {[1,2,3,4,5].map((i) => (
+                      <div 
+                        key={i} 
+                        className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border-2 border-white/20 relative overflow-hidden"
+                      >
+                        <Image
+                          src={`https://api.dicebear.com/7.x/personas/svg?seed=user${i}`}
+                          alt={`Community member ${i}`}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <span className="text-sm font-medium">Join our growing community of tech innovators</span>
+                </div>
+              </div>
+            </div>
+
+            <h1 className="text-5xl font-bold text-white mb-6">
+              {isTranslationLoading ? '...' : t(TranslationKeys.EPICWG_INNSBRUCK)}
+            </h1>
             
-            <motion.p 
-              className="text-lg text-white/90 mb-12 max-w-2xl leading-relaxed"
-              variants={containerVariants}
-            >
-              Charming residential house in Omes, near Innsbruck, with spectacular mountain views. 
-              Located directly on the hillside, the house offers a total of 244.13m² of living space 
-              and 160.25m² of additional space across three levels.
-            </motion.p>
+            <p className="text-xl text-white/90 mb-12 max-w-2xl leading-relaxed">
+              {isTranslationLoading ? '...' : t(TranslationKeys.EPICWG_DESCRIPTION)}
+            </p>
 
-            <motion.div 
-              className="flex flex-wrap gap-4 mb-12"
-              variants={containerVariants}
-            >
-              {aiTrends.map((trend, index) => (
-                <motion.span
-                  key={trend.label}
-                  className={`${trend.color} px-6 py-2.5 rounded-full text-sm font-medium shadow-lg backdrop-blur-sm 
-                    hover:scale-105 transition-transform cursor-pointer`}
-                  whileHover={{ y: -2 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  {trend.label}
-                </motion.span>
-              ))}
-            </motion.div>
+            {/* Search Bar - inspired by larsen.ee */}
+            <div className="bg-white rounded-full p-2 flex items-center gap-4 mb-12 max-w-2xl shadow-lg mx-auto">
+              <div className="flex-1 flex items-center gap-4 px-4">
+                <IconCalendarEvent className="w-5 h-5 text-gray-400" />
+                <input 
+                  type="text" 
+                  placeholder="When would you like to move in?"
+                  className="w-full py-2 outline-none"
+                />
+              </div>
+              <button className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors">
+                Search
+              </button>
+            </div>
 
-            <motion.div 
-              className="flex gap-8 items-center"
-              variants={containerVariants}
-            >
+            <div className="flex gap-8 items-center">
               <motion.button
                 onClick={() => {
                   const roomsSection = document.getElementById('rooms');
@@ -338,23 +324,55 @@ export default function EpicWGPage() {
                 whileTap={{ scale: 0.95 }}
               >
                 <IconHome className="w-5 h-5" />
-                Discover Rooms
+                {isTranslationLoading ? '...' : t(TranslationKeys.DISCOVER_ROOMS)}
               </motion.button>
-              <motion.div className="flex gap-6">
-                <div className="hidden md:block">
-                  <IconButton icon={<IconBrandGithub />} href="https://github.com/epicwg" />
-                </div>
+              <div className="hidden md:flex gap-6">
+                <IconButton icon={<IconBrandGithub />} href="https://github.com/epicwg" />
                 <IconButton icon={<IconBrandDiscord />} href="https://discord.gg/epicwg" />
                 <IconButton icon={<IconBrandInstagram />} href="https://instagram.com/epicwg" />
-              </motion.div>
-            </motion.div>
-          </motion.div>
+              </div>
+            </div>
 
-          {/* Subtle pattern overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent 
-            mix-blend-overlay pointer-events-none" />
+            {/* Stats Bar - similar to nomads.com */}
+            <div className="absolute bottom-8 left-0 right-0 bg-black/30 backdrop-blur-sm">
+              <div className="container mx-auto px-4 py-4">
+                <div className="grid grid-cols-3 gap-8">
+                  <div className="text-white">
+                    <div className="text-2xl font-bold">10+</div>
+                    <div className="text-sm text-white/80">Available Rooms</div>
+                  </div>
+                  <div className="text-white">
+                    <div className="text-2xl font-bold">24/7</div>
+                    <div className="text-sm text-white/80">Coworking Access</div>
+                  </div>
+                  <div className="text-white">
+                    <div className="text-2xl font-bold">30+</div>
+                    <div className="text-sm text-white/80">Community Members</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
+        
+        {/* Scroll Indicator */}
+        <motion.div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-white/80 cursor-pointer"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          onClick={() => {
+            window.scrollTo({
+              top: window.innerHeight,
+              behavior: 'smooth'
+            });
+          }}
+        >
+          <IconChevronDown className="w-6 h-6" />
+        </motion.div>
+      </div>
 
+      {/* Rest of the content */}
+      <div className="container mx-auto px-4 py-16">
         {/* Community Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
           {communityStats.map((stat) => (
@@ -376,25 +394,27 @@ export default function EpicWGPage() {
           ))}
         </div>
 
-        {/* Quick Stats als kompakte Badges */}
-        <div className="bg-white rounded-xl p-4 mb-12 shadow-sm">
-          <div className="flex flex-wrap gap-4 items-center">
-            {amenityStats.map((stat) => (
-              <div
-                key={stat.name}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-lg"
-              >
-                <div className="bg-blue-50 p-1.5 rounded-md">
-                  <stat.icon className="w-4 h-4 text-blue-600" />
-                </div>
-                <div className="flex flex-col">
-                  <Text className="text-sm text-gray-600">{stat.name}</Text>
-                  <Text className="font-semibold">{stat.value}</Text>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Feature Sections */}
+        {features.map((feature, index) => (
+          <FeatureSection
+            key={feature.title}
+            {...feature}
+            reversed={index % 2 === 1}
+          />
+        ))}
+
+        {/* Community Benefits */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="w-full max-w-7xl mx-auto mb-20"
+        >
+          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+            Unsere Benefits
+          </h2>
+          <BenefitValues />
+        </motion.div>
 
         {/* Bento Grid Features mit expandierbaren Cards */}
         <motion.div 
@@ -404,7 +424,7 @@ export default function EpicWGPage() {
           className="mb-16"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, index) => (
+            {featureData.map((feature, index) => (
               <motion.div
                 key={feature.name}
                 initial={{ opacity: 0, y: 20 }}
@@ -499,10 +519,7 @@ export default function EpicWGPage() {
                         {feature.name === "Amenities" && (
                           <div className="mt-4">
                             <BarList
-                              data={amenityStats.map(stat => ({
-                                name: stat.name,
-                                value: stat.value
-                              }))}
+                              data={[]} // Removed data here
                               className="mt-2"
                             />
                           </div>
@@ -533,14 +550,14 @@ export default function EpicWGPage() {
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <Badge color="blue" size="xl" className="mb-4">Limited Time Offer</Badge>
-                <Title className="text-3xl mb-2">Early Bird Pre-booking</Title>
+                <Badge color="blue" size="xl" className="mb-4">{isTranslationLoading ? '...' : t(TranslationKeys.LIMITED_TIME_OFFER)}</Badge>
+                <Title className="text-3xl mb-2">{isTranslationLoading ? '...' : t(TranslationKeys.EARLY_BIRD_PRE_BOOKING)}</Title>
                 <Text className="text-gray-600">
-                  Be part of our community from the start and enjoy exclusive benefits
+                  {isTranslationLoading ? '...' : t(TranslationKeys.EARLY_BIRD_DESCRIPTION)}
                 </Text>
               </div>
               <div className="text-right">
-                <Text className="text-sm text-gray-500">Campaign ends</Text>
+                <Text className="text-sm text-gray-500">{isTranslationLoading ? '...' : t(TranslationKeys.CAMPAIGN_ENDS)}</Text>
                 <Text className="text-xl font-semibold text-gray-900">March 31st, 2025</Text>
               </div>
             </div>
@@ -550,15 +567,15 @@ export default function EpicWGPage() {
               currentAmount={currentAmount}
               goal={epicwgData.earlyBirdCampaign.goal}
               endDate={epicwgData.earlyBirdCampaign.endDate}
-              isLoading={isLoading}
+              isLoading={isLoadingCampaign}
             />
 
             {/* Tier Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              {epicwgData.earlyBirdCampaign.tiers.map((tier) => {
-                const tierSlot = tierSlots.find(slot => slot.tierId === tier.id);
-                const isSoldOut = tierSlot ? tierSlot.remainingSlots <= 0 : false;
-                const remainingSlots = tierSlot ? tierSlot.remainingSlots : tier.maxSlots;
+              {epicwgData.earlyBirdCampaign.tiers.map((tier: Tier) => {
+                const tierSlot = tierSlots.find((slot) => slot.tierId === tier.id);
+                const isSoldOut = tierSlot ? tierSlot.usedSlots >= tierSlot.maxSlots : false;
+                const remainingSlots = tierSlot ? tierSlot.maxSlots - tierSlot.usedSlots : tier.maxSlots;
 
                 return (
                   <Card 
@@ -569,26 +586,26 @@ export default function EpicWGPage() {
                   >
                     {tier.id === 'pioneer' && (
                       <div className="bg-blue-500 text-white text-center text-sm py-1">
-                        Best Value
+                        {isTranslationLoading ? '...' : t(TranslationKeys.BEST_VALUE)}
                       </div>
                     )}
                     <div className="p-6">
                       <Title className="text-xl mb-2">{tier.title}</Title>
                       <div className="flex items-baseline mb-4">
-                        <Text className="text-3xl font-bold">€{tier.minDeposit}</Text>
-                        <Text className="text-gray-500 ml-2">deposit</Text>
+                        <Text className="text-3xl font-bold">€{tier.deposit}</Text>
+                        <Text className="text-gray-500 ml-2">{isTranslationLoading ? '...' : t(TranslationKeys.DEPOSIT)}</Text>
                       </div>
                       <div className="mb-4">
-                        <Badge color="green" className="mb-2">{tier.discount}% off rent</Badge>
+                        <Badge color="green" className="mb-2">{tier.discount}% {isTranslationLoading ? '...' : t(TranslationKeys.OFF_RENT)}</Badge>
                         <Text className={`text-sm ${isSoldOut ? 'text-red-500 font-bold' : 'text-gray-500'}`}>
-                          {isSoldOut ? 'SOLD OUT' : `${remainingSlots} of ${tierSlot?.maxSlots || tier.maxSlots} spots left`}
+                          {isSoldOut ? isTranslationLoading ? '...' : t(TranslationKeys.SOLD_OUT) : `${remainingSlots} of ${tierSlot?.maxSlots || tier.maxSlots} spots left`}
                         </Text>
                       </div>
                       <div className="space-y-2 mb-6">
-                        {tier.perks.map((perk, index) => (
+                        {tier.benefits.map((benefit: string, index: number) => (
                           <div key={index} className="flex items-start gap-2">
                             <IconChevronRight className="w-4 h-4 text-blue-500 mt-1" />
-                            <Text className="text-sm text-gray-600">{perk}</Text>
+                            <Text className="text-sm text-gray-600">{benefit}</Text>
                           </div>
                         ))}
                       </div>
@@ -599,7 +616,7 @@ export default function EpicWGPage() {
                         onClick={() => handleReserve(tier)}
                         disabled={isSoldOut || isProcessing}
                       >
-                        {isSoldOut ? 'Sold Out' : 'Reserve Now'}
+                        {isSoldOut ? isTranslationLoading ? '...' : t(TranslationKeys.SOLD_OUT) : isTranslationLoading ? '...' : t(TranslationKeys.RESERVE_NOW)}
                       </Button>
                     </div>
                   </Card>
@@ -607,24 +624,21 @@ export default function EpicWGPage() {
               })}
             </div>
 
-            {/* FAQ Section */}
-            <div className="space-y-4">
-              <Title className="text-xl mb-4">Frequently Asked Questions</Title>
-              {epicwgData.earlyBirdCampaign.faq.map((item, index) => (
-                <Card key={index} className="overflow-hidden">
-                  <div className="p-4">
-                    <Text className="font-medium mb-2">{item.question}</Text>
-                    <Text className="text-gray-600">{item.answer}</Text>
-                  </div>
-                </Card>
-              ))}
-            </div>
           </div>
         </div>
 
+        {/* AI FAQ section */}
+        <section className="relative py-24 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden rounded-3xl mx-4 mb-32">
+          <div className="absolute inset-0 bg-grid-white/5 bg-[size:32px] contrast-50 opacity-10 rounded-3xl" />
+          <div className="relative h-full">
+            <div className="w-full h-full bg-gray-900/80 backdrop-blur-sm -my-24">
+              <AiFaq />
+            </div>
+          </div>
+        </section>
+
         {/* Common Areas */}
         <div className="mb-12">
-          <Title className="text-2xl mb-6">Common Areas</Title>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {epicwgData.commonAreas.map((area) => (
               <Card 
@@ -653,8 +667,7 @@ export default function EpicWGPage() {
         </div>
 
         {/* Available Rooms */}
-        <div className="mb-12">
-          <Title className="text-2xl mb-6">Available Rooms</Title>
+        <div id="rooms" className="mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {epicwgData.rooms.map((room) => (
               <RoomCard 
@@ -669,10 +682,9 @@ export default function EpicWGPage() {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <Card className="w-full max-w-lg mx-4">
               <div className="p-6">
-                <Title className="text-2xl mb-4">Confirm Reservation</Title>
+                <Title className="text-2xl mb-4">{isTranslationLoading ? '...' : t(TranslationKeys.CONFIRM_RESERVATION)}</Title>
                 <Text className="mb-6">
-                  You are about to reserve a spot in the {selectedTier.title} tier with a deposit of €{selectedTier.minDeposit}.
-                  This amount will be deducted from your first month's rent.
+                  {isTranslationLoading ? '...' : t(TranslationKeys.CONFIRM_RESERVATION_DESCRIPTION, { tier: selectedTier.title, deposit: selectedTier.deposit })}
                 </Text>
                 <div className="flex justify-end gap-4">
                   <Button
@@ -680,14 +692,14 @@ export default function EpicWGPage() {
                     onClick={() => setShowApplicationModal(false)}
                     disabled={isProcessing}
                   >
-                    Cancel
+                    {isTranslationLoading ? '...' : t(TranslationKeys.CANCEL)}
                   </Button>
                   <Button
                     color="blue"
                     onClick={handleConfirmReservation}
                     disabled={isProcessing}
                   >
-                    {isProcessing ? 'Processing...' : 'Confirm Reservation'}
+                    {isProcessing ? isTranslationLoading ? '...' : t(TranslationKeys.PROCESSING) : isTranslationLoading ? '...' : t(TranslationKeys.CONFIRM_RESERVATION)}
                   </Button>
                 </div>
               </div>
@@ -696,18 +708,28 @@ export default function EpicWGPage() {
         )}
       </div>
       <footer className="py-6 bg-gray-50 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-center text-gray-500 text-sm">
-          <Image 
-            src="/libralab.svg" 
-            alt="libralab" 
-            width={16} 
-            height={16} 
-            className="mr-2 opacity-70" 
-          />
-          <span> {new Date().getFullYear()} - powered by libra innovation flexco
-          </span>
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col items-center justify-center gap-4">
+            {/* Social icons for mobile */}
+            <div className="flex md:hidden gap-6 mb-4">
+              <IconButton icon={<IconBrandGithub />} href="https://github.com/epicwg" />
+              <IconButton icon={<IconBrandDiscord />} href="https://discord.gg/epicwg" />
+              <IconButton icon={<IconBrandInstagram />} href="https://instagram.com/epicwg" />
+            </div>
+            <div className="flex items-center justify-center text-gray-500 text-sm">
+              <Image 
+                src="/libralab.svg" 
+                alt="libralab" 
+                width={16} 
+                height={16} 
+                className="mr-2 opacity-70" 
+              />
+              <span>{new Date().getFullYear()} - {isTranslationLoading ? '...' : t(TranslationKeys.POWERED_BY)} libra innovation flexco</span>
+            </div>
+          </div>
         </div>
       </footer>
+      <FloatingNav />
     </div>
   );
 }

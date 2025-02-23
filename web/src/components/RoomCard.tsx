@@ -3,7 +3,7 @@
 import { Text, Badge } from "@tremor/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { IconWifi, IconMapPin, IconCircleFilled, IconStar, IconCurrencyEuro } from "@tabler/icons-react";
+import { IconWifi, IconMapPin, IconCircleFilled, IconStar, IconCurrencyEuro, IconZoomIn, IconRuler } from "@tabler/icons-react";
 
 interface RoomCardProps {
   room: {
@@ -12,7 +12,7 @@ interface RoomCardProps {
     description: string;
     size: number;
     price: number;
-    floor: number;
+    floor: string;
     amenities: string[];
     available: boolean;
     images: string[];
@@ -22,6 +22,20 @@ interface RoomCardProps {
   };
   onApply?: (roomId: string) => void;
 }
+
+const getLocationDescription = (room: RoomCardProps['room']) => {
+  let location = room.floor;
+
+  // Add additional context based on room features or title
+  if (room.features?.some(f => f.toLowerCase().includes('küche'))) {
+    location += ' • Nahe Küche';
+  }
+  if (room.features?.some(f => f.toLowerCase().includes('coworking'))) {
+    location += ' • Nahe Co-working';
+  }
+
+  return location;
+};
 
 export function RoomCard({ room, onApply }: RoomCardProps) {
   const defaultImage = "/images/rooms/zimmer1.webp";
@@ -52,10 +66,10 @@ export function RoomCard({ room, onApply }: RoomCardProps) {
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
         )}
-        {/* Gradient Overlay - nur unteres Drittel */}
-        <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent" />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
         
-        {/* Content der bei Hover ausgeblendet wird */}
+        {/* Front Side Content */}
         <div className="absolute inset-0 flex flex-col justify-between p-4 z-10 transition-opacity duration-300 group-hover:opacity-0">
           {/* Top Bar */}
           <div className="flex justify-between items-start">
@@ -69,73 +83,70 @@ export function RoomCard({ room, onApply }: RoomCardProps) {
             >
               <IconCircleFilled className={`w-4 h-4 ${room.available ? 'text-green-400' : 'text-red-400'}`} />
               <Text className="text-white font-medium">
-                {room.available ? 'Noch frei' : 'Reserviert'}
+                {room.available ? 'Available' : 'Booked'}
               </Text>
             </motion.div>
           </div>
 
           {/* Bottom Content */}
-          <div>
-            <Text className="text-2xl font-bold text-white mb-1 drop-shadow-lg">
+          <div className="z-20">
+            <Text className="!text-3xl !font-bold !text-white mb-2 !drop-shadow-lg">
               {room.title}
             </Text>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-3">
               <IconMapPin className="w-4 h-4 text-white/90" />
-              <Text className="text-sm text-white/90">Innsbruck, Austria</Text>
+              <Text className="text-sm text-white/90">{getLocationDescription(room)}</Text>
             </div>
             <div className="flex items-baseline gap-1">
-              <Text className="text-3xl font-bold text-white drop-shadow-lg">€{room.price}</Text>
+              <Text className="!text-5xl !font-bold !text-white !drop-shadow-lg">€{room.price}</Text>
               <Text className="text-sm text-white/80">/mo</Text>
             </div>
           </div>
         </div>
 
-        {/* Hover Stats Overlay */}
+        {/* Back Side Content */}
         <div className="absolute inset-0 bg-black/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="p-4 space-y-6">
-            {/* Internet Speed */}
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-1.5 w-fit">
-              <IconWifi className="w-4 h-4 text-white" />
-              <Text className="text-sm font-medium text-white">1000 Mbps</Text>
-            </div>
-
+          <div className="h-full p-4 flex flex-col justify-center">
             {/* Stats */}
             <div className="space-y-8">
-              {/* Rating Stars */}
-              {room.rating !== undefined && (
-                <div className="flex items-center gap-1 mb-2">
-                  {[...Array(5)].map((_, index) => (
-                    <IconStar
-                      key={index}
-                      className={`w-4 h-4 ${
-                        index < (room.rating || 0) ? 'text-yellow-400' : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
+              {/* Overall Rating */}
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <IconStar className="w-5 h-5 text-yellow-400" />
+                  <Text className="text-white/90 font-medium">Overall</Text>
+                  <Text className="text-white/90 ml-auto">{room.rating}/10</Text>
                 </div>
-              )}
+                <div className="h-8 bg-white/10 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-yellow-400 rounded-full transition-all duration-500" 
+                    style={{ width: `${(room.rating || 0) * 10}%` }} 
+                  />
+                </div>
+              </div>
 
               {/* Cost Rating */}
-              {room.costRating !== undefined && (
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(3)].map((_, index) => (
-                    <IconCurrencyEuro
-                      key={index}
-                      className={`w-4 h-4 ${
-                        index < (room.costRating || 0) ? 'text-green-500' : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <IconCurrencyEuro className="w-5 h-5 text-green-500" />
+                  <Text className="text-white/90 font-medium">Cost</Text>
+                  <Text className="text-white/90 ml-auto">{room.costRating}/10</Text>
                 </div>
-              )}
+                <div className="h-8 bg-white/10 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-green-500 rounded-full transition-all duration-500" 
+                    style={{ width: `${(room.costRating || 0) * 10}%` }} 
+                  />
+                </div>
+              </div>
               
               {/* Size Rating */}
               <div className="space-y-2">
-                <div className="flex items-center justify-between mb-2">
-                  <Text className="text-white/90 font-medium text-lg">📏 Size</Text>
-                  <Text className="text-white/90 font-medium text-lg">{room.size}m²</Text>
+                <div className="flex items-center gap-2">
+                  <IconRuler className="w-5 h-5 text-blue-400" />
+                  <Text className="text-white/90 font-medium">Size</Text>
+                  <Text className="text-white/90 ml-auto">{room.size}m²</Text>
                 </div>
-                <div className="h-4 bg-white/10 rounded-full overflow-hidden">
+                <div className="h-8 bg-white/10 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-blue-400 rounded-full transition-all duration-500" 
                     style={{ width: `${(room.size/30) * 100}%` }} 
@@ -144,9 +155,9 @@ export function RoomCard({ room, onApply }: RoomCardProps) {
               </div>
             </div>
 
-            {/* Amenities */}
-            <div className="flex flex-wrap gap-2">
-              {room.amenities.slice(0, 3).map((amenity) => (
+            {/* Features */}
+            <div className="flex flex-wrap gap-2 mt-8">
+              {room.amenities.map((amenity) => (
                 <Badge 
                   key={amenity}
                   className="bg-white/10 backdrop-blur-sm text-white text-xs px-3 py-1.5 font-medium"
@@ -154,16 +165,11 @@ export function RoomCard({ room, onApply }: RoomCardProps) {
                   {amenity}
                 </Badge>
               ))}
-              {room.amenities.length > 3 && (
-                <Badge className="bg-white/10 backdrop-blur-sm text-white text-xs px-3 py-1.5 font-medium">
-                  +{room.amenities.length - 3}
-                </Badge>
-              )}
             </div>
 
             {/* Zoom Icon */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <IconCircleFilled className="w-12 h-12 text-white/80" />
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-50">
+              <IconZoomIn className="w-12 h-12 text-white" />
             </div>
           </div>
         </div>

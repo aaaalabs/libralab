@@ -3,8 +3,14 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import { CampaignProvider } from '../context/CampaignContext';
+import { TranslationProvider } from '@/context/TranslationContext';
 
 const inter = Inter({ subsets: ['latin'] });
+
+// export const metadata: Metadata = {
+//   title: "EpicWG",
+//   description: "Join our early-bird campaign for EpicWG",
+// };
 
 export default function RootLayout({
   children,
@@ -14,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <CampaignProvider initialAmount={400}>
-          {children}
-        </CampaignProvider>
+        <TranslationProvider defaultLanguage="en">
+          <CampaignProvider>
+            {children}
+          </CampaignProvider>
+        </TranslationProvider>
       </body>
     </html>
   );

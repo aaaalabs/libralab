@@ -45,7 +45,8 @@
         "Laundry room",
         "Bicycle storage",
         "Garden access",
-        "Basement storage"
+        "Basement storage",
+        "E-Trike Carsharing"
       ]
     },
     "infrastruktur": {
@@ -72,116 +73,154 @@
   },
   "rooms": [
     {
-      "id": "keller-1",
-      "title": "Cozy Basement Room",
-      "description": "Bright basement room with separate entrance",
-      "size": 15,
-      "price": 350,
-      "floor": -1,
-      "amenities": ["Natural light", "Separate entrance", "Heating"],
-      "available": true,
-      "images": ["/images/rooms/zimmer1.webp"],
-      "rating": 4.5,
-      "costRating": 4.0,
-      "features": ["South-facing", "Wooden floors", "Large window"]
-    },
-    {
-      "id": "keller-2",
-      "title": "Bright Basement Room",
-      "description": "Spacious basement room with plenty of natural light",
-      "size": 18,
-      "price": 380,
-      "floor": -1,
-      "amenities": ["Natural light", "Heating"],
-      "available": true,
-      "images": ["/images/rooms/zimmer2.webp"],
-      "rating": 4.2,
-      "costRating": 4.5,
-      "features": ["Garden access", "Laminate flooring", "Built-in wardrobe"]
-    },
-    {
-      "id": "eg-wohn",
-      "title": "Large Living Room",
-      "description": "Bright living room on the ground floor",
-      "size": 25,
-      "price": 500,
-      "floor": 0,
-      "amenities": ["Large windows", "Central location", "Common room"],
-      "available": true,
-      "images": ["/images/rooms/zimmer3.webp"],
-      "rating": 4.5,
-      "costRating": 4.0,
-      "features": ["South-facing", "Wooden floors", "Large window"]
-    },
-    {
       "id": "eg-1",
-      "title": "Ground Floor Room",
-      "description": "Practical room near the kitchen",
-      "size": 16,
-      "price": 420,
-      "floor": 0,
-      "amenities": ["Natural light", "Near kitchen", "Central location"],
+      "title": "VIP-Platz mit Balkon",
+      "description": "Dein VIP-Platz: Balkon mit Bergkino inklusive und die Küche direkt nebenan – schneller kommst du nicht an deinen morgendlichen Kaffee!",
+      "size": 15,
+      "price": 1250,
+      "floor": "Dachgeschoß",
+      "roomNumber": 1,
+      "amenities": ["Balkon", "Küche nebenan", "Bergblick"],
       "available": true,
-      "images": ["/images/rooms/zimmer4.webp"],
-      "rating": 4.2,
-      "costRating": 4.5,
-      "features": ["Garden access", "Laminate flooring", "Built-in wardrobe"]
+      "images": ["/images/rooms/[Zimmer1]_15m2_01.webp"],
+      "rating": 4.5,
+      "costRating": 4.0,
+      "features": ["Balkon", "Direkte Küchennähe", "Bergpanorama"]
     },
     {
       "id": "eg-2",
-      "title": "Quiet Room",
-      "description": "Relaxing room on the ground floor",
-      "size": 14,
-      "price": 380,
-      "floor": 0,
-      "amenities": ["Natural light", "Quiet location"],
+      "title": "Gemütlich unterm Dach",
+      "description": "Gemütlich unterm Dach: Die Schräge macht's schräg, aber der Preis macht alles wieder gerade. Sparfüchse, greift zu!",
+      "size": 16.5,
+      "price": 1110,
+      "floor": "Dachgeschoß",
+      "roomNumber": 2,
+      "amenities": ["Dachschräge", "Günstig"],
       "available": true,
-      "images": ["/images/rooms/zimmer5.webp"],
-      "rating": 4.5,
-      "costRating": 4.0,
-      "features": ["South-facing", "Wooden floors", "Large window"]
-    },
-    {
-      "id": "dg-1",
-      "title": "Attic Room with View",
-      "description": "Dream room under the roof",
-      "size": 20,
-      "price": 480,
-      "floor": 1,
-      "amenities": ["Skylight", "Best view", "Quiet location"],
-      "available": true,
-      "images": ["/images/rooms/zimmer6.webp"],
+      "images": ["/images/rooms/[Zimmer2]_16m2_01.webp"],
       "rating": 4.2,
       "costRating": 4.5,
-      "features": ["Garden access", "Laminate flooring", "Built-in wardrobe"]
+      "features": ["Dachschräge", "Preiswert"]
     },
     {
-      "id": "dg-2",
-      "title": "Bright Attic Room",
-      "description": "Large room in the attic",
+      "id": "eg-3",
+      "title": "Fashion-Profi Zimmer",
+      "description": "Leben wie ein Fashion-Profi: Riesiger Kleiderschrank, Dachschräge für extra Charme und genug Platz für deine private Modenschau (oder dein privates Labor in dem du daran arbeitest die Weltherrschaft zu übernehmen).",
+      "size": 24,
+      "price": 1510,
+      "floor": "Dachgeschoß",
+      "roomNumber": 3,
+      "amenities": ["Großer Kleiderschrank", "Dachschräge", "Viel Platz"],
+      "available": true,
+      "images": ["/images/rooms/[Zimmer3]_24m2_01.webp"],
+      "rating": 4.5,
+      "costRating": 4.0,
+      "features": ["Kleiderschrank", "Dachschräge", "Geräumig"]
+    },
+    {
+      "id": "eg-4",
+      "title": "Berghütten-Vibes",
+      "description": "Berghütten-Vibes ohne Holz hacken: Dein wassergeheizter Kachelofen ist der Star – plus Aussicht, die das Herz höherschlagen lässt.",
       "size": 22,
-      "price": 520,
-      "floor": 1,
-      "amenities": ["Skylight", "Good view"],
+      "price": 1430,
+      "floor": "Erdgeschoß",
+      "roomNumber": 4,
+      "amenities": ["Kachelofen", "Aussicht"],
       "available": true,
-      "images": ["/images/rooms/zimmer7.webp"],
-      "rating": 4.5,
+      "images": ["/images/rooms/[Zimmer4]_22m2_01.webp"],
+      "rating": 4.2,
       "costRating": 4.0,
-      "features": ["South-facing", "Wooden floors", "Large window"]
+      "features": ["Wassergeheizter Kachelofen", "Panoramablick"]
     },
     {
-      "id": "dg-3",
-      "title": "Cozy Attic Room",
-      "description": "Small but fine room under the roof",
-      "size": 19,
-      "price": 460,
-      "floor": 1,
-      "amenities": ["Skylight", "Quiet location"],
+      "id": "eg-5",
+      "title": "XXL-Format mit Terrasse",
+      "description": "Terrassentür auf, Berge rein: Dein Leben im XXL-Format – Platz, Panorama und Luft ohne Ende. Hier bist du der Boss!",
+      "size": 25,
+      "price": 1650,
+      "floor": "Erdgeschoß",
+      "roomNumber": 5,
+      "amenities": ["Terrasse", "Panoramablick", "Großzügig"],
       "available": true,
-      "images": ["/images/rooms/zimmer8.webp"],
-      "rating": 4.2,
-      "costRating": 4.5,
-      "features": ["Garden access", "Laminate flooring", "Built-in wardrobe"]
+      "images": ["/images/rooms/[Zimmer5]_25m2_01.webp"],
+      "rating": 4.5,
+      "costRating": 3.8,
+      "features": ["Terrasse", "XXL-Format", "Bergpanorama"]
+    },
+    {
+      "id": "eg-6",
+      "title": "Perfekt balanciert",
+      "description": "Perfekt balanciert: Nicht zu groß, nicht zu klein, aber mit Aussicht, die alles andere vergessen lässt. Ein echter Allrounder!",
+      "size": 15.5,
+      "price": 1170,
+      "floor": "Erdgeschoß",
+      "roomNumber": 6,
+      "amenities": ["Ausgewogen", "Aussicht"],
+      "available": true,
+      "images": ["/images/rooms/[Zimmer6]_15m2_01.webp"],
+      "rating": 4.3,
+      "costRating": 4.2,
+      "features": ["Ausgewogene Größe", "Panoramablick"]
+    },
+    {
+      "id": "eg-7",
+      "title": "Minimalismus deluxe",
+      "description": "Minimalismus deluxe: Klein, günstig und mit der Nische so clever, dass du dich wie ein Stauraum-Genie fühlen wirst!",
+      "size": 10,
+      "price": 950,
+      "floor": "Erdgeschoß",
+      "roomNumber": 7,
+      "amenities": ["Clever", "Stauraum", "Günstig"],
+      "available": true,
+      "images": ["/images/rooms/[Zimmer7]_10m2_01.webp"],
+      "rating": 4.0,
+      "costRating": 4.8,
+      "features": ["Clever", "Nische", "Minimalistisch"]
+    },
+    {
+      "id": "ug1-8",
+      "title": "Urlaubsfeeling garantiert",
+      "description": "Urlaubsfeeling garantiert: Terrasse, Garten und eine Aussicht, die dich jeden Morgen auf Wolke sieben weckt. Raum für alles, was Spaß macht!",
+      "size": 24.5,
+      "price": 1630,
+      "floor": "Untergeschoß",
+      "roomNumber": 8,
+      "amenities": ["Terrasse", "Garten", "Aussicht"],
+      "available": true,
+      "images": ["/images/rooms/[Zimmer8]_24m2_01.webp"],
+      "rating": 4.7,
+      "costRating": 4.0,
+      "features": ["Terrasse", "Gartenzugang", "Panoramablick"]
+    },
+    {
+      "id": "ug1-9",
+      "title": "Ausblick-Zimmer",
+      "description": "Nicht zu groß, nicht zu klein, aber mit Aussicht, die so gut ist, dass du nie die Vorhänge schließen willst!",
+      "size": 15.5,
+      "price": 1170,
+      "floor": "Untergeschoß",
+      "roomNumber": 9,
+      "amenities": ["Aussicht", "Ausgewogen"],
+      "available": true,
+      "images": ["/images/rooms/[Zimmer9]_15m2_01.webp"],
+      "rating": 4.3,
+      "costRating": 4.2,
+      "features": ["Panoramablick", "Ausgewogene Größe"]
+    },
+    {
+      "id": "ug1-10",
+      "title": "Klein aber fein",
+      "description": "Klein, aber fein: Mit direktem Terrassenzugang und einer cleveren Nische bist du bestens ausgestattet – für Minimalisten ein Paradies!",
+      "size": 10,
+      "price": 950,
+      "floor": "Untergeschoß",
+      "roomNumber": 10,
+      "amenities": ["Terrassenzugang", "Clever", "Minimalistisch"],
+      "available": true,
+      "images": ["/images/rooms/[Zimmer10]_10m2_01.webp"],
+      "rating": 4.0,
+      "costRating": 4.8,
+      "features": ["Terrassenzugang", "Clever", "Minimalistisch"]
     }
   ],
   "commonAreas": [
@@ -195,11 +234,12 @@
         "Multiple workstations",
         "Coffee station",
         "Meeting area",
-        "Kitchen facilities"
+        "Kitchen facilities",
+        "E-Trike charging station"
       ],
       "type": "CommunitySpace",
       "floor": -1,
-      "images": ["/images/rooms/gemeinschaftsraum1.webp"],
+      "images": ["/images/rooms/gemeinschaftsraum1.JPG"],
       "isSpecial": true,
       "included": true,
       "rating": 4.8,
@@ -324,69 +364,135 @@
   },
   "earlyBirdCampaign": {
     "goal": 8000,
-    "currentAmount": 0,
+    "currentAmount": 400,
     "endDate": "2025-03-31T23:59:59+02:00",
     "startDate": "2025-02-15T00:00:00+01:00",
     "tiers": [
       {
-        "id": "pioneer",
-        "title": "EpicWG Pioneer",
-        "minDeposit": 500,
-        "discount": 15,
-        "maxSlots": 5,
-        "remainingSlots": 5,
-        "perks": [
-          "15% off monthly rent for 6 months",
-          "Priority room selection",
-          "Exclusive Pioneer community events",
-          "Free laundry for 6 months",
-          "Limited edition EpicWG merch pack"
-        ]
-      },
-      {
-        "id": "early-adopter",
-        "title": "Early Adopter",
-        "minDeposit": 300,
-        "discount": 10,
-        "maxSlots": 8,
+        "id": "essential",
+        "title": "Essential",
+        "price": 880,
+        "deposit": 500,
+        "maxSlots": 15,
         "remainingSlots": 8,
-        "perks": [
-          "10% off monthly rent for 4 months",
-          "Early room selection after Pioneers",
-          "Free laundry for 3 months",
-          "EpicWG welcome pack"
-        ]
+        "discount": 20,
+        "description": "Perfect for focused individuals who value quality living and workspace.",
+        "heroFeatures": [
+          "Premium Room with Emma Mattress",
+          "Basic Co-Working Setup",
+          "Community Access"
+        ],
+        "benefits": [
+          "Super Schlafqualität - Emma Matratzen",
+          "Workstation mit höhenverstellbarem Tisch",
+          "Voll ausgestattete Küche",
+          "Waschmaschinen & Trockner",
+          "Wöchentliche Reinigung",
+          "Terasse mit Grill & Chill Ecke",
+          "Community Events Basic"
+        ],
+        "availableNow": true,
+        "tag": "Smart Start"
       },
       {
-        "id": "community",
-        "title": "Community Member",
-        "minDeposit": 200,
-        "discount": 5,
-        "maxSlots": 12,
-        "remainingSlots": 12,
-        "perks": [
-          "5% off monthly rent for 3 months",
-          "Free laundry for 1 month",
-          "EpicWG sticker pack"
-        ]
+        "id": "pro",
+        "title": "Pro",
+        "price": 1280,
+        "deposit": 800,
+        "maxSlots": 10,
+        "remainingSlots": 4,
+        "discount": 25,
+        "description": "Enhanced living experience with premium workspace and exclusive perks.",
+        "heroFeatures": [
+          "Skylink Highspeed+ Internet",
+          "Premium Workstation Setup",
+          "Full Community Access"
+        ],
+        "benefits": [
+          "Alles von Essential +",
+          "Ergonomischer Premium Stuhl",
+          "Breitbild Monitor",
+          "Freeflow Premium Kaffee",
+          "Meeting Raum Priorität",
+          "Ski & Bike Storage",
+          "Vergünstigte Event Tickets",
+          "AI-Shift Workshops (2x/Monat)"
+        ],
+        "availableNow": true,
+        "tag": "Most Popular"
+      },
+      {
+        "id": "ultimate",
+        "title": "Ultimate",
+        "price": 1880,
+        "deposit": 1000,
+        "maxSlots": 5,
+        "remainingSlots": 2,
+        "discount": 30,
+        "description": "The complete package for entrepreneurs who want it all.",
+        "heroFeatures": [
+          "First Access to New Features",
+          "AI Business Toolkit",
+          "Concierge Service"
+        ],
+        "benefits": [
+          "Alles von Pro +",
+          "Dual Monitor Setup",
+          "Eigene Kaffeemaschine",
+          "Mini Kühlschrank",
+          "BT Soundsystem",
+          "Priority Access: Gym/Sauna/Kino (2025)",
+          "Unlimited GPU Credits (Q2/2025)",
+          "AI-Shift Business (-50%)",
+          "Förderberatung (-50%)",
+          "VIP Event Access"
+        ],
+        "availableNow": true,
+        "tag": "VIP Experience"
       }
     ],
-    "faq": [
+    "upsells": [
       {
-        "question": "How does the deposit work?",
-        "answer": "Your deposit secures your spot and will be deducted from your first month's rent. It's fully refundable until March 31st, 2025."
+        "id": "coffee-kit",
+        "title": "Kaffeepaket+",
+        "price": 29,
+        "perks": [
+          "Barista-Maschine",
+          "Premium Bohnen Selection",
+          "Monatliche Spezialitäten"
+        ],
+        "availableFor": ["essential", "pro"]
       },
       {
-        "question": "When do I choose my room?",
-        "answer": "Room selection starts in order of tier level (Pioneer first) and deposit date within each tier."
+        "id": "workspace-pro",
+        "title": "Digital Nomad Kit",
+        "price": 49,
+        "perks": [
+          "27\" 4K Monitor",
+          "Premium BT-Soundsystem",
+          "Wireless Charging Pad"
+        ],
+        "availableFor": ["essential", "pro"]
+      }
+    ],
+    "futureAmenities": [
+      {
+        "title": "Gym & Boulder",
+        "date": "2025-Q3",
+        "description": "State-of-the-art fitness center",
+        "previewImage": "/images/amenities/gym-preview.webp"
       },
       {
-        "question": "What happens if the campaign goal isn't reached?",
-        "answer": "All deposits will be fully refunded if we don't reach our €8,000 goal by March 31st, 2025."
+        "title": "Sauna & Whirlpool",
+        "date": "2026-Q1",
+        "description": "Wellness area with mountain view",
+        "previewImage": "/images/amenities/sauna-preview.webp"
       },
       {
-        "question": "Can I upgrade my tier later?",
-        "answer": "Yes, you can upgrade to a higher tier if slots are still available, paying only the difference in deposit."
+        "title": "Gaming & Cinema",
+        "date": "2025-Q4",
+        "description": "4K projector and gaming setup",
+        "previewImage": "/images/amenities/cinema-preview.webp"
       }
     ]
   }

@@ -13,7 +13,11 @@ interface CampaignContextType {
 
 const CampaignContext = createContext<CampaignContextType | undefined>(undefined);
 
-export function CampaignProvider({ children }: { children: React.ReactNode }) {
+interface CampaignProviderProps {
+  children: React.ReactNode;
+}
+
+export function CampaignProvider({ children }: CampaignProviderProps) {
   const [currentAmount, setCurrentAmount] = useState(400);
   const [isLoading, setIsLoading] = useState(true);
   const [tierSlots, setTierSlots] = useState<TierSlots[]>([]);
