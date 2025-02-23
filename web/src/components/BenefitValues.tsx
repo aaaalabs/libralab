@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type Benefit = {
@@ -91,37 +91,37 @@ const Badge = ({ benefit, index }: { benefit: Benefit; index: number }) => (
 
 export function BenefitValues() {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [shuffledBenefits] = useState(() => shuffleArray(benefits));
-  const visibleBenefits = isExpanded ? shuffledBenefits : shuffledBenefits.slice(0, 8);
+  const [shuffledBenefits, setShuffledBenefits] = useState(benefits);
+
+  useEffect(() => {
+    setShuffledBenefits(shuffleArray(benefits));
+  }, []);
+
+  const visibleBenefits = isExpanded ? shuffledBenefits : shuffledBenefits.slice(0, 12);
 
   return (
     <div className="w-full">
-      <div className="flex flex-wrap items-center gap-2 justify-center">
+      <div className="flex flex-wrap gap-3">
         <AnimatePresence mode="sync">
           {visibleBenefits.map((benefit, index) => (
-            <Badge key={`${benefit.text}-${index}`} benefit={benefit} index={index} />
+            <Badge key={benefit.text} benefit={benefit} index={index} />
           ))}
         </AnimatePresence>
-        
-        {!isExpanded && (
-          <motion.button
-            onClick={() => setIsExpanded(true)}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full 
-                     bg-gray-100 hover:bg-gray-200 backdrop-blur-sm 
-                     border border-gray-300 text-gray-600
-                     hover:text-gray-800 transition-all duration-300
-                     text-sm font-medium"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span>Mehr anzeigen</span>
-            <span className="text-lg">↓</span>
-          </motion.button>
-        )}
       </div>
+      {benefits.length > 12 && (
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="mt-4 text-sm text-gray-600 hover:text-gray-800 flex items-center gap-2"
+        >
+          {isExpanded ? 'Show less' : 'Show more'}
+          <motion.span
+            animate={{ rotate: isExpanded ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            ↓
+          </motion.span>
+        </button>
+      )}
     </div>
   );
 }

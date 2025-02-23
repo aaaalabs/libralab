@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { TablerIconsProps } from '@tabler/icons-react';
 import { OptimizedImage } from '../ui/optimized-image';
@@ -70,17 +72,19 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
           {/* Image */}
           {imageUrl && (
             <motion.div
-              initial={{ opacity: 0, x: reversed ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="flex-1"
+              className="relative flex-1"
+              style={{ aspectRatio: '2.35/1' }}
             >
               <OptimizedImage
                 src={imageUrl}
                 alt={title}
-                className="aspect-[4/3] rounded-2xl"
-                priority={false}
+                className="rounded-2xl shadow-2xl w-full h-full object-cover"
+                width={1200}
+                height={510}
               />
             </motion.div>
           )}
@@ -88,4 +92,4 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
       </div>
     </div>
   );
-}
+};
