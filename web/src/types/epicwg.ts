@@ -1,6 +1,6 @@
 import epicwgData from '../data/epicwg.json';
 
-export type EpicWGData = typeof epicwgData;
+export type LibraLabData = typeof epicwgData;
 
 export interface Location {
   description: string;

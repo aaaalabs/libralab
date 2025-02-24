@@ -1,4 +1,4 @@
 export const metadata = {
-  title: 'EpicWG',
+  title: 'LibraLab',
   description: 'Your Epic Living Space',
 };

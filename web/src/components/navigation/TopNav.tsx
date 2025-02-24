@@ -24,6 +24,14 @@ export function TopNav() {
   const navLinkBaseStyle = `text-sm font-medium transition-colors duration-200`;
   const navLinkScrolledStyle = isScrolled ? 'text-[#2E4555] hover:text-[#D09467]' : 'text-[#EBDBC3] hover:text-[#D09467]';
 
+  const scrollToRooms = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const roomsSection = document.getElementById('rooms');
+    if (roomsSection) {
+      roomsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -41,6 +49,7 @@ export function TopNav() {
                   src="/libralab_darkmode.png"
                   alt="LibraLab"
                   fill
+                  sizes="(max-width: 768px) 100vw, 200px"
                   className={`object-contain transition-opacity duration-300 ${
                     isScrolled ? 'opacity-0' : 'opacity-100'
                   }`}
@@ -51,6 +60,7 @@ export function TopNav() {
                   src="/libralab_lighrmode.png"
                   alt="LibraLab"
                   fill
+                  sizes="(max-width: 768px) 100vw, 200px"
                   className={`object-contain transition-opacity duration-300 ${
                     isScrolled ? 'opacity-100' : 'opacity-0'
                   }`}
@@ -65,8 +75,8 @@ export function TopNav() {
               <LanguageSelector />
 
               {/* Discover Room Button */}
-              <Link
-                href="/#rooms"
+              <button
+                onClick={scrollToRooms}
                 className="group relative inline-flex items-center px-4 py-2 text-sm font-medium overflow-hidden rounded-full border-2 border-[#D09467] transition-all duration-300"
                 style={{
                   backgroundColor: 'rgba(208, 148, 103, 0.1)',
@@ -93,7 +103,7 @@ export function TopNav() {
                 <span className="relative z-10 text-[#D09467] group-hover:text-[#EBDBC3] transition-colors duration-300 flex items-center">
                   {t('nav.discover_room')}
                 </span>
-              </Link>
+              </button>
             </div>
           </div>
         </div>

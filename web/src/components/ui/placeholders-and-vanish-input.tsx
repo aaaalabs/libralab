@@ -52,7 +52,7 @@ export function PlaceholdersAndVanishInput({
     if (!inputRef.current) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
 
     canvas.width = 800;
@@ -199,17 +199,21 @@ export function PlaceholdersAndVanishInput({
       onSubmit={handleSubmit}
     >
       <canvas
+        ref={canvasRef}
+        width={800}
+        height={800}
+        style={{ display: 'none' }}
         className={cn(
           "absolute pointer-events-none text-base transform scale-50 top-[20%] left-2 sm:left-8 origin-top-left filter invert dark:invert-0 pr-20",
           !animating ? "opacity-0" : "opacity-100"
         )}
-        ref={canvasRef}
       />
       <div className="relative w-full h-full flex items-center">
         <input
           ref={inputRef}
           type="text"
           value={value}
+          suppressHydrationWarning
           onChange={(e) => {
             if (!animating) {
               setValue(e.target.value);

@@ -1,0 +1,36 @@
+{
+  "hooks": [
+    {
+      "question": "Ready to code with a view of the Alps?",
+      "subtitle": "Trade your desk view for mountain peaks. Join our tech-focused living space."
+    },
+    {
+      "question": "Missing inspiration in your current workspace?",
+      "subtitle": "Find your next big idea in our innovation-driven alpine community."
+    },
+    {
+      "question": "Want to live where others vacation?",
+      "subtitle": "Experience year-round resort living while building amazing tech."
+    },
+    {
+      "question": "Looking for your next tech adventure?",
+      "subtitle": "Join fellow developers in Europe's most exciting tech coliving space."
+    },
+    {
+      "question": "Tired of the usual startup hubs?",
+      "subtitle": "Discover a fresh perspective in our Alpine tech paradise."
+    },
+    {
+      "question": "Ready to upgrade your remote work life?",
+      "subtitle": "Experience high-speed internet with high-altitude inspiration."
+    },
+    {
+      "question": "Want to join a community of tech innovators?",
+      "subtitle": "Live, work, and grow with like-minded tech professionals."
+    },
+    {
+      "question": "Dreaming of the perfect work-life balance?",
+      "subtitle": "Code by day, ski by evening - make it your reality."
+    }
+  ]
+}

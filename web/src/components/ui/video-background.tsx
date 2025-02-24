@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 
 interface VideoBackgroundProps {
@@ -18,7 +20,7 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.75; // Slower playback for more dramatic effect
+      videoRef.current.playbackRate = 0.75;
     }
   }, []);
 
@@ -34,8 +36,7 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
           className="absolute inset-0 bg-cover bg-center" 
           style={{ 
             backgroundImage: `url(${poster})`,
-            opacity: 1,
-            transition: 'opacity 0.5s ease-out'
+            opacity: 1
           }} 
         />
       )}
@@ -50,23 +51,22 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
         preload="auto"
         poster={poster}
         onLoadedData={handleVideoLoaded}
-        className={`w-full h-full object-cover transition-opacity duration-500 ${
-          isVideoLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
+        className="absolute inset-0 w-full h-full object-cover"
       >
         {sources.map((src, index) => (
           <source key={index} src={src} type="video/mp4" />
         ))}
       </video>
 
-      {/* Overlay */}
-      {gradient ? (
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-transparent" />
-      ) : (
-        <div 
-          className="absolute inset-0 bg-black" 
-          style={{ opacity: overlayOpacity }}
-        />
+      {/* Dark overlay */}
+      <div 
+        className="absolute inset-0 bg-black"
+        style={{ opacity: overlayOpacity }}
+      />
+
+      {/* Optional gradient overlay */}
+      {gradient && (
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
       )}
     </div>
   );

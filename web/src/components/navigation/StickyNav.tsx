@@ -37,7 +37,7 @@ export function StickyNav() {
           <Link href="/" className="flex items-center">
             <Image
               src="/sync_logo02.svg"
-              alt="EpicWG Logo"
+              alt="LibraLab Logo"
               width={32}
               height={32}
               className="w-8 h-8"

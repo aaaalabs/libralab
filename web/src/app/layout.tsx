@@ -1,6 +1,7 @@
 'use client';
 
 import './globals.css';
+import '@/lib/env';  
 import { Inter } from 'next/font/google';
 import { CampaignProvider } from '../context/CampaignContext';
 import { TranslationProvider } from '@/context/TranslationContext';

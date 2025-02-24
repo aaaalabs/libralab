@@ -20,6 +20,7 @@ interface FeatureSectionProps {
   groups: FeatureGroup[];
   imageUrl?: string;
   reversed?: boolean;
+  onApply?: () => void;
 }
 
 export const FeatureSection: React.FC<FeatureSectionProps> = ({
@@ -28,6 +29,7 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
   groups,
   imageUrl,
   reversed = false,
+  onApply,
 }) => {
   return (
     <div className="py-24 overflow-hidden">

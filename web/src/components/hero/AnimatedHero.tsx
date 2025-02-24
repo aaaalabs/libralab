@@ -1,13 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { FlipWords } from "../ui/flip-words";
 import { motion } from "framer-motion";
 import { VideoBackground } from "../ui/video-background";
 import { useTranslation } from "@/context/TranslationContext";
+import { ApplicationForm } from "../application/ApplicationForm";
 
 export function AnimatedHero() {
   const { t, currentLanguage } = useTranslation();
+  const [showApplicationForm, setShowApplicationForm] = useState(false);
   
   const words = currentLanguage === 'en' 
     ? ["workspace", "apartment", "rental", "coliving"]
@@ -66,8 +68,8 @@ export function AnimatedHero() {
             transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
             className="mt-12 flex gap-4 justify-center"
           >
-            <a
-              href="#apply"
+            <button
+              onClick={() => setShowApplicationForm(true)}
               className="group relative inline-flex items-center px-8 py-4 text-lg font-medium overflow-hidden rounded-full border-2 border-[#D09467] transition-all duration-300"
               style={{
                 backgroundColor: 'rgba(208, 148, 103, 0.1)',
@@ -101,10 +103,16 @@ export function AnimatedHero() {
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </span>
-            </a>
+            </button>
           </motion.div>
         </div>
       </div>
+
+      {/* Application Form */}
+      <ApplicationForm 
+        isOpen={showApplicationForm}
+        onClose={() => setShowApplicationForm(false)}
+      />
     </div>
   );
 }
