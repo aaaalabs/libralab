@@ -1,10 +1,10 @@
-# LibraLab
+# LIBRAlab
 
 AI-Powered Co-Living Portal
 
 ## Overview
 
-LibraLab is a modern co-living platform that simplifies the process of room applications and community management.
+LIBRAlab is a modern co-living platform that simplifies the process of room applications and community management.
 
 ## Features (MVP)
 

@@ -29,16 +29,6 @@ const socialLinks = [
     href: 'https://linkedin.com/company/libralab-ai',
     icon: IconBrandLinkedin,
   },
-  {
-    name: 'Email',
-    href: 'mailto:hello@libralab.ai',
-    icon: IconMail,
-  },
-  {
-    name: 'Phone',
-    href: 'tel:+43123456789',
-    icon: IconPhone,
-  },
 ];
 
 export function Footer() {
@@ -52,21 +42,21 @@ export function Footer() {
           {/* Partners */}
           <div>
             <Text className="font-semibold text-lg text-white mb-6">Our Partners</Text>
-            <div className="flex flex-wrap gap-8">
+            <div className="grid gap-4">
               {partners.map((partner) => (
                 <Link
                   key={partner.name}
                   href={partner.href}
-                  className="hover:opacity-75 transition-opacity focus:ring-2 focus:ring-white rounded"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="flex items-center justify-center bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-colors"
                 >
                   <Image
                     src={partner.logo}
                     alt={partner.name}
-                    width={100}
+                    width={120}
                     height={40}
-                    className="h-10 w-auto"
+                    className="h-8 w-auto object-contain"
                   />
                 </Link>
               ))}
@@ -75,66 +65,7 @@ export function Footer() {
 
           {/* Company Info */}
           <div>
-            <Text className="font-semibold text-lg text-white mb-4">LibraLab</Text>
-            <Text className="text-base text-gray-300 mb-6">
-              Innovation Hub & Tech Community in Innsbruck
-            </Text>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-6">Quick Links</h3>
-            <nav className="flex flex-col space-y-4">
-              <Link href="/privacy" className="text-base text-gray-300 hover:text-white">
-                Privacy Policy
-              </Link>
-              <Link href="/imprint" className="text-base text-gray-300 hover:text-white">
-                Legal Notice
-              </Link>
-            </nav>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-6">Contact</h3>
-            <nav className="flex flex-col space-y-4">
-              <a href="mailto:hello@libralab.ai" className="text-base text-gray-300 hover:text-white">
-                hello@libralab.ai
-              </a>
-              <a href="tel:+43123456789" className="text-base text-gray-300 hover:text-white">
-                +43 123 456 789
-              </a>
-              <div className="flex space-x-4 mt-2">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-gray-300 hover:text-white"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <link.icon className="h-6 w-6" />
-                  </a>
-                ))}
-              </div>
-            </nav>
-          </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="mt-12 pt-8 border-t border-gray-700">
-          <Text className="text-sm text-gray-300">
-            &copy; {currentYear} LibraLab.ai – Made with <IconHeart className="inline-block h-4 w-4 text-red-500" /> in Innsbruck
-          </Text>
-        </div>
-      </div>
-
-      {/* Mobile Footer */}
-      <div className="md:hidden py-8 px-6">
-        <div className="space-y-8">
-          {/* Company Info */}
-          <div>
-            <Text className="font-semibold text-lg text-white mb-2">LibraLab</Text>
+            <Text className="font-semibold text-lg text-white mb-6">LIBRAlab</Text>
             <Text className="text-sm text-gray-300">
               Innovation Hub & Tech Community in Innsbruck
             </Text>
@@ -142,32 +73,121 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-base font-semibold text-white mb-3">Contact</h3>
-            <div className="space-y-2">
-              <a href="mailto:hello@libralab.ai" className="text-sm text-gray-300 block">
-                hello@libralab.ai
-              </a>
-              <div className="flex space-x-4 mt-3">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-gray-300 hover:text-white"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <link.icon className="h-5 w-5" />
-                  </a>
-                ))}
-              </div>
+            <Text className="font-semibold text-lg text-white mb-6">Connect</Text>
+            <div className="flex space-x-4">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-gray-300 hover:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.name}
+                >
+                  <link.icon className="h-5 w-5" />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Copyright */}
-          <Text className="text-xs text-gray-300 pt-4 border-t border-gray-700">
-            &copy; {currentYear} LibraLab.ai
+          {/* Legal */}
+          <div>
+            <Text className="text-white font-semibold mb-4">Rechtliches</Text>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/impressum" className="text-gray-300 hover:text-white transition-colors">
+                  Impressum
+                </Link>
+              </li>
+              <li>
+                <Link href="/datenschutz" className="text-gray-300 hover:text-white transition-colors">
+                  Datenschutz
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="mt-12 pt-8 border-t border-gray-700">
+          <Text className="text-sm text-gray-300">
+            &copy; {currentYear} LIBRAlab.ai – Made with <IconHeart className="inline-block h-4 w-4 text-red-500" /> in Innsbruck
           </Text>
         </div>
+      </div>
+
+      {/* Mobile Footer */}
+      <div className="md:hidden px-6 py-8">
+        <div className="space-y-8">
+          {/* Partners */}
+          <div>
+            <Text className="font-semibold text-lg text-white mb-4">Our Partners</Text>
+            <div className="grid gap-4">
+              {partners.map((partner) => (
+                <Link
+                  key={partner.name}
+                  href={partner.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-colors"
+                >
+                  <Image
+                    src={partner.logo}
+                    alt={partner.name}
+                    width={120}
+                    height={40}
+                    className="h-8 w-auto object-contain"
+                  />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Company Info */}
+          <div>
+            <Text className="font-semibold text-lg text-white mb-4">LIBRAlab</Text>
+            <Text className="text-sm text-gray-300">
+              Innovation Hub & Tech Community in Innsbruck
+            </Text>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <Text className="font-semibold text-lg text-white mb-4">Connect</Text>
+            <div className="flex space-x-4">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-gray-300 hover:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.name}
+                >
+                  <link.icon className="h-5 w-5" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <Text className="font-semibold text-lg text-white mb-4">Rechtliches</Text>
+            <div className="space-y-2">
+              <Link href="/impressum" className="text-gray-300 block hover:text-white transition-colors">
+                Impressum
+              </Link>
+              <Link href="/datenschutz" className="text-gray-300 block hover:text-white transition-colors">
+                Datenschutz
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <Text className="text-xs text-gray-300 mt-8 pt-8 border-t border-gray-700">
+          &copy; {currentYear} LIBRAlab.ai
+        </Text>
       </div>
     </footer>
   );

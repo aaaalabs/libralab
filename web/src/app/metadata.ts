@@ -1,4 +1,4 @@
 export const metadata = {
-  title: 'LibraLab',
+  title: 'LIBRAlab',
   description: 'Your Epic Living Space',
 };

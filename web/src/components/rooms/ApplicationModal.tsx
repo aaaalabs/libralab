@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactElement } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import { Dialog } from '@headlessui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IconX } from '@tabler/icons-react';
@@ -26,17 +26,6 @@ interface ApplicationModalProps {
 }
 
 export function ApplicationModal({ isOpen, onClose, room }: ApplicationModalProps): ReactElement {
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-    moveInDate: '',
-    duration: '6',
-    budget: room?.price.toString() || '',
-  });
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -47,13 +36,6 @@ export function ApplicationModal({ isOpen, onClose, room }: ApplicationModalProp
       document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    onClose();
-  };
 
   return (
     <AnimatePresence>
@@ -96,10 +78,8 @@ export function ApplicationModal({ isOpen, onClose, room }: ApplicationModalProp
 
               <div className="mt-8">
                 <ApplicationForm 
-                  onSubmit={handleSubmit}
-                  formData={formData}
-                  setFormData={setFormData}
-                  room={room}
+                  isOpen={isOpen}
+                  onClose={onClose}
                 />
               </div>
             </motion.div>

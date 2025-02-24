@@ -2,14 +2,11 @@
 
 import './globals.css';
 import '@/lib/env';  
-import { Inter } from 'next/font/google';
 import { CampaignProvider } from '../context/CampaignContext';
 import { TranslationProvider } from '@/context/TranslationContext';
 import { ThemeProvider } from "next-themes";
 import { TopNav } from '@/components/navigation/TopNav';
 import { Toaster } from '../components/ui/toaster';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,
@@ -18,7 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/brp5mxq.css" />
+      </head>
+      <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TranslationProvider defaultLanguage="en">
             <CampaignProvider>

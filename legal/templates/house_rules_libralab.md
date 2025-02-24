@@ -1,4 +1,4 @@
-# LibraLab House Rules & Community Guidelines
+# LIBRAlab House Rules & Community Guidelines
 
 ## 1. Grundprinzipien
 - Respekt und Toleranz

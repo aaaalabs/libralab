@@ -23,7 +23,7 @@ export default function OfferPage() {
             </div>
             <div>
               <FeatureSection 
-                title="Why Join LibraLab?"
+                title="Why Join LIBRAlab?"
                 description="Experience the perfect blend of tech innovation and community"
                 groups={[
                   {

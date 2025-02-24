@@ -256,8 +256,8 @@ export default function LibraLabPage() {
       <TopNav />
       <AnimatedHero />
 
-      {/* Featured Rooms Section */}
-      <div className="py-16 px-6 sm:px-8 md:px-12 lg:px-16 bg-[#EBDBC3]/10">
+      {/* Showcase Section - Featured Rooms Highlight */}
+      <div className="py-16 px-6 sm:px-8 md:px-12 lg:px-16 bg-gradient-to-b from-white to-[#EBDBC3]/10">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-8">
             <div>
@@ -274,7 +274,9 @@ export default function LibraLabPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {epicwgData.rooms.slice(0, 3).map((room, index) => (
+            {epicwgData.rooms
+              .filter(room => [1, 4, 5].includes(room.roomNumber))
+              .map((room, index) => (
               <motion.div
                 key={room.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -311,7 +313,7 @@ export default function LibraLabPage() {
                             {room.floor}
                           </span>
                         </div>
-                        <h3 className="text-xl font-semibold text-[#EBDBC3] mb-2">{room.title}</h3>
+                        <h3 className="text-xl font-semibold text-white mb-2">{room.title}</h3>
                         <div className="flex items-center gap-4">
                           <span className="text-[#EBDBC3]/90 text-sm flex items-center gap-1">
                             <IconRuler className="w-4 h-4" />
@@ -520,8 +522,8 @@ export default function LibraLabPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-8">
             <div>
-              <h2 className="text-3xl font-bold mb-4 text-[#2E4555]">Featured Spaces</h2>
-              <p className="text-[#979C94]">Handpicked rooms for tech professionals</p>
+              <h2 className="text-3xl font-bold mb-4 text-[#2E4555]">All Available Spaces</h2>
+              <p className="text-[#979C94]">Explore our complete collection of tech-focused living spaces</p>
             </div>
           </div>
 
@@ -563,7 +565,7 @@ export default function LibraLabPage() {
                             {room.floor}
                           </span>
                         </div>
-                        <h3 className="text-xl font-semibold text-[#EBDBC3] mb-2">{room.title}</h3>
+                        <h3 className="text-xl font-semibold text-white mb-2">{room.title}</h3>
                         <div className="flex items-center gap-4">
                           <span className="text-[#EBDBC3]/90 text-sm flex items-center gap-1">
                             <IconRuler className="w-4 h-4" />
@@ -580,9 +582,8 @@ export default function LibraLabPage() {
                           </span>
                         </div>
                       </div>
-                      <div className="text-[#D09467] font-medium backdrop-blur-sm bg-[#2E4555]/30 px-3 py-1.5 rounded-full">
-                        from {room.price}€
-                        <span className="text-[#EBDBC3]/80 text-sm">/month</span>
+                      <div className="text-white font-medium backdrop-blur-sm bg-[#2E4555]/30 px-3 py-1.5 rounded-full">
+                        €{room.price}<span className="text-[#EBDBC3]/80">/mo</span>
                       </div>
                     </div>
                   </div>
@@ -595,7 +596,7 @@ export default function LibraLabPage() {
 
       {/* Communal Areas Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">
+        <h2 className="text-3xl font-bold text-[#D09467] mb-8 text-center">
           Communal Areas
         </h2>
         <p className="text-lg text-gray-600 text-center mb-12 max-w-3xl mx-auto">

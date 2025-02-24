@@ -1,14 +1,14 @@
 ---
-titel: "LibraLab - KI-WG & Innovation Hub"
+titel: "LIBRAlab - KI-WG & Innovation Hub"
 datum: "2025-02-15"
 version: "final"
-autor: "LibraLab"
+autor: "LIBRAlab"
 evaluationsDatum: "2025-02-15"
 projektId: "LIBRA-2025-02"
 tags: ["KI", "WG", "Innovation", "Startup", "DAO", "Coworking", "Digital Nomads"]
 ---
 
-# LibraLab - KI-WG & Innovation Hub
+# LIBRAlab - KI-WG & Innovation Hub
 
 ## Basisdaten
 - **Erstellungsdatum:** 2025-02-15
@@ -18,7 +18,7 @@ tags: ["KI", "WG", "Innovation", "Startup", "DAO", "Coworking", "Digital Nomads"
 - **Standort:** Omes, Tirol
 
 ## Projektbeschreibung
-LibraLab ist ein innovatives Wohn- und Arbeitskonzept, das eine KI-fokussierte Wohngemeinschaft mit einem professionellen Co-Working Space verbindet. Das Projekt wird in einer 10-Zimmer Immobilie in Omes, Tirol, realisiert und richtet sich an Digital Nomads, Freelancer und Jungunternehmer im KI-Bereich. Besonders innovativ ist die Integration einer DAO (Decentralized Autonomous Organization) über Colony.io für gemeinschaftliche Entscheidungsprozesse.
+LIBRAlab ist ein innovatives Wohn- und Arbeitskonzept, das eine KI-fokussierte Wohngemeinschaft mit einem professionellen Co-Working Space verbindet. Das Projekt wird in einer 10-Zimmer Immobilie in Omes, Tirol, realisiert und richtet sich an Digital Nomads, Freelancer und Jungunternehmer im KI-Bereich. Besonders innovativ ist die Integration einer DAO (Decentralized Autonomous Organization) über Colony.io für gemeinschaftliche Entscheidungsprozesse.
 
 ## RICE Metriken
 ### Reach (Reichweite)

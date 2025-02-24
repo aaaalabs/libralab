@@ -1,5 +1,5 @@
 /**
- * LibraLab Color System
+ * LIBRAlab Color System
  * A sophisticated, premium color palette that balances tech professionalism with living comfort
  * Supports both light and dark modes through CSS variables
  */

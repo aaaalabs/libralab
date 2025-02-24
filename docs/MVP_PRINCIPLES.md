@@ -1,4 +1,4 @@
-# LibraLab MVP Principles
+# LIBRAlab MVP Principles
 
 ## Core Philosophy
 - **KISS (Keep It Simple, Stupid)**: Every feature must be as simple as possible while solving the core problem

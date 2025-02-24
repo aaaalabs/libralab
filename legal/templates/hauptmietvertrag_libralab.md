@@ -39,7 +39,7 @@ und
 3.3 Eine Kaution in Höhe von EUR [BETRAG] ist bei Vertragsunterzeichnung zu hinterlegen.
 
 ## §4 Untervermietung
-4.1 Der Hauptmieter ist berechtigt, die Räumlichkeiten im Rahmen des LibraLab-Konzepts unterzuvermieten.
+4.1 Der Hauptmieter ist berechtigt, die Räumlichkeiten im Rahmen des LIBRAlab-Konzepts unterzuvermieten.
 
 4.2 Die Untervermietung muss folgende Bedingungen erfüllen:
 - Befristete Verträge (6-12 Monate)

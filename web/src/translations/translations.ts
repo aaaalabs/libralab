@@ -3,7 +3,7 @@ export const translations = {
     hero: {
       more_than_a: "More than a",
       forget_hostels: "Forget random hostels and spotty WiFi.",
-      join_community: "Join a curated community of AI innovators",
+      join_community: "Join a curated community of AI innovators ",
       in_alps: "in the heart of the Alps.",
       apply_now: "Apply Now"
     },
@@ -61,8 +61,8 @@ export const translations = {
   de: {
     hero: {
       more_than_a: "Mehr als nur",
-      forget_hostels: "Vergessen Sie zufällige Hostels und unzuverlässiges WLAN.",
-      join_community: "Werden Sie Teil einer ausgewählten KI-Innovatoren-Community",
+      forget_hostels: "Vergiss zufällige Hostels und unzuverlässiges WLAN.",
+      join_community: "Werde Teil einer ausgewählten KI-Innovatoren-Community ",
       in_alps: "im Herzen der Alpen.",
       apply_now: "Jetzt Bewerben"
     },
@@ -72,11 +72,11 @@ export const translations = {
     },
     founders_elite: {
       title: "Gründer Elite",
-      description: "Treten Sie unserem exklusiven Early-Bird-Programm bei"
+      description: "Tritt unserem exklusiven Early-Bird-Programm bei"
     },
     founders_elite_title: "Gründer Elite",
     early_bird_pre_booking: "Early Bird Vorbestellung",
-    early_bird_description: "Seien Sie unter den Ersten, die sich ihren Platz sichern",
+    early_bird_description: "Sei unter den Ersten, die sich ihren Platz sichern",
     raised: "Gesammelt",
     campaign_ends: "Kampagne endet",
     off_rent: "Rabatt auf reguläre Miete",
@@ -84,10 +84,10 @@ export const translations = {
     spots_left: "Plätze übrig",
     sold_out: "Ausverkauft",
     confirm_reservation: "Reservierung bestätigen",
-    confirm_reservation_description: "Sie sind dabei, {{tier}} mit einer Anzahlung von €{{deposit}} zu reservieren. Möchten Sie fortfahren?",
+    confirm_reservation_description: "Du biest dabei, {{tier}} mit einer Anzahlung von €{{deposit}} zu reservieren. Möchtest du fortfahren?",
     cancel: "Abbrechen",
     processing: "Verarbeitung...",
-    ai_faq_error: "Entschuldigung, ich konnte Ihre Frage nicht verarbeiten. Bitte versuchen Sie es erneut.",
+    ai_faq_error: "Entschuldigung, ich konnte deine Frage nicht verarbeiten. Bitte versuche es erneut.",
     ai_faq_loading: "Denke nach...",
     benefit: {
       interior_design: "Premium Innenausstattung",
@@ -100,9 +100,9 @@ export const translations = {
       location_description: "Im Herzen von Innsbruck gelegen",
       title: "Vorteile",
       priority: "Bevorzugter Zugang",
-      priority_description: "Zimmer-Benachrichtigung: Erhalten Sie eine Nachricht, wenn Ihr gestaltetes Zimmer gebucht werden soll",
+      priority_description: "Zimmer-Benachrichtigung: Erhalte eine Nachricht, wenn dein gestaltetes Zimmer gebucht werden soll",
       ai_consulting: "KI-Beratung & Unterstützung",
-      ai_consulting_description: "1:1 KI-Beratung mit dem Libralab CTO während Ihres Aufenthalts",
+      ai_consulting_description: "1:1 KI-Beratung mit dem Libralab CTO während deines Aufenthalts",
       events: "Exklusive Events & Meetups",
       events_description: "Regelmäßige Tech-Talks, Networking-Events und Gründer-Treffen",
       revenue_share: "Umsatzbeteiligung",
@@ -110,9 +110,9 @@ export const translations = {
       etrike: "E-Trike Carsharing",
       etrike_description: "E-Trike Carsharing Mini",
       pioneer: "Pionier-Status",
-      pioneer_description: "Seien Sie eines der ersten Mitglieder und gestalten Sie die Community mit",
+      pioneer_description: "Sei eines der ersten Mitglieder und gestalte die Community mit",
       parking: "Reservierter Parkplatz",
-      parking_description: "Ihr eigener reservierter Parkplatz",
+      parking_description: "Dein eigener reservierter Parkplatz",
       cleaning: "Professioneller Reinigungsservice",
       cleaning_description: "Regelmäßige professionelle Reinigung Ihres Bereichs"
     }

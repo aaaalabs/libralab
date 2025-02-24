@@ -1,4 +1,4 @@
-# LibraLab Aktionsplan
+# LIBRAlab Aktionsplan
 
 ## 1. Marketing-Strategie (14 Tage)
 

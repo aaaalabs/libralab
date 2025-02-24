@@ -1,4 +1,4 @@
-# LibraLab Tech Stack Documentation
+# LIBRAlab Tech Stack Documentation
 
 ## Core Services
 

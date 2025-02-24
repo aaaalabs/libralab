@@ -110,7 +110,7 @@ export function AiFaq() {
           animate={{ opacity: 1, y: 0 }}
           className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-6 text-[#D09467]"
         >
-          Frag unsere KI über LibraLab
+          Frag unsere LIBR<span className="text-[#EBDBC3]">AI</span>
         </motion.h2>
 
         <div className="flex flex-col items-center justify-center space-y-8">

@@ -1,4 +1,4 @@
-# Untermietvertrag LibraLab
+# Untermietvertrag LIBRAlab
 
 zwischen
 
@@ -37,7 +37,7 @@ und
 - DAO-Mitgliedschaft
 
 ## §4 Community & DAO-Integration
-4.1 Der Community Member verpflichtet sich zur aktiven Teilnahme am LibraLab DAO:
+4.1 Der Community Member verpflichtet sich zur aktiven Teilnahme am LIBRAlab DAO:
 - Teilnahme an Community-Entscheidungen
 - Nutzung der Colony.io Plattform
 - Einhaltung der DAO-Governance

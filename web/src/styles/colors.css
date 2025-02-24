@@ -24,9 +24,9 @@
   --color-border-heavy: #D9C4A5;
 
   --color-state-success: #4CAF50;
-  --color-state-warning: #FFC107;
+  --color-state-warning: #D09467;  /* Using copper for warnings */
   --color-state-error: #DC3545;
-  --color-state-info: #2196F3;
+  --color-state-info: #2E4555;    /* Using navy for info states */
 }
 
 .dark {
@@ -49,7 +49,12 @@
   --color-interactive-secondaryHover: #F4E8D6;
   --color-interactive-secondaryActive: #F9F5EE;
 
-  --color-border-light: #243744;
-  --color-border-medium: #2E4555;
-  --color-border-heavy: #708599;
+  --color-border-light: #1B2933;
+  --color-border-medium: #243744;
+  --color-border-heavy: #2E4555;
+
+  --color-state-success: #4CAF50;
+  --color-state-warning: #D09467;  /* Using copper for warnings */
+  --color-state-error: #DC3545;
+  --color-state-info: #3A5469;    /* Using navy-light for info states in dark mode */
 }

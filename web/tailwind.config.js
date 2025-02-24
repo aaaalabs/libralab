@@ -9,7 +9,49 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['futura-pt', 'sans-serif'],
+      },
+      fontSize: {
+        base: ['1.125rem', '1.75rem'],  // 18px base size (up from 16px)
+        sm: ['1rem', '1.5rem'],         // 16px
+        lg: ['1.25rem', '1.875rem'],    // 20px
+        xl: ['1.375rem', '2rem'],       // 22px
+        'tremor-label': ['0.75rem'],
+        'tremor-default': ['0.875rem', { lineHeight: '1.25rem' }],
+        'tremor-title': ['1.125rem', { lineHeight: '1.75rem' }],
+        'tremor-metric': ['1.875rem', { lineHeight: '2.25rem' }],
+      },
       colors: {
+        primary: {
+          DEFAULT: '#D09467', // copper
+          hover: '#B87D51', // copper-dark
+        },
+        navy: {
+          DEFAULT: '#2E4555',
+          light: '#3A5469',
+          dark: '#1E2D38'
+        },
+        copper: {
+          DEFAULT: '#D09467',
+          light: '#DBA77D',
+          dark: '#B87D51'
+        },
+        beige: {
+          DEFAULT: '#EBDBC3',
+          light: '#F2E7D6',
+          dark: '#D9C3A3'
+        },
+        gray: {
+          DEFAULT: '#979C94',
+          light: '#ADB1A9',
+          dark: '#81867F'
+        },
+        sand: {
+          DEFAULT: '#E1B588',
+          light: '#E8C4A0',
+          dark: '#D4A170'
+        },
         tremor: {
           brand: {
             faint: '#eff6ff',
@@ -61,12 +103,6 @@ module.exports = {
         'tremor-small': '0.375rem',
         'tremor-default': '0.5rem',
         'tremor-full': '9999px',
-      },
-      fontSize: {
-        'tremor-label': ['0.75rem'],
-        'tremor-default': ['0.875rem', { lineHeight: '1.25rem' }],
-        'tremor-title': ['1.125rem', { lineHeight: '1.75rem' }],
-        'tremor-metric': ['1.875rem', { lineHeight: '2.25rem' }],
       },
     },
   },

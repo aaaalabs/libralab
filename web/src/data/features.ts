@@ -26,7 +26,7 @@ interface Feature {
 export const features: Feature[] = [
   {
     title: "Deep Work, Maximum Focus",
-    description: "Productivity starts with the right environment. At LibraLab, you get a space designed for deep work, creativity, and high-level innovation.",
+    description: "Productivity starts with the right environment. At LIBRAlab, you get a space designed for deep work, creativity, and high-level innovation.",
     imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200",
     groups: [
       {
@@ -52,7 +52,7 @@ export const features: Feature[] = [
   },
   {
     title: "AI Innovation Hub & Tech Community",
-    description: "LibraLab is an innovation hub for AI professionals, tech founders, and remote entrepreneurs. It's where new ideas take shape, connections are built, and breakthroughs happen.",
+    description: "LIBRAlab is an innovation hub for AI professionals, tech founders, and remote entrepreneurs. It's where new ideas take shape, connections are built, and breakthroughs happen.",
     imageUrl: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=1200",
     groups: [
       {

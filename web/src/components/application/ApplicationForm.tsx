@@ -58,7 +58,7 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
         <textarea
           ref={textareaRef}
           placeholder={placeholder}
-          className="w-full h-full p-2 border rounded-lg bg-white/5 border-gray-700 text-white placeholder-gray-400 resize-none transition-colors hover:bg-white/10"
+          className="w-full h-full p-2 border rounded-lg bg-[#2E4555] border-white/20 text-white placeholder-white/50 resize-none transition-colors hover:bg-[#2E4555]/90 focus:border-[#D09467] focus:ring-1 focus:ring-[#D09467]"
           value={value}
           onChange={onChange}
           onFocus={() => {
@@ -187,7 +187,7 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
               <input
                 type="text"
                 placeholder="Your Name"
-                className="w-full p-2 border rounded-lg bg-white/5 border-gray-700 text-white placeholder-gray-400"
+                className="w-full p-2 border rounded-lg bg-white/10 border-white/20 text-white placeholder-white/50"
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
               />
@@ -209,7 +209,7 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
               <input
                 type="email"
                 placeholder="Your Email"
-                className="w-full p-2 border rounded-lg bg-white/5 border-gray-700 text-white placeholder-gray-400"
+                className="w-full p-2 border rounded-lg bg-white/10 border-white/20 text-white placeholder-white/50"
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
                 disabled={formData.name.length === 0}
@@ -246,15 +246,15 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
                   className="relative"
                 >
                   <select
-                    className="w-full p-2 border rounded-lg bg-white/5 border-gray-700 text-white"
+                    className="w-full p-2 border rounded-lg bg-white/10 border-white/20 text-white"
                     value={formData.stayDuration}
                     onChange={(e) => setFormData({...formData, stayDuration: e.target.value})}
                   >
-                    <option value="">How long would you like to stay?</option>
-                    <option value="1 month">1 month</option>
-                    <option value="2 months">2 months</option>
-                    <option value="3 months">3 months</option>
-                    <option value="4+ months">4+ months</option>
+                    <option value="" className="text-gray-700">How long would you like to stay?</option>
+                    <option value="1 month" className="text-gray-700">1 month</option>
+                    <option value="2 months" className="text-gray-700">2 months</option>
+                    <option value="3 months" className="text-gray-700">3 months</option>
+                    <option value="4+ months" className="text-gray-700">4+ months</option>
                   </select>
                 </motion.div>
               )}
@@ -270,7 +270,7 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
         <div className="space-y-6">
           <textarea
             placeholder="Tell us about your experience with AI (projects, interests, goals)"
-            className="w-full p-2 border rounded-lg h-32 bg-white/5 border-gray-700 text-white placeholder-gray-400"
+            className="w-full p-2 border rounded-lg h-32 bg-white/10 border-white/20 text-white placeholder-white/50"
             value={formData.experience}
             onChange={(e) => setFormData({...formData, experience: e.target.value})}
           />
@@ -326,75 +326,20 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
       description: "Optional: Tell us something interesting about you",
       fields: (
         <div className="space-y-4">
-          <div className="relative">
-            {!formData.funFact ? (
-              <button
-                onClick={() => setActiveField('funFact')}
-                className="w-full p-2 text-left text-gray-400 bg-white/5 border border-gray-700 rounded-lg hover:bg-white/10"
-              >
-                + Share a fun fact about yourself (optional)
-              </button>
-            ) : (
-              <button
-                onClick={() => setActiveField('funFact')}
-                className="w-full group relative hover:bg-white/10 transition-colors rounded-lg"
-              >
-                <div className="flex items-center gap-2 p-2 bg-white/5 border border-gray-700 rounded-lg">
-                  <p className="flex-1 text-sm text-gray-300 truncate">{formData.funFact}</p>
-                  <span className="shrink-0 px-2 text-sm text-[#D09467] opacity-0 group-hover:opacity-100">
-                    Edit
-                  </span>
-                </div>
-              </button>
-            )}
-            {activeField === 'funFact' && (
-              <div className="absolute inset-x-0 top-0 z-10">
-                <textarea
-                  autoFocus
-                  placeholder="Share a fun fact about yourself"
-                  className="w-full p-2 h-32 bg-[#2E4555] border border-[#D09467] rounded-lg text-white placeholder-gray-400 resize-none"
-                  value={formData.funFact}
-                  onChange={(e) => setFormData({...formData, funFact: e.target.value})}
-                  onBlur={() => setActiveField(null)}
-                />
-              </div>
-            )}
-          </div>
-
-          <div className="relative">
-            {!formData.projectIdea ? (
-              <button
-                onClick={() => setActiveField('projectIdea')}
-                className="w-full p-2 text-left text-gray-400 bg-white/5 border border-gray-700 rounded-lg hover:bg-white/10"
-              >
-                + Got a cool project idea? Tell us about it! (optional)
-              </button>
-            ) : (
-              <button
-                onClick={() => setActiveField('projectIdea')}
-                className="w-full group relative hover:bg-white/10 transition-colors rounded-lg"
-              >
-                <div className="flex items-center gap-2 p-2 bg-white/5 border border-gray-700 rounded-lg">
-                  <p className="flex-1 text-sm text-gray-300 truncate">{formData.projectIdea}</p>
-                  <span className="shrink-0 px-2 text-sm text-[#D09467] opacity-0 group-hover:opacity-100">
-                    Edit
-                  </span>
-                </div>
-              </button>
-            )}
-            {activeField === 'projectIdea' && (
-              <div className="absolute inset-x-0 top-0 z-10">
-                <textarea
-                  autoFocus
-                  placeholder="Tell us about your project idea"
-                  className="w-full p-2 h-32 bg-[#2E4555] border border-[#D09467] rounded-lg text-white placeholder-gray-400 resize-none"
-                  value={formData.projectIdea}
-                  onChange={(e) => setFormData({...formData, projectIdea: e.target.value})}
-                  onBlur={() => setActiveField(null)}
-                />
-              </div>
-            )}
-          </div>
+          <input
+            type="text"
+            placeholder="Share a fun fact about yourself (optional)"
+            className="w-full p-2 border rounded-lg bg-white/10 border-white/20 text-white placeholder-white/50"
+            value={formData.funFact}
+            onChange={(e) => setFormData({...formData, funFact: e.target.value})}
+          />
+          <input
+            type="text"
+            placeholder="Got a cool project idea? Tell us about it! (optional)"
+            className="w-full p-2 border rounded-lg bg-white/10 border-white/20 text-white placeholder-white/50"
+            value={formData.projectIdea}
+            onChange={(e) => setFormData({...formData, projectIdea: e.target.value})}
+          />
         </div>
       )
     }
@@ -434,7 +379,7 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
         </button>
 
         <div className="bg-[#2E4555] rounded-xl shadow-xl p-6 overflow-y-auto max-h-[90vh]">
-          <h1 className="text-3xl font-bold mb-2 text-white">Join LibraLab AI CoLiving</h1>
+          <h1 className="text-3xl font-bold mb-2 text-white">Join LIBRAlab AI CoLiving</h1>
           <p className="text-gray-300 mb-6">Where AI innovators shape tomorrow's living</p>
           
           <Features />
@@ -533,9 +478,9 @@ export function ApplicationForm({ isOpen, onClose }: ApplicationFormProps) {
             )}
           </motion.div>
 
-          <Alert className="mt-8 bg-white/5 border-gray-700">
+          <Alert className="mt-8 bg-white/5 border-[#2E4555]/20">
             <AlertDescription className="text-gray-300">
-              After submission, we'll review your application and schedule a discovery call to learn more about you and answer any questions you might have about LibraLab.
+              After submission, we'll review your application and schedule a discovery call to learn more about you and answer any questions you might have about LIBRAlab.
             </AlertDescription>
           </Alert>
         </div>
