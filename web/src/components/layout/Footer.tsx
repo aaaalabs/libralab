@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Text } from '@tremor/react';
 import { IconBrandGithub, IconBrandLinkedin, IconHeart, IconMail, IconPhone } from '@tabler/icons-react';
+import { useState, useEffect } from 'react';
+import { ContactForm } from '../contact/ContactForm';
 
 const partners = [
   {
@@ -31,14 +33,42 @@ const socialLinks = [
   },
 ];
 
+const quotes = [
+  "more than a hostel. a community.",
+  "more than a hostel. a launchpad.",
+  "more than a hostel. an innovation hub.",
+  "more than a hostel. a tech playground.",
+  "more than a hostel. your second home.",
+  "more than a hostel. a creative space.",
+];
+
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [randomQuote, setRandomQuote] = useState(quotes[0]);
+
+  useEffect(() => {
+    setRandomQuote(quotes[Math.floor(Math.random() * quotes.length)]);
+  }, []);
 
   return (
     <footer className="bg-[#2E4555] print:hidden">
       {/* Desktop Footer */}
       <div className="hidden md:block max-w-7xl mx-auto py-12 px-8">
         <div className="grid grid-cols-4 gap-12">
+          {/* Company Info */}
+          <div>
+            <Text className="font-semibold text-2xl text-white mb-4">LIBRAlab</Text>
+            <div className="space-y-4">
+              <Text className="text-lg text-[#D09467]">
+                Austria's first AI Coliving Space
+              </Text>
+              <Text className="text-gray-300 italic">
+                {randomQuote}
+              </Text>
+            </div>
+          </div>
+
           {/* Partners */}
           <div>
             <Text className="font-semibold text-lg text-white mb-6">Our Partners</Text>
@@ -63,30 +93,31 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Company Info */}
-          <div>
-            <Text className="font-semibold text-lg text-white mb-6">LIBRAlab</Text>
-            <Text className="text-sm text-gray-300">
-              Innovation Hub & Tech Community in Innsbruck
-            </Text>
-          </div>
-
-          {/* Contact */}
+          {/* Contact & Social */}
           <div>
             <Text className="font-semibold text-lg text-white mb-6">Connect</Text>
-            <div className="flex space-x-4">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-gray-300 hover:text-white"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.name}
-                >
-                  <link.icon className="h-5 w-5" />
-                </a>
-              ))}
+            <div className="space-y-4">
+              <button
+                onClick={() => setIsContactFormOpen(true)}
+                className="inline-flex items-center gap-2 text-white hover:text-[#D09467] transition-colors"
+              >
+                <IconMail className="w-5 h-5" />
+                <span>Contact Us</span>
+              </button>
+              <div className="flex space-x-4">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="text-gray-300 hover:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.name}
+                  >
+                    <link.icon className="h-5 w-5" />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -119,6 +150,19 @@ export function Footer() {
       {/* Mobile Footer */}
       <div className="md:hidden px-6 py-8">
         <div className="space-y-8">
+          {/* Company Info */}
+          <div>
+            <Text className="font-semibold text-lg text-white mb-4">LIBRAlab</Text>
+            <div className="space-y-4">
+              <Text className="text-lg text-[#D09467]">
+                Austria's first AI Coliving Space
+              </Text>
+              <Text className="text-gray-300 italic">
+                {randomQuote}
+              </Text>
+            </div>
+          </div>
+
           {/* Partners */}
           <div>
             <Text className="font-semibold text-lg text-white mb-4">Our Partners</Text>
@@ -143,30 +187,31 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Company Info */}
-          <div>
-            <Text className="font-semibold text-lg text-white mb-4">LIBRAlab</Text>
-            <Text className="text-sm text-gray-300">
-              Innovation Hub & Tech Community in Innsbruck
-            </Text>
-          </div>
-
-          {/* Contact */}
+          {/* Contact & Social */}
           <div>
             <Text className="font-semibold text-lg text-white mb-4">Connect</Text>
-            <div className="flex space-x-4">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-gray-300 hover:text-white"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.name}
-                >
-                  <link.icon className="h-5 w-5" />
-                </a>
-              ))}
+            <div className="space-y-4">
+              <button
+                onClick={() => setIsContactFormOpen(true)}
+                className="inline-flex items-center gap-2 text-white hover:text-[#D09467] transition-colors"
+              >
+                <IconMail className="w-5 h-5" />
+                <span>Contact Us</span>
+              </button>
+              <div className="flex space-x-4">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="text-gray-300 hover:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.name}
+                  >
+                    <link.icon className="h-5 w-5" />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -189,6 +234,12 @@ export function Footer() {
           &copy; {currentYear} LIBRAlab.ai
         </Text>
       </div>
+
+      {/* Contact Form Modal */}
+      <ContactForm 
+        isOpen={isContactFormOpen} 
+        onClose={() => setIsContactFormOpen(false)} 
+      />
     </footer>
   );
 }
