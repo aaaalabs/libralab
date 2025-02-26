@@ -394,85 +394,56 @@
   ],
   "commonAreas": [
     {
-      "id": "keller-kueche",
-      "title": "Coworking Space",
-      "description": "Spacious coworking area in the basement with kitchen facilities",
-      "size": 10.43,
-      "features": [
-        "High-speed internet",
-        "Multiple workstations",
-        "Coffee station",
-        "Meeting area",
-        "Kitchen facilities",
-        "E-Trike charging station"
-      ],
-      "type": "CommunitySpace",
+      "id": "bathrooms",
+      "title": {
+        "en": "Modern Bathrooms",
+        "de": "Badezimmer im Erdgeschoss"
+      },
+      "description": {
+        "en": "Two modern bathrooms on the ground floor",
+        "de": "Zwei moderne Badezimmer im Erdgeschoss"
+      },
+      "features": {
+        "modern": {
+          "en": "Modern design",
+          "de": "Modernes Design"
+        },
+        "cleaned": {
+          "en": "Regular cleaning service",
+          "de": "Regelmäßiger Reinigungsservice"
+        }
+      },
+      "type": "Bathroom",
+      "floor": 0,
+      "images": ["/images/epicwg/bathrooms/bathroom1.webp", "/images/epicwg/bathrooms/bathroom2.webp"]
+    },
+    {
+      "id": "basement",
+      "title": {
+        "en": "Basement Area",
+        "de": "Kellerbereich"
+      },
+      "description": {
+        "en": "Spacious basement with storage and garden access",
+        "de": "Geräumiger Keller mit Stauraum und Gartenzugang"
+      },
+      "features": {
+        "storage": {
+          "en": "Storage space",
+          "de": "Stauraum"
+        },
+        "garden": {
+          "en": "Garden access",
+          "de": "Gartenzugang"
+        },
+        "bike": {
+          "en": "Bike storage",
+          "de": "Fahrradstellplatz"
+        }
+      },
+      "type": "Storage",
       "floor": -1,
-      "images": ["/images/rooms/gemeinschaftsraum1.JPG"],
-      "isSpecial": true,
-      "included": true,
-      "rating": 4.8,
-      "amenities": ["24/7 access", "High-speed WiFi", "Coffee & Tea"]
-    },
-    {
-      "id": "eg-kueche",
-      "title": "Community Kitchen",
-      "description": "Modern, fully equipped kitchen and social hub",
-      "size": 6.94,
-      "features": [
-        "Professional appliances",
-        "Dining area",
-        "Social space",
-        "Storage space",
-        "Coffee bar"
-      ],
-      "type": "CommunitySpace",
-      "floor": 0,
-      "images": ["/images/rooms/gemeinschaftsraum2.webp"],
-      "isSpecial": true,
-      "included": true,
-      "rating": 4.9,
-      "amenities": ["Full equipment", "Social events", "Storage space"]
-    },
-    {
-      "id": "eg-bad-1",
-      "title": "Ground Floor Bathroom 1",
-      "description": "Modern bathroom on the ground floor",
-      "size": 4.1,
-      "features": ["Shower", "WC", "Sink"],
-      "type": "Bathroom",
-      "floor": 0,
-      "images": ["/images/rooms/zimmer11.webp"]
-    },
-    {
-      "id": "eg-bad-2",
-      "title": "Ground Floor Bathroom 2",
-      "description": "Second bathroom on the ground floor",
-      "size": 4.1,
-      "features": ["Shower", "WC", "Sink"],
-      "type": "Bathroom",
-      "floor": 0,
-      "images": ["/images/rooms/zimmer12.webp"]
-    },
-    {
-      "id": "dg-bad",
-      "title": "Attic Bathroom",
-      "description": "Bright bathroom under the roof",
-      "size": 2.88,
-      "features": ["Shower", "WC", "Sink"],
-      "type": "Bathroom",
-      "floor": 1,
-      "images": ["/images/rooms/gemeinschaftsraum1.webp"]
-    },
-    {
-      "id": "dg-diele",
-      "title": "Attic Hallway",
-      "description": "Spacious entrance area in the attic",
-      "size": 10.6,
-      "features": ["Wardrobe", "Distribution area"],
-      "type": "Hallway",
-      "floor": 1,
-      "images": ["/images/rooms/gemeinschaftsraum2.webp"]
+      "images": ["/images/epicwg/basement/storage.webp", "/images/epicwg/basement/garden-access.webp"]
     }
   ],
   "nebenflaechen": {

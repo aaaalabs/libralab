@@ -74,40 +74,40 @@ export const translations = {
     },
     communal_areas: {
       title: "Communal Areas",
-      description: "Experience our thoughtfully designed shared spaces that foster collaboration and community",
+      description: "Enjoy our shared spaces designed for relaxation, productivity, and community building",
       coworking: {
         title: "Coworking Space",
-        description: "Spacious coworking area in the basement with kitchen facilities",
+        description: "High-speed internet, ergonomic chairs, and a productive atmosphere for focused work",
         features: {
-          access: "24/7 access",
-          wifi: "High-speed WiFi",
-          coffee: "Coffee & Tea"
+          access: "24/7 Access",
+          wifi: "High-Speed Internet",
+          coffee: "Ergonomic Chairs"
         }
       },
       kitchen: {
         title: "Community Kitchen",
-        description: "Modern, fully equipped kitchen and social hub",
+        description: "Fully equipped kitchen with appliances, utensils, and a dining area for socializing",
         features: {
-          equipment: "Full equipment",
-          events: "Social events",
-          storage: "Storage space"
+          equipment: "Fully Equipped",
+          events: "Dining Area",
+          storage: "Storage Space"
         }
       },
       bathrooms: {
         title: "Ground Floor Bathrooms",
-        description: "Two modern bathrooms on the ground floor",
+        description: "Clean and well-maintained bathrooms with modern fixtures and amenities",
         features: {
-          fixtures: "Modern fixtures",
-          maintained: "Well-maintained"
+          modern: "Modern Fixtures",
+          cleaned: "Well Maintained"
         }
       },
-      attic: {
-        title: "Attic Area",
-        description: "Spacious entrance area and bathroom under the roof",
+      basement: {
+        title: "Basement & Garden",
+        description: "Storage space and garden area with bike parking",
         features: {
-          bright: "Bright space",
-          modern: "Modern design",
-          views: "Mountain views"
+          storage: "Storage Space",
+          garden: "Garden Access",
+          bike: "Bike Parking"
         }
       }
     },
@@ -248,40 +248,40 @@ export const translations = {
     },
     communal_areas: {
       title: "Gemeinschaftsbereiche",
-      description: "Erleben Sie unsere durchdacht gestalteten Gemeinschaftsräume, die Zusammenarbeit und Gemeinschaft fördern",
+      description: "Genieße unsere gemeinsamen Räume, die für Entspannung, Produktivität und Gemeinschaftsbildung konzipiert sind",
       coworking: {
         title: "Coworking Space",
-        description: "Großzügiger Coworking-Bereich im Untergeschoss mit Küche",
+        description: "Hochgeschwindigkeits-Internet, ergonomische Stühle und eine produktive Atmosphäre für konzentriertes Arbeiten",
         features: {
           access: "24/7 Zugang",
-          wifi: "Hochgeschwindigkeits-WLAN",
-          coffee: "Kaffee & Tee"
+          wifi: "Hochgeschwindigkeits-Internet",
+          coffee: "Ergonomische Stühle"
         }
       },
       kitchen: {
         title: "Gemeinschaftsküche",
-        description: "Moderne, voll ausgestattete Küche und sozialer Treffpunkt",
+        description: "Voll ausgestattete Küche mit Geräten, Utensilien und einem Essbereich zum Austausch",
         features: {
-          equipment: "Volle Ausstattung",
-          events: "Soziale Events",
+          equipment: "Voll ausgestattet",
+          events: "Essbereich",
           storage: "Stauraum"
         }
       },
       bathrooms: {
         title: "Badezimmer im Erdgeschoss",
-        description: "Zwei moderne Badezimmer im Erdgeschoss",
+        description: "Saubere und gut gepflegte Badezimmer mit modernen Armaturen und Annehmlichkeiten",
         features: {
-          fixtures: "Moderne Einrichtung",
-          maintained: "Gut gepflegt"
+          modern: "Moderne Armaturen",
+          cleaned: "Gut gepflegt"
         }
       },
-      attic: {
-        title: "Dachgeschoss",
-        description: "Großzügiger Eingangsbereich und Bad unterm Dach",
+      basement: {
+        title: "Keller & Garten",
+        description: "Stauraum und Gartenbereich mit Fahrradparkplätzen",
         features: {
-          bright: "Heller Raum",
-          modern: "Modernes Design",
-          views: "Bergblick"
+          storage: "Lagerraum",
+          garden: "Gartenzugang",
+          bike: "Fahrradstellplätze"
         }
       }
     },
