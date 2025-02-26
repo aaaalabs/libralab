@@ -16,7 +16,7 @@ export function AnimatedHero() {
     : ["Arbeitsplatz", "Apartment", "Mietobjekt", "Coliving"];
 
   return (
-    <div className="relative h-screen">
+    <div className="relative h-screen overflow-x-hidden">
       <VideoBackground
         sources={['/videos/scenic/alps-sunset.mp4']}
         gradient={true}
@@ -34,7 +34,7 @@ export function AnimatedHero() {
             <span className="text-[#EBDBC3] block">{t('hero.more_than_a')} </span>
             <FlipWords 
               words={words} 
-              className="text-[#D09467] drop-shadow-lg"
+              className="text-white drop-shadow-lg"
               duration={4000}
             />
           </motion.div>

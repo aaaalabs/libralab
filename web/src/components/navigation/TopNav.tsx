@@ -3,42 +3,60 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useTranslation } from '@/context/TranslationContext';
 import { motion } from 'framer-motion';
 import { LanguageSelector } from "./LanguageSelector";
 
 export function TopNav() {
-  const pathname = usePathname();
-  const { currentLanguage, setLanguage, t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useTranslation();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  // Check if current page is a legal/static page
+  const isLegalPage = pathname === '/impressum' || pathname === '/datenschutz' || pathname === '/privacy';
+
+  // Handle room discovery click
+  const handleDiscoverRoomClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (pathname === '/') {
+      // If on main page, just scroll
+      const roomsSection = document.getElementById('available-rooms');
+      if (roomsSection) {
+        roomsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on another page, navigate to main page with rooms section
+      router.push('/#available-rooms');
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > window.innerHeight);
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > window.innerHeight);
     };
+
     window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinkBaseStyle = `text-sm font-medium transition-colors duration-200`;
-  const navLinkScrolledStyle = isScrolled ? 'text-[#2E4555] hover:text-[#D09467]' : 'text-[#EBDBC3] hover:text-[#D09467]';
-
-  const scrollToRooms = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const roomsSection = document.getElementById('rooms');
-    if (roomsSection) {
-      roomsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const navStyle = isLegalPage
+    ? 'bg-[#2E4555] text-white'
+    : isScrolled
+    ? 'bg-white text-[#2E4555] shadow-lg'
+    : 'bg-transparent text-white';
 
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navStyle}`}
     >
-      <nav className={`navbar-transparent ${isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-sm' : 'bg-transparent'} ${isScrolled ? 'scrolled' : ''}`}>
+      <nav className={`navbar-transparent ${isScrolled || isLegalPage ? 'bg-white/80 backdrop-blur-lg shadow-sm' : 'bg-transparent'} ${isScrolled || isLegalPage ? 'scrolled' : ''}`}>
         <div className="max-w-7xl mx-auto pl-4 sm:pl-6 lg:pl-8 pr-4 sm:pr-6 lg:pr-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -49,7 +67,7 @@ export function TopNav() {
                   src="/libralab_darkmode.svg"
                   alt="LIBRAlab"
                   fill
-                  className={`transition-opacity duration-300 ${isScrolled ? 'opacity-0' : 'opacity-100'}`}
+                  className={`transition-opacity duration-300 ${isScrolled || isLegalPage ? 'opacity-0' : 'opacity-100'}`}
                   priority
                 />
                 {/* Light mode logo - visible when scrolled */}
@@ -57,7 +75,7 @@ export function TopNav() {
                   src="/libralab_lightmode.svg"
                   alt="LIBRAlab"
                   fill
-                  className={`transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`}
+                  className={`transition-opacity duration-300 ${isScrolled || isLegalPage ? 'opacity-100' : 'opacity-0'}`}
                   priority
                 />
               </div>
@@ -70,22 +88,22 @@ export function TopNav() {
 
               {/* Discover Room Button */}
               <button
-                onClick={scrollToRooms}
+                onClick={handleDiscoverRoomClick}
                 className={`
                   group relative inline-flex items-center px-4 py-2 text-sm font-medium overflow-hidden rounded-full transition-all duration-300
-                  ${isScrolled 
+                  ${isScrolled || isLegalPage 
                     ? 'bg-[#2E4555] text-white shadow-[0_2px_8px_rgba(46,69,85,0.25)]' 
                     : 'border-2 border-[#D09467] text-[#D09467] group-hover:text-[#EBDBC3]'
                   }
                 `}
-                style={!isScrolled ? {
+                style={!isScrolled && !isLegalPage ? {
                   backgroundColor: 'rgba(208, 148, 103, 0.1)',
                   backdropFilter: 'blur(8px)',
                   WebkitBackdropFilter: 'blur(8px)',
                 } : undefined}
               >
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {isScrolled ? (
+                  {(isScrolled || isLegalPage) ? (
                     <>
                       <div className="absolute inset-0" style={{
                         backdropFilter: 'blur(12px) saturate(180%)',

@@ -8,8 +8,11 @@ export const translations = {
       apply_now: "Apply Now"
     },
     nav: {
-      discover_room: "Discover Room",
-      invest: "Invest Now"
+      discover_room: "Discover Rooms",
+      invest: "Invest Now",
+      limited: "Limited",
+      home: "Home",
+      community: "Community"
     },
     founders_elite: {
       title: "Founders Elite",
@@ -28,8 +31,9 @@ export const translations = {
     confirm_reservation_description: "You are about to reserve {{tier}} with a deposit of €{{deposit}}. Would you like to proceed?",
     cancel: "Cancel",
     processing: "Processing...",
-    ai_faq_error: "Sorry, I couldn't process your question. Please try again.",
     ai_faq_loading: "Thinking...",
+    ai_faq_placeholder: "I'm ready for your questions about LibraCoLiving! What would you like to know?",
+    ai_faq_error: "Sorry, I couldn't process your question. Please try again.",
     benefit: {
       interior_design: "Premium Interior Design",
       interior_design_description: "Custom Interior Design Consultation",
@@ -56,6 +60,64 @@ export const translations = {
       parking_description: "Your own reserved parking spot",
       cleaning: "Professional Cleaning Service",
       cleaning_description: "Regular professional cleaning of your space"
+    },
+    communal_areas: {
+      title: "Communal Areas",
+      description: "Experience our thoughtfully designed shared spaces that foster collaboration and community",
+      coworking: {
+        title: "Coworking Space",
+        description: "Spacious coworking area in the basement with kitchen facilities",
+        features: {
+          access: "24/7 access",
+          wifi: "High-speed WiFi",
+          coffee: "Coffee & Tea"
+        }
+      },
+      kitchen: {
+        title: "Community Kitchen",
+        description: "Modern, fully equipped kitchen and social hub",
+        features: {
+          equipment: "Full equipment",
+          events: "Social events",
+          storage: "Storage space"
+        }
+      },
+      bathrooms: {
+        title: "Ground Floor Bathrooms",
+        description: "Two modern bathrooms on the ground floor",
+        features: {
+          fixtures: "Modern fixtures",
+          maintained: "Well-maintained"
+        }
+      },
+      attic: {
+        title: "Attic Area",
+        description: "Spacious entrance area and bathroom under the roof",
+        features: {
+          bright: "Bright space",
+          modern: "Modern design",
+          views: "Mountain views"
+        }
+      }
+    },
+    footer: {
+      company_tagline: "Austria's first AI coliving space",
+      our_partners: "Our Partners",
+      connect: "Connect",
+      contact_us: "Contact Us",
+      made_with: "Made with",
+      in_austria: "in Austria",
+      legal: "Legal",
+      privacy: "Privacy Policy",
+      imprint: "Imprint",
+      quotes: {
+        community: "more than a hostel. a community.",
+        launchpad: "more than a hostel. a launchpad.",
+        innovation: "more than a hostel. an innovation hub.",
+        playground: "more than a hostel. a tech playground.",
+        home: "more than a hostel. your second home.",
+        creative: "more than a hostel. a creative space."
+      }
     }
   },
   de: {
@@ -68,7 +130,10 @@ export const translations = {
     },
     nav: {
       discover_room: "Zimmer Entdecken",
-      invest: "Jetzt Investieren"
+      invest: "Jetzt Investieren",
+      limited: "Limitiert",
+      home: "Startseite",
+      community: "Community"
     },
     founders_elite: {
       title: "Gründer Elite",
@@ -87,8 +152,9 @@ export const translations = {
     confirm_reservation_description: "Du biest dabei, {{tier}} mit einer Anzahlung von €{{deposit}} zu reservieren. Möchtest du fortfahren?",
     cancel: "Abbrechen",
     processing: "Verarbeitung...",
+    ai_faq_loading: "Ich denke nach...",
+    ai_faq_placeholder: "Ich bin bereit für deine Fragen über LibraCoLiving! Was möchtest du wissen?",
     ai_faq_error: "Entschuldigung, ich konnte deine Frage nicht verarbeiten. Bitte versuche es erneut.",
-    ai_faq_loading: "Denke nach...",
     benefit: {
       interior_design: "Premium Innenausstattung",
       interior_design_description: "Individuelle Innenarchitektur-Beratung",
@@ -115,6 +181,64 @@ export const translations = {
       parking_description: "Dein eigener reservierter Parkplatz",
       cleaning: "Professioneller Reinigungsservice",
       cleaning_description: "Regelmäßige professionelle Reinigung Ihres Bereichs"
+    },
+    communal_areas: {
+      title: "Gemeinschaftsbereiche",
+      description: "Erleben Sie unsere durchdacht gestalteten Gemeinschaftsräume, die Zusammenarbeit und Gemeinschaft fördern",
+      coworking: {
+        title: "Coworking Space",
+        description: "Großzügiger Coworking-Bereich im Untergeschoss mit Küche",
+        features: {
+          access: "24/7 Zugang",
+          wifi: "Hochgeschwindigkeits-WLAN",
+          coffee: "Kaffee & Tee"
+        }
+      },
+      kitchen: {
+        title: "Gemeinschaftsküche",
+        description: "Moderne, voll ausgestattete Küche und sozialer Treffpunkt",
+        features: {
+          equipment: "Volle Ausstattung",
+          events: "Soziale Events",
+          storage: "Stauraum"
+        }
+      },
+      bathrooms: {
+        title: "Badezimmer im Erdgeschoss",
+        description: "Zwei moderne Badezimmer im Erdgeschoss",
+        features: {
+          fixtures: "Moderne Einrichtung",
+          maintained: "Gut gepflegt"
+        }
+      },
+      attic: {
+        title: "Dachgeschoss",
+        description: "Großzügiger Eingangsbereich und Bad unterm Dach",
+        features: {
+          bright: "Heller Raum",
+          modern: "Modernes Design",
+          views: "Bergblick"
+        }
+      }
+    },
+    footer: {
+      company_tagline: "Österreichs erstes KI-Coliving Space",
+      our_partners: "Unsere Partner",
+      connect: "Verbinden",
+      contact_us: "Kontaktiere uns",
+      made_with: "Gemacht mit",
+      in_austria: "in Österreich",
+      legal: "Rechtliches",
+      privacy: "Datenschutz",
+      imprint: "Impressum",
+      quotes: {
+        community: "mehr als ein Hostel. eine Gemeinschaft.",
+        launchpad: "mehr als ein Hostel. eine Startrampe.",
+        innovation: "mehr als ein Hostel. ein Innovationszentrum.",
+        playground: "mehr als ein Hostel. ein Tech-Spielplatz.",
+        home: "mehr als ein Hostel. dein zweites Zuhause.",
+        creative: "mehr als ein Hostel. ein kreativer Raum."
+      }
     }
   }
 };

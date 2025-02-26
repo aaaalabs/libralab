@@ -8,10 +8,14 @@ export function PlaceholdersAndVanishInput({
   placeholders,
   onChange,
   onSubmit,
+  onFocus,
+  onBlur,
 }: {
   placeholders: string[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
 
@@ -149,6 +153,22 @@ export function PlaceholdersAndVanishInput({
     animateFrame(start);
   };
 
+  const vanishAndSubmit = () => {
+    if (!inputRef.current || animating) return;
+    
+    setAnimating(true);
+    draw();
+
+    // Use RAF to ensure the canvas is ready
+    requestAnimationFrame(() => {
+      const maxX = newDataRef.current.reduce(
+        (prev, current) => (current.x > prev ? current.x : prev),
+        0
+      );
+      animate(maxX);
+    });
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !animating) {
       e.preventDefault();
@@ -156,33 +176,19 @@ export function PlaceholdersAndVanishInput({
     }
   };
 
-  const vanishAndSubmit = () => {
-    setAnimating(true);
-    draw();
-
-    const value = inputRef.current?.value || "";
-    if (value && inputRef.current) {
-      const maxX = newDataRef.current.reduce(
-        (prev, current) => (current.x > prev ? current.x : prev),
-        0
-      );
-      animate(maxX);
-    }
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
+    if (animating) return; // Prevent multiple submissions while animating
+    
+    let submittedValue = value.trim();
+    
     // If there's no user input, use the current placeholder
-    if (!value.trim()) {
-      const currentQuestion = placeholders[currentPlaceholder];
-      const syntheticEvent = {
-        target: { value: currentQuestion },
-      } as React.ChangeEvent<HTMLInputElement>;
-      onChange(syntheticEvent);
-      setValue(currentQuestion);
+    if (!submittedValue) {
+      submittedValue = placeholders[currentPlaceholder];
+      setValue(submittedValue);
     }
-
+    
     // Trigger the vanish animation
     vanishAndSubmit();
     
@@ -202,7 +208,6 @@ export function PlaceholdersAndVanishInput({
         ref={canvasRef}
         width={800}
         height={800}
-        style={{ display: 'none' }}
         className={cn(
           "absolute pointer-events-none text-base transform scale-50 top-[20%] left-2 sm:left-8 origin-top-left filter invert dark:invert-0 pr-20",
           !animating ? "opacity-0" : "opacity-100"
@@ -213,7 +218,6 @@ export function PlaceholdersAndVanishInput({
           ref={inputRef}
           type="text"
           value={value}
-          suppressHydrationWarning
           onChange={(e) => {
             if (!animating) {
               setValue(e.target.value);
@@ -221,6 +225,8 @@ export function PlaceholdersAndVanishInput({
             }
           }}
           onKeyDown={handleKeyDown}
+          onFocus={onFocus}
+          onBlur={onBlur}
           className={cn(
             "w-full h-full bg-transparent text-white px-4 sm:px-8 pr-12 focus:outline-none text-base",
             animating && "text-transparent"

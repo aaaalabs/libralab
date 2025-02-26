@@ -17,11 +17,21 @@ const customQuestions = [
   "Was sind die Kosten für verschiedene Membership-Optionen?"
 ];
 
-export function AiFaq() {
+export function AiFaq({ onFocusChange }: { onFocusChange?: (focused: boolean) => void }) {
   const { t } = useTranslation();
   const [question, setQuestion] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocusChange = (focused: boolean) => {
+    setIsFocused(focused);
+    // Only clear response and allow shrinking if we're unfocusing and there's no response
+    if (!focused && !response) {
+      setResponse('');
+    }
+    onFocusChange?.(focused || !!response); // Keep expanded if there's a response
+  };
 
   const handleCustomQuestion = async (q: string) => {
     // If the question is empty, use the current placeholder
@@ -32,19 +42,20 @@ export function AiFaq() {
     }
     
     setIsLoading(true);
-    setQuestion(questionToAsk);
 
     try {
-      const webhookUrl = process.env.NEXT_PUBLIC_AI_FAQ_WEBHOOK;
+      // Get webhook URL and ensure it's properly formatted
+      const webhookUrl = process.env.NEXT_PUBLIC_AI_FAQ_WEBHOOK?.split('NEXT_PUBLIC_')[0].trim();
+      
       console.log('Config:', {
         webhookUrl,
         question: questionToAsk,
         env: process.env.NODE_ENV
       });
       
-      if (!webhookUrl) {
-        console.error('Missing NEXT_PUBLIC_AI_FAQ_WEBHOOK environment variable');
-        throw new Error('Webhook URL is not configured');
+      if (!webhookUrl?.startsWith('https://hook.eu1.make.com/')) {
+        console.error('Invalid NEXT_PUBLIC_AI_FAQ_WEBHOOK environment variable');
+        throw new Error('Webhook URL is not configured correctly');
       }
 
       const payload = { 
@@ -55,9 +66,12 @@ export function AiFaq() {
 
       const response = await fetch(webhookUrl, {
         method: 'POST',
+        mode: 'cors',
+        credentials: 'omit',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Origin': typeof window !== 'undefined' ? window.location.origin : ''
         },
         body: JSON.stringify(payload),
       });
@@ -104,16 +118,16 @@ export function AiFaq() {
       </div>
 
       {/* Content */}
-      <div className="relative w-full h-full flex flex-col justify-center px-4 py-6">
+      <div className="relative w-full h-full flex flex-col items-center pt-20">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-6 text-[#D09467]"
         >
-          Frag unsere LIBR<span className="text-[#EBDBC3]">AI</span>
+          Frag unsere LIBRA <span className="text-[#EBDBC3]">AI</span>
         </motion.h2>
 
-        <div className="flex flex-col items-center justify-center space-y-8">
+        <div className="flex flex-col items-center w-full space-y-8 px-4">
           {/* Custom Question Input */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -131,72 +145,34 @@ export function AiFaq() {
                 const currentValue = e.currentTarget.querySelector('input')?.value || '';
                 handleCustomQuestion(currentValue);
               }}
+              onFocus={() => handleFocusChange(true)}
+              onBlur={() => handleFocusChange(false)}
             />
           </motion.div>
 
-          {/* Loading State */}
-          <AnimatePresence>
-            {isLoading && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-[#979C94] text-sm sm:text-base"
-              >
-                {t('ai_faq_loading')}
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Response */}
+          {/* Loading and Response Container */}
           <AnimatePresence mode="wait">
-            {response && !isLoading && (
+            {(isFocused || isLoading || response) && (
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ 
-                  height: "auto",
-                  opacity: 1,
-                  transition: {
-                    height: {
-                      duration: 0.4,
-                      ease: [0.16, 1, 0.3, 1],
-                    },
-                    opacity: {
-                      duration: 0.25,
-                      delay: 0.3,
-                    }
-                  }
-                }}
-                exit={{ 
-                  opacity: 0,
-                  height: 0,
-                  transition: {
-                    height: {
-                      duration: 0.3,
-                      delay: 0.1
-                    },
-                    opacity: {
-                      duration: 0.15
-                    }
-                  }
-                }}
-                className="w-full max-w-2xl overflow-hidden bg-[#2E4555] bg-opacity-80 rounded-lg shadow-lg"
+                key={isLoading ? 'loading' : 'response'}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="w-full max-w-2xl bg-black/30 backdrop-blur-md rounded-xl p-6 min-h-[150px] flex items-center justify-center"
               >
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ 
-                    opacity: 1, 
-                    y: 0,
-                    transition: {
-                      duration: 0.25,
-                      delay: 0.35
-                    }
-                  }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className="text-[#EBDBC3] text-sm sm:text-base leading-relaxed p-4 sm:p-6"
-                >
-                  {response}
-                </motion.div>
+                {isLoading ? (
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="w-2 h-2 bg-[#D09467] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                    <div className="w-2 h-2 bg-[#D09467] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                    <div className="w-2 h-2 bg-[#D09467] rounded-full animate-bounce"></div>
+                  </div>
+                ) : response ? (
+                  <div className="text-[#EBDBC3] whitespace-pre-wrap">{response}</div>
+                ) : (
+                  <div className="text-[#EBDBC3]/70 text-center">
+                    <p>{t('ai_faq_placeholder')}</p>
+                  </div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>

@@ -77,12 +77,58 @@
       "WORKSPACE": "24/7 workspace access",
       "EVENTS": "Exclusive events",
       "PIONEER": "Pioneer member status"
+    },
+    "hero": {
+      "more_than_a": "More than a",
+      "forget_hostels": "Forget random hostels and spotty WiFi.",
+      "join_community": "Join a curated community of AI innovators ",
+      "in_alps": "in the heart of the Alps.",
+      "apply_now": "Apply Now"
+    },
+    "nav": {
+      "discover_room": "Discover Room",
+      "invest": "Invest Now",
+      "limited": "Limited",
+      "home": "Home",
+      "community": "Community"
+    },
+    "founders_elite": {
+      "title": "Founders Elite",
+      "description": "Join our exclusive early-bird program"
+    },
+    "membership": {
+      "WORKSPACE": "24/7 workspace access",
+      "EVENTS": "Exclusive events",
+      "PIONEER": "Pioneer member status"
+    },
+    "ai_faq_loading": {
+      "de": "Ich denke nach...",
+      "en": "Thinking..."
+    },
+    "ai_faq_placeholder": {
+      "de": "Ich bin bereit für deine Fragen über LibraCoLiving! Was möchtest du wissen?",
+      "en": "I'm ready for your questions about LibraCoLiving! What would you like to know?"
+    },
+    "ai_faq_error": {
+      "de": "Entschuldigung, ich konnte deine Frage nicht verarbeiten. Bitte versuche es erneut.",
+      "en": "Sorry, I couldn't process your question. Please try again."
+    },
+    "footer": {
+      "company_tagline": "Austria's first AI coliving space",
+      "our_partners": "Our Partners",
+      "connect": "Connect",
+      "contact_us": "Contact Us",
+      "made_with": "Made with",
+      "in_austria": "in Austria",
+      "location": "Location",
+      "view_on_earth": "View on Google Earth",
+      "last_updated": "February 2025"
     }
   },
   "de": {
     "benefit.interior_design": "Individuelle Innenarchitektur-Beratung (Wert: €3.000)",
     "benefit.community": "Lebenslange AI-Shift Community Mitgliedschaft (Wert: €1.200/Jahr)",
-    "benefit.priority": "Zimmer-Priorität: Erhalten Sie Benachrichtigungen, wenn Ihr gestaltetes Zimmer gebucht werden soll (1 Jahr) (Wert: €600)",
+    "benefit.priority": "Zimmer-Priorität: Erhalte Benachrichtigungen, wenn dein gestaltetes Zimmer gebucht werden soll (1 Jahr) (Wert: €600)",
     "benefit.ai_consulting": "1:1 KI-Beratung mit Libralab CTO während Ihres Aufenthalts (Wert: €2.000)",
     "benefit.workspace": "Premium Arbeitsplatz-Ausstattung",
     "benefit.events": "Exklusive Gründer-Events",
@@ -91,7 +137,7 @@
     "benefit.cleaning": "Premium Reinigungsservice",
     "benefit.etrike": "E-Trike Carsharing Mini (Wert: €2.400/Jahr)",
     "benefit.etrike.description": "Kostenloser Zugang zu unserer umweltfreundlichen E-Trike-Flotte für lokale Fahrten",
-    "benefit.revenue_share": "Verdienen Sie 20% Umsatzbeteiligung von den Buchungen Ihres gestalteten Zimmers (1 Jahr) (Geschätzter Wert: €2.400)",
+    "benefit.revenue_share": "Verdiene 20% Umsatzbeteiligung von den Buchungen deines gestalteten Zimmers (1 Jahr) (Geschätzter Wert: €2.400)",
     "deposit": "Kaution",
     "founders_elite_deposit": "€1000 Anzahlung",
     "early_bird_pre_booking": "Early Bird Pre-Booking",
@@ -157,6 +203,52 @@
       "WORKSPACE": "24/7 Workspace-Zugang",
       "EVENTS": "Exklusive Events",
       "PIONEER": "Pioneer-Mitgliedsstatus"
+    },
+    "hero": {
+      "more_than_a": "Mehr als nur",
+      "forget_hostels": "Vergiss zufällige Hostels und unzuverlässiges WLAN.",
+      "join_community": "Werde Teil einer ausgewählten KI-Innovatoren-Community ",
+      "in_alps": "im Herzen der Alpen.",
+      "apply_now": "Jetzt bewerben"
+    },
+    "nav": {
+      "discover_room": "Zimmer entdecken",
+      "invest": "Jetzt investieren",
+      "limited": "Limitiert",
+      "home": "Home",
+      "community": "Community"
+    },
+    "founders_elite": {
+      "title": "Founders Elite",
+      "description": "Sei Teil unseres exklusiven Early-Bird Programms"
+    },
+    "membership": {
+      "WORKSPACE": "24/7 Workspace-Zugang",
+      "EVENTS": "Exklusive Events",
+      "PIONEER": "Pioneer-Mitgliedsstatus"
+    },
+    "ai_faq_loading": {
+      "de": "Ich denke nach...",
+      "en": "Thinking..."
+    },
+    "ai_faq_placeholder": {
+      "de": "Ich bin bereit für deine Fragen über LibraCoLiving! Was möchtest du wissen?",
+      "en": "I'm ready for your questions about LibraCoLiving! What would you like to know?"
+    },
+    "ai_faq_error": {
+      "de": "Entschuldigung, ich konnte deine Frage nicht verarbeiten. Bitte versuche es erneut.",
+      "en": "Sorry, I couldn't process your question. Please try again."
+    },
+    "footer": {
+      "company_tagline": "Österreichs erstes KI-Coliving Space",
+      "our_partners": "Unsere Partner",
+      "connect": "Verbinden",
+      "contact_us": "Kontaktiere uns",
+      "made_with": "Gemacht mit",
+      "in_austria": "in Österreich",
+      "location": "Standort",
+      "view_on_earth": "In Google Earth ansehen",
+      "last_updated": "Februar 2025"
     }
   }
 }

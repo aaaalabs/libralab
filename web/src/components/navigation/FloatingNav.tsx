@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslation } from '@/context/TranslationContext';
 import {
   IconMenu2,
   IconX,
@@ -18,6 +19,7 @@ export const FloatingNav = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,14 +33,15 @@ export const FloatingNav = () => {
 
   const navItems = [
     {
-      label: 'Pre-Seed Investment',
+      label: t('nav.invest'),
       href: '/preseed',
       icon: IconStarsFilled,
-      highlight: true
+      highlight: true,
+      limitedBadge: t('nav.limited')
     },
-    { label: 'Home', href: '/', icon: IconHome },
-    { label: 'Book a Tour', href: '/book', icon: IconCalendarEvent },
-    { label: 'Community', href: '/community', icon: IconUsers },
+    { label: t('nav.home'), href: '/', icon: IconHome },
+    { label: t('nav.discover_room'), href: '/book', icon: IconCalendarEvent },
+    { label: t('nav.community'), href: '/community', icon: IconUsers },
   ];
 
   const scrollToTop = () => {
@@ -95,7 +98,7 @@ export const FloatingNav = () => {
                         <span className="whitespace-nowrap">{item.label}</span>
                         {item.highlight && (
                           <span className="ml-2 px-2 py-0.5 text-xs bg-blue-100 text-blue-700 rounded-full">
-                            Limited
+                            {item.limitedBadge}
                           </span>
                         )}
                       </Link>

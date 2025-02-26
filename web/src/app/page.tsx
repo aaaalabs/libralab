@@ -36,7 +36,12 @@ import {
   IconStar,
   IconCoffee,
   IconBath,
-  IconStairs
+  IconStairs,
+  IconExternalLink,
+  IconMap,
+  IconPlayerPlay,
+  IconArrowDown,
+  IconCalendar
 } from '@tabler/icons-react';
 import epicwgData from '../data/epicwg.json';
 import { BentoCard, BentoGrid } from "../components/ui/bento-grid";
@@ -193,12 +198,15 @@ export default function LibraLabPage() {
   // Start STATE AND HOOKS COMPONENT
   const { t } = useTranslation();
   const { toast } = useToast();
-  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const { currentAmount, addDeposit, isLoading: isLoadingCampaign } = useCampaign();
+  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [showApplicationForm, setShowApplicationForm] = useState(false);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const [aiFaqFocused, setAiFaqFocused] = useState(false);
+  const [showMapModal, setShowMapModal] = useState(false);
   // End STATE AND HOOKS COMPONENT
 
   // Start HANDLERS COMPONENT
@@ -213,17 +221,16 @@ export default function LibraLabPage() {
       if (success) {
         setSelectedRoom(null);
         setShowApplicationForm(true);
-      } else {
         toast({
-          title: "Error",
-          description: "Failed to reserve spot. Please try again.",
-          variant: "destructive",
+          title: "Reservation successful!",
+          description: "We'll be in touch soon to confirm your spot.",
         });
       }
     } catch (error) {
+      console.error('Failed to reserve:', error);
       toast({
-        title: "Error",
-        description: "An unexpected error occurred.",
+        title: "Reservation failed",
+        description: "Please try again later.",
         variant: "destructive",
       });
     } finally {
@@ -349,36 +356,76 @@ export default function LibraLabPage() {
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto px-4">
-          <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="text-[#D09467] text-4xl font-bold mb-2">24+</div>
-            <div className="text-[#2E4555] font-medium mb-2">
-              Monthly AI research presentations and hands-on workshops
+          <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow group cursor-pointer relative">
+            <div className="absolute top-4 right-4 text-[#D09467] group-hover:text-[#E1B588] transition-colors">
+              <IconExternalLink size={20} />
             </div>
-            <div className="text-gray-600">Tech Talks & Workshops</div>
+            <a 
+              href="https://ai-shift.de" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <div className="text-[#D09467] text-4xl font-bold mb-2 group-hover:text-[#E1B588] transition-colors">6+</div>
+              <div className="text-[#2E4555] font-medium mb-2">
+                Monthly AI workshop modules in our ai_shift community
+              </div>
+              <div className="text-gray-600">Tech Education</div>
+            </a>
           </div>
           
-          <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="text-[#D09467] text-4xl font-bold mb-2">30+</div>
-            <div className="text-[#2E4555] font-medium mb-2">
-              Active community members working in AI and tech
+          <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow group cursor-pointer relative">
+            <div className="absolute top-4 right-4 text-[#D09467] group-hover:text-[#E1B588] transition-colors">
+              <IconMap size={20} />
             </div>
-            <div className="text-gray-600">Tech Professionals</div>
+            <button 
+              onClick={() => setShowMapModal(true)}
+              className="block w-full text-left"
+            >
+              <div className="text-[#D09467] text-4xl font-bold mb-2 group-hover:text-[#E1B588] transition-colors">500+</div>
+              <div className="text-[#2E4555] font-medium mb-2">
+                AI Agency founders in our global AAA network
+              </div>
+              <div className="text-gray-600">Network Reach</div>
+            </button>
           </div>
           
-          <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="text-[#D09467] text-4xl font-bold mb-2">50+</div>
-            <div className="text-[#2E4555] font-medium mb-2">
-              Collaborative projects launched by our community
+          <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow group cursor-pointer relative">
+            <div className="absolute top-4 right-4 text-[#D09467] group-hover:text-[#E1B588] transition-colors">
+              <IconArrowDown size={20} />
             </div>
-            <div className="text-gray-600">Side Projects</div>
+            <a 
+              href="#available-rooms" 
+              className="block"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('available-rooms')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <div className="text-[#D09467] text-4xl font-bold mb-2 group-hover:text-[#E1B588] transition-colors">10</div>
+              <div className="text-[#2E4555] font-medium mb-2">
+                Tech-ready rooms launching in 2025
+              </div>
+              <div className="text-gray-600">Living Spaces</div>
+            </a>
           </div>
           
-          <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="text-[#D09467] text-4xl font-bold mb-2">5+</div>
-            <div className="text-[#2E4555] font-medium mb-2">
-              Successful ventures founded by community members
+          <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow group cursor-pointer relative">
+            <div className="absolute top-4 right-4 text-[#D09467] group-hover:text-[#E1B588] transition-colors">
+              <IconPlayerPlay size={20} />
             </div>
-            <div className="text-gray-600">Startup Exits</div>
+            <a 
+              href="https://open.spotify.com/show/1BD4pUfxWWyj9yYGpvE9Oe" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <div className="text-[#D09467] text-4xl font-bold mb-2 group-hover:text-[#E1B588] transition-colors">5</div>
+              <div className="text-[#2E4555] font-medium mb-2">
+                Episodes of our "Spark" AI founders podcast
+              </div>
+              <div className="text-gray-600">Community Content</div>
+            </a>
           </div>
         </div>
 
@@ -392,9 +439,12 @@ export default function LibraLabPage() {
             <p className="text-gray-300 mb-4">
               Modern, comfortable living spaces designed for tech professionals.
             </p>
-            <a href="#" className="text-[#D09467] hover:text-[#E1B588] flex items-center gap-1 font-medium">
+            <button 
+              onClick={() => document.getElementById('available-rooms')?.scrollIntoView({ behavior: 'smooth' })}
+              className="text-[#D09467] hover:text-[#E1B588] flex items-center gap-1 font-medium transition-colors"
+            >
               View rooms <IconArrowRight className="w-4 h-4" />
-            </a>
+            </button>
           </div>
 
           <div className="bg-gradient-to-br from-[#2E4555] to-[#1a2831] rounded-xl p-8 text-white">
@@ -403,23 +453,33 @@ export default function LibraLabPage() {
             </div>
             <h3 className="text-xl font-semibold mb-3">Mobility</h3>
             <p className="text-gray-300 mb-4">
-              Eco-friendly E-Trike sharing and excellent public transport connections.
+              Sustainable transportation solutions for our community.
             </p>
-            <a href="#" className="text-[#D09467] hover:text-[#E1B588] flex items-center gap-1 font-medium">
+            <a 
+              href="https://www.wemovenow.com/e-trike/"
+              target="_blank"
+              rel="noopener noreferrer" 
+              className="text-[#D09467] hover:text-[#E1B588] flex items-center gap-1 font-medium transition-colors"
+            >
               Learn more <IconArrowRight className="w-4 h-4" />
             </a>
           </div>
 
           <div className="bg-gradient-to-br from-[#2E4555] to-[#1a2831] rounded-xl p-8 text-white">
             <div className="bg-[#D09467]/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-              <IconCalendarEvent className="w-6 h-6 text-[#D09467]" />
+              <IconCalendar className="w-6 h-6 text-[#D09467]" />
             </div>
             <h3 className="text-xl font-semibold mb-3">Events</h3>
             <p className="text-gray-300 mb-4">
-              Regular tech talks, networking events, and founder meetups.
+              Regular community events and tech meetups.
             </p>
-            <a href="#" className="text-[#D09467] hover:text-[#E1B588] flex items-center gap-1 font-medium">
-              View calendar <IconArrowRight className="w-4 h-4" />
+            <a 
+              href="https://aiaustria.com/event-calendar"
+              target="_blank"
+              rel="noopener noreferrer" 
+              className="text-[#D09467] hover:text-[#E1B588] flex items-center gap-1 font-medium transition-colors"
+            >
+              Learn more <IconArrowRight className="w-4 h-4" />
             </a>
           </div>
         </div>
@@ -512,18 +572,27 @@ export default function LibraLabPage() {
       {/* AI FAQ section */}
       <section className="relative bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden rounded-3xl mx-4 mb-16">
         <div className="absolute inset-0 bg-grid-white/5 bg-[size:32px] contrast-50 opacity-10 rounded-3xl" />
-        <div className="relative h-[300px]">
-          <AiFaq />
-        </div>
+        <motion.section
+          animate={{ 
+            height: aiFaqFocused ? "500px" : "300px",
+            transition: {
+              duration: 0.4,
+              ease: [0.16, 1, 0.3, 1],
+            }
+          }}
+          className="w-full flex flex-col justify-center items-center relative overflow-hidden"
+        >
+          <AiFaq onFocusChange={setAiFaqFocused} />
+        </motion.section>
       </section>
 
       {/* Complete Rooms List */}
-      <div id="rooms" className="py-16 px-6 sm:px-8 md:px-12 lg:px-16">
+      <section id="available-rooms" className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-8">
             <div>
-              <h2 className="text-3xl font-bold mb-4 text-[#2E4555]">All Available Spaces</h2>
-              <p className="text-[#979C94]">Explore our complete collection of tech-focused living spaces</p>
+              <h2 className="text-3xl font-bold text-[#2E4555] mb-2">All Available Space</h2>
+              <p className="text-gray-600">Choose your perfect room in our tech-focused coliving space</p>
             </div>
           </div>
 
@@ -592,15 +661,15 @@ export default function LibraLabPage() {
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Communal Areas Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-3xl font-bold text-[#D09467] mb-8 text-center">
-          Communal Areas
+          {t('communal_areas.title')}
         </h2>
         <p className="text-lg text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-          Experience our thoughtfully designed shared spaces that foster collaboration and community
+          {t('communal_areas.description')}
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -608,20 +677,20 @@ export default function LibraLabPage() {
           <div className="group bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-[#EBDBC3]/30">
             <h3 className="text-xl font-semibold text-[#2E4555] mb-3 flex items-center gap-2">
               <IconDeviceLaptop className="w-6 h-6 text-[#D09467]" />
-              Coworking Space
+              {t('communal_areas.coworking.title')}
             </h3>
             <p className="text-[#979C94] mb-4">
-              Spacious coworking area in the basement with kitchen facilities
+              {t('communal_areas.coworking.description')}
             </p>
             <div className="flex flex-wrap gap-2">
               <span className="px-3 py-1 rounded-full text-sm bg-[#2E4555]/5 text-[#2E4555] font-medium">
-                24/7 access
+                {t('communal_areas.coworking.features.access')}
               </span>
               <span className="px-3 py-1 rounded-full text-sm bg-[#2E4555]/5 text-[#2E4555] font-medium">
-                High-speed WiFi
+                {t('communal_areas.coworking.features.wifi')}
               </span>
               <span className="px-3 py-1 rounded-full text-sm bg-[#2E4555]/5 text-[#2E4555] font-medium">
-                Coffee & Tea
+                {t('communal_areas.coworking.features.coffee')}
               </span>
             </div>
           </div>
@@ -630,20 +699,20 @@ export default function LibraLabPage() {
           <div className="group bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-[#EBDBC3]/30">
             <h3 className="text-xl font-semibold text-[#2E4555] mb-3 flex items-center gap-2">
               <IconCoffee className="w-6 h-6 text-[#D09467]" />
-              Community Kitchen
+              {t('communal_areas.kitchen.title')}
             </h3>
             <p className="text-[#979C94] mb-4">
-              Modern, fully equipped kitchen and social hub
+              {t('communal_areas.kitchen.description')}
             </p>
             <div className="flex flex-wrap gap-2">
               <span className="px-3 py-1 rounded-full text-sm bg-[#2E4555]/5 text-[#2E4555] font-medium">
-                Full equipment
+                {t('communal_areas.kitchen.features.equipment')}
               </span>
               <span className="px-3 py-1 rounded-full text-sm bg-[#2E4555]/5 text-[#2E4555] font-medium">
-                Social events
+                {t('communal_areas.kitchen.features.events')}
               </span>
               <span className="px-3 py-1 rounded-full text-sm bg-[#2E4555]/5 text-[#2E4555] font-medium">
-                Storage space
+                {t('communal_areas.kitchen.features.storage')}
               </span>
             </div>
           </div>
@@ -652,17 +721,17 @@ export default function LibraLabPage() {
           <div className="group bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-[#EBDBC3]/30">
             <h3 className="text-xl font-semibold text-[#2E4555] mb-3 flex items-center gap-2">
               <IconBath className="w-6 h-6 text-[#D09467]" />
-              Ground Floor Bathrooms
+              {t('communal_areas.bathrooms.title')}
             </h3>
             <p className="text-[#979C94] mb-4">
-              Two modern bathrooms on the ground floor
+              {t('communal_areas.bathrooms.description')}
             </p>
             <div className="flex flex-wrap gap-2">
               <span className="px-3 py-1 rounded-full text-sm bg-[#2E4555]/5 text-[#2E4555] font-medium">
-                Modern fixtures
+                {t('communal_areas.bathrooms.features.fixtures')}
               </span>
               <span className="px-3 py-1 rounded-full text-sm bg-[#2E4555]/5 text-[#2E4555] font-medium">
-                Well-maintained
+                {t('communal_areas.bathrooms.features.maintained')}
               </span>
             </div>
           </div>
@@ -671,17 +740,20 @@ export default function LibraLabPage() {
           <div className="group bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-[#EBDBC3]/30">
             <h3 className="text-xl font-semibold text-[#2E4555] mb-3 flex items-center gap-2">
               <IconStairs className="w-6 h-6 text-[#D09467]" />
-              Attic Area
+              {t('communal_areas.attic.title')}
             </h3>
             <p className="text-[#979C94] mb-4">
-              Spacious entrance area and bathroom under the roof
+              {t('communal_areas.attic.description')}
             </p>
             <div className="flex flex-wrap gap-2">
               <span className="px-3 py-1 rounded-full text-sm bg-[#2E4555]/5 text-[#2E4555] font-medium">
-                Bright space
+                {t('communal_areas.attic.features.bright')}
               </span>
               <span className="px-3 py-1 rounded-full text-sm bg-[#2E4555]/5 text-[#2E4555] font-medium">
-                Modern bathroom
+                {t('communal_areas.attic.features.modern')}
+              </span>
+              <span className="px-3 py-1 rounded-full text-sm bg-[#2E4555]/5 text-[#2E4555] font-medium">
+                {t('communal_areas.attic.features.views')}
               </span>
             </div>
           </div>
@@ -698,6 +770,29 @@ export default function LibraLabPage() {
         isOpen={showApplicationForm}
         onClose={() => setShowApplicationForm(false)}
       />
+      
+      {/* Map Modal */}
+      {showMapModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl w-full max-w-4xl relative">
+            <button 
+              onClick={() => setShowMapModal(false)}
+              className="absolute -top-4 -right-4 w-8 h-8 bg-[#D09467] text-white rounded-full flex items-center justify-center hover:bg-[#E1B588] transition-colors"
+            >
+              ×
+            </button>
+            <div className="w-full h-[500px] rounded-xl overflow-hidden">
+              <iframe 
+                src="https://mapper.voiceloop.io/embed/e40d4010-a914-4164-b1a4-4ffba470f531" 
+                width="100%" 
+                height="500" 
+                frameBorder="0"
+                title="AAA Network Map"
+              />
+            </div>
+          </div>
+        </div>
+      )}
       <Footer />
     </div>
     // End MAIN LAYOUT COMPONENT
