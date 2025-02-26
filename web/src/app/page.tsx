@@ -8,6 +8,7 @@ import { LanguagePicker } from "../components/ui/language-picker";
 import { Room } from "../types/room";
 import { ApplicationForm } from "../components/application/ApplicationForm";
 import Image from "next/image";
+import Link from "next/link";
 import { 
   IconMapPin, 
   IconWifi,
@@ -41,14 +42,13 @@ import {
   IconMap,
   IconPlayerPlay,
   IconArrowDown,
-  IconCalendar
+  IconCalendar,
+  IconX
 } from '@tabler/icons-react';
 import epicwgData from '../data/epicwg.json';
 import { BentoCard, BentoGrid } from "../components/ui/bento-grid";
 import { motion, AnimatePresence } from "framer-motion";
 import { IconButton } from "../components/ui/icon-button";
-import { RoomCard } from "../components/RoomCard";
-import { CampaignProgress } from "../components/ui/campaign-progress";
 import { useToast } from "../components/ui/use-toast";
 import { useTranslation } from '@/context/TranslationContext';
 import { TranslationKeys } from '@/types/i18n';
@@ -57,7 +57,6 @@ import { VideoBackground } from "../components/ui/video-background";
 import { FeatureSection } from '@/components/features/FeatureSection';
 import { features } from '@/data/features';
 import { ApplyNowSection } from '@/components/application/ApplyNowSection';
-import Link from 'next/link';
 import { VideoPlayer } from "../components/ui/video-player";
 import { Footer } from "../components/layout/Footer";
 import { TopNav } from '@/components/navigation/TopNav';
@@ -194,9 +193,272 @@ type Tier = {
 };
 // End TYPES COMPONENT
 
+// Helper function to translate room titles
+const translateRoomTitle = (title: string): string => {
+  const translations: Record<string, string> = {
+    "VIP-Platz mit Balkon": "VIP Spot with Balcony",
+    "Gemütlich unterm Dach": "Cozy Under the Roof",
+    "Fashion-Profi Zimmer": "Fashion Pro Room",
+    "Berghütten-Vibes": "Mountain Cabin Vibes",
+    "Ruhe-Oase mit Aussicht": "Quiet Oasis with a View",
+    "Dein Rückzugsort": "Your Retreat",
+    "Urlaubsfeeling garantiert": "Vacation Feeling Guaranteed",
+    "Dein Startup-Zimmer": "Your Startup Room",
+    "Zimmer 9": "Room 9",
+    "Zimmer 10": "Room 10",
+    "Zimmer 11": "Room 11",
+    "Zimmer 12": "Room 12"
+  };
+  return translations[title] || title;
+};
+
+// Helper function to translate room features
+const translateRoomFeature = (feature: string): string => {
+  const translations: Record<string, string> = {
+    "Balkon": "Balcony",
+    "Direkte Küchennähe": "Direct kitchen access",
+    "Bergpanorama": "Mountain panorama",
+    "Günstigster Preis": "Lowest price",
+    "Ruhige Lage": "Quiet location",
+    "Dachschräge": "Sloped ceiling",
+    "Kleiderschrank": "Large wardrobe",
+    "Geräumig": "Spacious",
+    "Kachelofen": "Tiled stove",
+    "Aussicht": "View",
+    "Eigenes Bad": "Private bathroom",
+    "Eigene Terrasse": "Private terrace",
+    "Gartenzugang": "Garden access",
+    "Großes Fenster": "Large window",
+    "Gemütlich": "Cozy",
+    "Helles Zimmer": "Bright room",
+    "Wassergeheizter Kachelofen": "Water-heated tiled stove",
+    "Panoramablick": "Panoramic view",
+    "Terrasse": "Terrace",
+    "XXL-Format": "XXL size",
+    "Eigene Dusche": "Private shower",
+    "Eigenes WC": "Private toilet",
+    "Garten": "Garden"
+  };
+  return translations[feature] || feature;
+};
+
+// Helper function to translate floor names
+const translateFloorName = (floor: string): string => {
+  const translations: Record<string, string> = {
+    "Zimmer 1": "Room 1",
+    "Zimmer 2": "Room 2",
+    "Zimmer 3": "Room 3",
+    "Zimmer 4": "Room 4",
+    "Zimmer 5": "Room 5",
+    "Zimmer 6": "Room 6",
+    "Zimmer 7": "Room 7",
+    "Zimmer 8": "Room 8",
+    "Zimmer 9": "Room 9",
+    "Zimmer 10": "Room 10",
+    "Zimmer 11": "Room 11",
+    "Zimmer 12": "Room 12",
+    "Dachgeschoß": "Top Floor",
+    "Erdgeschoß": "Ground Floor",
+    "Untergeschoß": "Basement"
+  };
+  return translations[floor] || floor;
+};
+
+// Helper function to translate room descriptions
+const translateRoomDescription = (description: string): string => {
+  const translations: Record<string, string> = {
+    "Leben wie ein Fashion-Profi: Riesiger Kleiderschrank, Dachschräge für extra Charme und genug Platz für deine private Modenschau (oder dein privates Labor in dem du daran arbeitest die Weltherrschaft zu übernehmen).": "Live like a fashion pro: Huge wardrobe, sloped ceiling for extra charm and enough space for your private fashion show (or your private lab where you work on taking over the world).",
+    "Berghütten-Vibes ohne Holz hacken: Dein wassergeheizter Kachelofen ist der Star – plus Aussicht, die das Herz höherschlagen lässt.": "Mountain cabin vibes without chopping wood: Your water-heated tiled stove is the star - plus a view that will make your heart beat faster.",
+    "Terrassentür auf, Berge rein: Dein Leben im XXL-Format – Platz, Panorama und Luft ohne Ende. Hier bist du der Boss!": "Open the terrace door, let the mountains in: Your life in XXL format - space, panorama and endless fresh air. Here you're the boss!",
+    "Perfekt balanciert: Nicht zu groß, nicht zu klein, aber mit Aussicht, die alles andere vergessen lässt. Ein echter Allrounder!": "Perfectly balanced: Not too big, not too small, but with a view that makes you forget everything else. A true all-rounder!",
+    "Minimalismus deluxe: Klein, günstig und mit der Nische so clever, dass du dich wie ein Stauraum-Genie fühlen wirst!": "Minimalism deluxe: Small, affordable, and with a niche so clever that you'll feel like a storage genius!",
+    "Urlaubsfeeling garantiert: Terrasse, Garten und eine Aussicht, die dich jeden Morgen auf Wolke sieben weckt. Raum für alles, was Spaß macht!": "Vacation feeling guaranteed: Terrace, garden, and a view that wakes you up on cloud nine every morning. Room for everything that's fun!",
+    "Clever & Kompakt: Dein Mini-Loft mit allem, was du brauchst. Perfekt für Minimalisten und Sparfüchse!": "Clever & Compact: Your mini-loft with everything you need. Perfect for minimalists and bargain hunters!",
+    "Tiny House Feeling: Klein aber oho! Mit Terrassenzugang und clever durchdachtem Layout machst du aus jedem Quadratmeter das Maximum.": "Tiny House Feeling: Small but mighty! With terrace access and cleverly thought-out layout, you'll make the most of every square meter."
+  };
+  return translations[description] || description;
+};
+
+// Helper functions for room cards
+const renderRoomStatusBadge = (room: Room, currentLanguage: string, t: any) => {
+  if (room.available) {
+    return (
+      <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#D09467]/80 text-white backdrop-blur-sm">
+        {t('rooms.available_now')}
+      </span>
+    );
+  } else if (room.availableFrom) {
+    return (
+      <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#979C94]/80 text-white backdrop-blur-sm">
+        {t('rooms.available_from')} {new Date(room.availableFrom).toLocaleDateString(
+          currentLanguage === 'de' ? 'de-DE' : 'en-US', 
+          { month: 'short', day: 'numeric', year: 'numeric' }
+        )}
+      </span>
+    );
+  }
+  return null;
+};
+
+const renderRoomTitle = (room: Room, currentLanguage: string) => {
+  return typeof room.title === 'object' 
+    ? room.title[currentLanguage as 'en' | 'de'] 
+    : currentLanguage === 'en' ? translateRoomTitle(room.title) : room.title;
+};
+
+const renderRoomDescription = (room: Room, currentLanguage: string) => {
+  return typeof room.description === 'object' 
+    ? room.description[currentLanguage as 'en' | 'de'] 
+    : currentLanguage === 'en' ? translateRoomDescription(room.description) : room.description;
+};
+
+const renderRoomFeature = (feature: string | Record<string, string>, currentLanguage: string) => {
+  return typeof feature === 'object' 
+    ? feature[currentLanguage as 'en' | 'de'] 
+    : currentLanguage === 'en' ? translateRoomFeature(feature) : feature;
+};
+
+// Room card component (for inline use)
+const RoomCardInline = ({ 
+  room, 
+  index, 
+  currentLanguage, 
+  t, 
+  activeRoomId, 
+  toggleRoomDetail, 
+  handleApplyForRoom 
+}: { 
+  room: Room; 
+  index: number; 
+  currentLanguage: string; 
+  t: any; 
+  activeRoomId: string | null; 
+  toggleRoomDetail: (roomId: string) => void; 
+  handleApplyForRoom: (room: Room) => void; 
+}) => {
+  return (
+    <motion.div
+      key={room.id}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.1 * index }}
+      className="relative aspect-square rounded-xl overflow-hidden group"
+    >
+      {/* Overlay gradients */}
+      <div className="absolute inset-0 bg-black/20 z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#2E4555]/80 to-transparent z-10"></div>
+      
+      {/* Room image */}
+      <Image
+        src={room.images[0]}
+        alt={typeof room.title === 'string' ? room.title : 'Room image'}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+      
+      {/* Room info overlay */}
+      <div className="absolute top-0 left-0 right-0 p-4 z-20">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#2E4555]/60 text-[#EBDBC3] backdrop-blur-sm">
+            {currentLanguage === 'en' ? translateFloorName(room.floor) : room.floor}
+          </span>
+          {renderRoomStatusBadge(room, currentLanguage, t)}
+        </div>
+        <h3 className="text-xl font-semibold text-white mb-2">
+          {renderRoomTitle(room, currentLanguage)}
+        </h3>
+        <div className="flex items-center gap-4">
+          <span className="text-[#EBDBC3]/90 text-sm flex items-center gap-1">
+            <IconRuler className="w-4 h-4" />
+            {room.size}m²
+          </span>
+          {/* Room-specific highlight */}
+          {room.features.slice(0, 1).map((feature, idx) => (
+            <span key={idx} className="text-[#EBDBC3]/90 text-sm flex items-center gap-1">
+              <IconStar className="w-4 h-4" />
+              {renderRoomFeature(feature, currentLanguage)}
+            </span>
+          ))}
+        </div>
+      </div>
+      
+      {/* Bottom actions */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 z-20 flex justify-between items-center">
+        <div className="text-white font-medium backdrop-blur-sm bg-[#2E4555]/30 px-3 py-1.5 rounded-full">
+          €{room.price}<span className="text-[#EBDBC3]/80">{t('rooms.per_month')}</span>
+        </div>
+        <button 
+          onClick={() => toggleRoomDetail(room.id)}
+          className="text-white backdrop-blur-sm bg-[#D09467]/70 hover:bg-[#D09467]/90 transition-colors px-4 py-1.5 rounded-full font-medium cursor-pointer"
+        >
+          {t('rooms.view_details')}
+        </button>
+      </div>
+      
+      {/* Room Detail Overlay */}
+      <div 
+        className={`absolute inset-0 bg-[#2E4555]/95 z-30 p-6 transition-all duration-300 flex flex-col overflow-y-auto ${
+          activeRoomId === room.id ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <button 
+          onClick={() => toggleRoomDetail(room.id)} 
+          className="absolute top-4 right-4 text-white hover:text-[#D09467] transition-colors z-40"
+        >
+          <IconX className="w-6 h-6" />
+        </button>
+        
+        <div className="flex flex-col h-full overflow-y-auto">
+          <h3 className="text-2xl font-bold text-white mb-4">
+            {renderRoomTitle(room, currentLanguage)}
+          </h3>
+          
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#D09467]/80 text-white">
+              {currentLanguage === 'en' ? translateFloorName(room.floor) : room.floor}
+            </span>
+            <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#2E4555]/60 text-[#EBDBC3]">
+              {room.size}m²
+            </span>
+            <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#2E4555]/60 text-[#EBDBC3]">
+              €{room.price}{t('rooms.per_month')}
+            </span>
+          </div>
+          
+          <p className="text-[#EBDBC3] mb-4">
+            {renderRoomDescription(room, currentLanguage)}
+          </p>
+          
+          <div className="mb-4">
+            <h4 className="text-white font-medium mb-2">{t('rooms.features')}</h4>
+            <div className="flex flex-wrap gap-2">
+              {room.features.map((feature, idx) => (
+                <span key={idx} className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#2E4555]/60 text-[#EBDBC3] flex items-center gap-1">
+                  <IconStar className="w-4 h-4" />
+                  {renderRoomFeature(feature, currentLanguage)}
+                </span>
+              ))}
+            </div>
+          </div>
+          
+          <div className="mt-auto pt-4">
+            <button 
+              onClick={() => handleApplyForRoom(room)}
+              className="w-full bg-[#D09467] hover:bg-[#D09467]/80 text-white font-medium py-2 rounded-lg transition-colors"
+            >
+              {t('hero.apply_now')}
+            </button>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 export default function LibraLabPage() {
   // Start STATE AND HOOKS COMPONENT
-  const { t } = useTranslation();
+  const { t, currentLanguage } = useTranslation();
   const { toast } = useToast();
   const { currentAmount, addDeposit, isLoading: isLoadingCampaign } = useCampaign();
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
@@ -207,6 +469,7 @@ export default function LibraLabPage() {
   const [isFocused, setIsFocused] = useState(false);
   const [aiFaqFocused, setAiFaqFocused] = useState(false);
   const [showMapModal, setShowMapModal] = useState(false);
+  const [activeRoomId, setActiveRoomId] = useState<string | null>(null);
   // End STATE AND HOOKS COMPONENT
 
   // Start HANDLERS COMPONENT
@@ -222,15 +485,15 @@ export default function LibraLabPage() {
         setSelectedRoom(null);
         setShowApplicationForm(true);
         toast({
-          title: "Reservation successful!",
-          description: "We'll be in touch soon to confirm your spot.",
+          title: t('reservation_notification.successful'),
+          description: t('reservation_notification.successful_description'),
         });
       }
     } catch (error) {
       console.error('Failed to reserve:', error);
       toast({
-        title: "Reservation failed",
-        description: "Please try again later.",
+        title: t('reservation_notification.error'),
+        description: t('reservation_notification.process_error'),
         variant: "destructive",
       });
     } finally {
@@ -249,11 +512,21 @@ export default function LibraLabPage() {
       setShowApplicationForm(false);
     } else {
       toast({
-        title: "Error",
-        description: "Failed to process your reservation. Please try again.",
+        title: t('reservation_notification.error'),
+        description: t('reservation_notification.process_error'),
         variant: "destructive",
       });
     }
+  };
+
+  const toggleRoomDetail = (roomId: string) => {
+    setActiveRoomId(activeRoomId === roomId ? null : roomId);
+  };
+
+  const handleApplyForRoom = (room: Room) => {
+    setSelectedRoom(room);
+    setShowApplicationForm(true);
+    setActiveRoomId(null); // Close the detail overlay
   };
   // End HANDLERS COMPONENT
 
@@ -268,14 +541,14 @@ export default function LibraLabPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-8">
             <div>
-              <h2 className="text-3xl font-bold mb-4 text-[#2E4555]">Featured Spaces</h2>
-              <p className="text-[#979C94]">Handpicked rooms for tech professionals</p>
+              <h2 className="text-3xl font-bold mb-4 text-[#2E4555]">{t('featured_spaces')}</h2>
+              <p className="text-[#979C94]">{t('handpicked_rooms')}</p>
             </div>
             <Link
               href="#rooms"
               className="text-[#D09467] hover:text-[#E1B588] font-medium flex items-center gap-2 transition-colors duration-300"
             >
-              View all spaces
+              {t('view_all_spaces')}
               <IconArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -284,64 +557,17 @@ export default function LibraLabPage() {
             {epicwgData.rooms
               .filter(room => [1, 4, 5].includes(room.roomNumber))
               .map((room, index) => (
-              <motion.div
-                key={room.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-                className="group"
-              >
-                <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                  <Image
-                    src={room.images[0]}
-                    alt={room.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#2E4555]/80 to-transparent" />
-                  {/* Availability Badge */}
-                  <div className="absolute top-4 right-4">
-                    {room.available ? (
-                      <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#D09467]/90 text-white backdrop-blur-sm">
-                        Available Now
-                      </span>
-                    ) : (
-                      <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#979C94]/90 text-white backdrop-blur-sm">
-                        Available: {new Date(room.availableFrom).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                      </span>
-                    )}
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex justify-between items-end">
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#2E4555]/60 text-[#EBDBC3] backdrop-blur-sm">
-                            {room.floor}
-                          </span>
-                        </div>
-                        <h3 className="text-xl font-semibold text-white mb-2">{room.title}</h3>
-                        <div className="flex items-center gap-4">
-                          <span className="text-[#EBDBC3]/90 text-sm flex items-center gap-1">
-                            <IconRuler className="w-4 h-4" />
-                            {room.size}m²
-                          </span>
-                          {/* Room-specific highlight */}
-                          <span className="text-[#EBDBC3]/90 text-sm flex items-center gap-1">
-                            {room.features[0] && (
-                              <>
-                                <IconStar className="w-4 h-4" />
-                                {room.features[0]}
-                              </>
-                            )}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                <RoomCardInline 
+                  key={room.id} 
+                  room={room} 
+                  index={index} 
+                  currentLanguage={currentLanguage} 
+                  t={t} 
+                  activeRoomId={activeRoomId} 
+                  toggleRoomDetail={toggleRoomDetail} 
+                  handleApplyForRoom={handleApplyForRoom} 
+                />
+              ))}
           </div>
         </div>
       </div>
@@ -416,8 +642,8 @@ export default function LibraLabPage() {
             </div>
             <a 
               href="https://open.spotify.com/show/1BD4pUfxWWyj9yYGpvE9Oe" 
-              target="_blank" 
-              rel="noopener noreferrer"
+              target="_blank"
+              rel="noopener noreferrer" 
               className="block"
             >
               <div className="text-[#D09467] text-4xl font-bold mb-2 group-hover:text-[#E1B588] transition-colors">5</div>
@@ -591,73 +817,23 @@ export default function LibraLabPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-8">
             <div>
-              <h2 className="text-3xl font-bold text-[#2E4555] mb-2">All Available Space</h2>
-              <p className="text-gray-600">Choose your perfect room in our tech-focused coliving space</p>
+              <h2 className="text-3xl font-bold text-[#2E4555] mb-2">{t('all_available_space')}</h2>
+              <p className="text-gray-600">{t('choose_room')}</p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {epicwgData.rooms.map((room, index) => (
-              <motion.div
-                key={room.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-                className="group"
-              >
-                <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                  <Image
-                    src={room.images[0]}
-                    alt={room.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#2E4555]/80 to-transparent" />
-                  {/* Availability Badge */}
-                  <div className="absolute top-4 right-4">
-                    {room.available ? (
-                      <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#D09467]/90 text-white backdrop-blur-sm">
-                        Available Now
-                      </span>
-                    ) : (
-                      <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#979C94]/90 text-white backdrop-blur-sm">
-                        Available: {new Date(room.availableFrom).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                      </span>
-                    )}
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex justify-between items-end">
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#2E4555]/60 text-[#EBDBC3] backdrop-blur-sm">
-                            {room.floor}
-                          </span>
-                        </div>
-                        <h3 className="text-xl font-semibold text-white mb-2">{room.title}</h3>
-                        <div className="flex items-center gap-4">
-                          <span className="text-[#EBDBC3]/90 text-sm flex items-center gap-1">
-                            <IconRuler className="w-4 h-4" />
-                            {room.size}m²
-                          </span>
-                          {/* Room-specific highlight */}
-                          <span className="text-[#EBDBC3]/90 text-sm flex items-center gap-1">
-                            {room.features[0] && (
-                              <>
-                                <IconStar className="w-4 h-4" />
-                                {room.features[0]}
-                              </>
-                            )}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="text-white font-medium backdrop-blur-sm bg-[#2E4555]/30 px-3 py-1.5 rounded-full">
-                        €{room.price}<span className="text-[#EBDBC3]/80">/mo</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+              <RoomCardInline 
+                key={room.id} 
+                room={room} 
+                index={index} 
+                currentLanguage={currentLanguage} 
+                t={t} 
+                activeRoomId={activeRoomId} 
+                toggleRoomDetail={toggleRoomDetail} 
+                handleApplyForRoom={handleApplyForRoom} 
+              />
             ))}
           </div>
         </div>
@@ -694,7 +870,7 @@ export default function LibraLabPage() {
               </span>
             </div>
           </div>
-
+          
           {/* Community Kitchen */}
           <div className="group bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-[#EBDBC3]/30">
             <h3 className="text-xl font-semibold text-[#2E4555] mb-3 flex items-center gap-2">
@@ -716,7 +892,7 @@ export default function LibraLabPage() {
               </span>
             </div>
           </div>
-
+          
           {/* Ground Floor Bathrooms */}
           <div className="group bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-[#EBDBC3]/30">
             <h3 className="text-xl font-semibold text-[#2E4555] mb-3 flex items-center gap-2">
@@ -735,7 +911,7 @@ export default function LibraLabPage() {
               </span>
             </div>
           </div>
-
+          
           {/* Attic Area */}
           <div className="group bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-[#EBDBC3]/30">
             <h3 className="text-xl font-semibold text-[#2E4555] mb-3 flex items-center gap-2">

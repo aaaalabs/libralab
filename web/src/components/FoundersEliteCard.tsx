@@ -19,33 +19,27 @@ export function FoundersEliteCard({ onApply, className = '' }: FoundersEliteProp
 
   const benefits = [
     {
-      key: 'benefit.interior_design' as const,
-      descriptionKey: 'benefit.interior_design_description' as const,
+      key: 'interior_design',
       value: '€3,000'
     },
     {
-      key: 'benefit.community' as const,
-      descriptionKey: 'benefit.community_description' as const,
+      key: 'community',
       value: '€1,200/Jahr'
     },
     {
-      key: 'benefit.priority' as const,
-      descriptionKey: 'benefit.priority_description' as const,
+      key: 'priority',
       value: '€600'
     },
     {
-      key: 'benefit.revenue_share' as const,
-      descriptionKey: 'benefit.revenue_share_description' as const,
+      key: 'revenue_share',
       value: '€2,400'
     },
     {
-      key: 'benefit.ai_consulting' as const,
-      descriptionKey: 'benefit.ai_consulting_description' as const,
+      key: 'ai_consulting',
       value: '€2,000'
     },
     {
-      key: 'benefit.etrike' as const,
-      descriptionKey: 'benefit.etrike_description' as const,
+      key: 'etrike',
       value: '€2,400/Jahr'
     }
   ];
@@ -66,10 +60,10 @@ export function FoundersEliteCard({ onApply, className = '' }: FoundersEliteProp
               </h2>
               <div className="flex items-center gap-4">
                 <Text className="text-gray-400">
-                  2 spots left
+                  {isTranslationLoading ? '...' : t('founders_elite_spots_left')}
                 </Text>
                 <Text className="text-amber-400">
-                  €8,999 one-time investment
+                  {isTranslationLoading ? '...' : t('founders_elite_price')}
                 </Text>
               </div>
             </div>
@@ -85,10 +79,10 @@ export function FoundersEliteCard({ onApply, className = '' }: FoundersEliteProp
         {/* Value Proposition */}
         <div className="mb-4">
           <Text className="text-amber-400 text-xl font-medium">
-            Total Value: €11,600+ (first year)
+            {isTranslationLoading ? '...' : t('founders_elite_value')}
           </Text>
           <Text className="text-gray-300 mt-1">
-            Looking for visionary founders
+            {isTranslationLoading ? '...' : t('founders_elite_looking_for')}
           </Text>
         </div>
 
@@ -108,7 +102,7 @@ export function FoundersEliteCard({ onApply, className = '' }: FoundersEliteProp
                 <div className="flex items-center gap-3 flex-1">
                   <IconCheck className="w-5 h-5 text-amber-400 flex-shrink-0" />
                   <Text className="text-gray-200">
-                    {isTranslationLoading ? '...' : t(benefit.descriptionKey)}
+                    {isTranslationLoading ? '...' : t(`benefit.${benefit.key}` as TranslationKey)}
                   </Text>
                 </div>
                 <Text className="text-amber-400 font-medium whitespace-nowrap">
@@ -126,7 +120,7 @@ export function FoundersEliteCard({ onApply, className = '' }: FoundersEliteProp
                 onApply();
               }}
             >
-              Jetzt Investieren
+              {isTranslationLoading ? '...' : t('invest_now')}
             </Button>
           </div>
         </motion.div>

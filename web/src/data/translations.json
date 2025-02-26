@@ -1,17 +1,19 @@
 {
   "en": {
-    "benefit.interior_design": "Custom Interior Design Consultation (Value: €3,000)",
-    "benefit.community": "Lifetime AI-Shift Community Membership (Value: €1,200/year)",
-    "benefit.priority": "Priority Room Alert: Get notified when your designed room is about to be booked (1 year) (Value: €600)",
-    "benefit.ai_consulting": "1:1 AI Consulting Sessions with Libralab CTO during your stay (Value: €2,000)",
-    "benefit.workspace": "Premium Workspace Setup",
-    "benefit.events": "Exclusive Founder Events Access",
-    "benefit.pioneer": "All Pioneer Tier Benefits",
-    "benefit.parking": "Dedicated Parking Space",
-    "benefit.cleaning": "Premium Cleaning Service",
-    "benefit.etrike": "E-Trike Carsharing Mini (Value: €2,400/year)",
-    "benefit.etrike.description": "Free access to our eco-friendly E-Trike fleet for local trips",
-    "benefit.revenue_share": "Earn 20% revenue share from your designed room bookings (1 year) (Est. Value: €2,400)",
+    "benefit": {
+      "interior_design": "Custom Interior Design Consultation (Value: €3,000)",
+      "community": "Lifetime AI-Shift Community Membership (Value: €1,200/year)",
+      "priority": "Priority Room Alert: Get notified when your designed room is about to be booked (1 year) (Value: €600)",
+      "ai_consulting": "1:1 AI Consulting Sessions with Libralab CTO during your stay (Value: €2,000)",
+      "workspace": "Premium Workspace Setup",
+      "events": "Exclusive Founder Events Access",
+      "pioneer": "All Pioneer Tier Benefits",
+      "parking": "Dedicated Parking Space",
+      "cleaning": "Premium Cleaning Service",
+      "etrike": "E-Trike Carsharing Mini (Value: €2,400/year)",
+      "etrike_description": "Free access to our eco-friendly E-Trike fleet for local trips",
+      "revenue_share": "Earn 20% revenue share from your designed room bookings (1 year) (Est. Value: €2,400)"
+    },
     "deposit": "Deposit",
     "founders_elite_deposit": "€1000 Deposit",
     "early_bird_pre_booking": "Early Bird Pre-Booking",
@@ -37,7 +39,7 @@
     "best_value": "Best Value",
     "powered_by": "Powered by",
     "founders_elite_title": "Founders Elite",
-    "founders_elite_price_month": "€8,999 one-time investment",
+    "founders_elite_price": "€8,999 one-time investment",
     "founders_elite_spots_left": "2 spots left",
     "founders_elite_value": "Total Value: €11,600+ (first year)",
     "founders_elite_ready_by": "Ready by March 2025",
@@ -113,6 +115,10 @@
       "de": "Entschuldigung, ich konnte deine Frage nicht verarbeiten. Bitte versuche es erneut.",
       "en": "Sorry, I couldn't process your question. Please try again."
     },
+    "ai_faq_title": {
+      "de": "Frag unsere LIBRA",
+      "en": "Ask our LIBRA"
+    },
     "footer": {
       "company_tagline": "Austria's first AI coliving space",
       "our_partners": "Our Partners",
@@ -123,24 +129,100 @@
       "location": "Location",
       "view_on_earth": "View on Google Earth",
       "last_updated": "February 2025"
+    },
+    "featured_spaces": "Featured Spaces",
+    "handpicked_rooms": "Handpicked rooms for tech professionals",
+    "view_all_spaces": "View all spaces",
+    "all_available_space": "All Available Space",
+    "choose_room": "Choose your perfect room in our tech-focused coliving space",
+    "communal_areas": {
+      "title": "Communal Areas",
+      "description": "Enjoy our shared spaces designed for relaxation, productivity, and community building",
+      "coworking": {
+        "title": "Coworking Space",
+        "description": "High-speed internet, ergonomic chairs, and a productive atmosphere for focused work",
+        "features": {
+          "access": "24/7 Access",
+          "wifi": "High-Speed Internet",
+          "coffee": "Ergonomic Chairs"
+        }
+      },
+      "kitchen": {
+        "title": "Community Kitchen",
+        "description": "Fully equipped kitchen with appliances, utensils, and a dining area for socializing",
+        "features": {
+          "equipment": "Fully Equipped",
+          "events": "Dining Area",
+          "storage": "Storage Space"
+        }
+      },
+      "bathrooms": {
+        "title": "Ground Floor Bathrooms",
+        "description": "Clean and well-maintained bathrooms with modern fixtures and amenities",
+        "features": {
+          "fixtures": "Modern Fixtures",
+          "maintained": "Well-Maintained"
+        }
+      },
+      "attic": {
+        "title": "Attic Area",
+        "description": "Bright and airy space with comfortable seating and panoramic views",
+        "features": {
+          "bright": "Bright and Airy",
+          "modern": "Panoramic Views",
+          "views": "Comfortable Seating"
+        }
+      }
+    },
+    "reservation_successful": "Reservation successful!",
+    "reservation_successful_description": "We'll be in touch soon to confirm your spot.",
+    "reservation_failed": "Reservation failed",
+    "reservation_failed_description": "Please try again later.",
+    "error": "Error",
+    "process_error": "Failed to process your reservation. Please try again.",
+    "invest_now": "Invest Now",
+    "rooms": {
+      "available_now": {
+        "en": "Available Now",
+        "de": "Jetzt verfügbar"
+      },
+      "available_from": {
+        "en": "Available from {{date}}",
+        "de": "Verfügbar ab: {{date}}"
+      },
+      "floor": "Floor",
+      "per_month": {
+        "en": "/month",
+        "de": "/Monat"
+      },
+      "view_details": {
+        "en": "View Details",
+        "de": "Details ansehen"
+      },
+      "features": {
+        "en": "Features",
+        "de": "Ausstattung"
+      }
     }
   },
   "de": {
-    "benefit.interior_design": "Individuelle Innenarchitektur-Beratung (Wert: €3.000)",
-    "benefit.community": "Lebenslange AI-Shift Community Mitgliedschaft (Wert: €1.200/Jahr)",
-    "benefit.priority": "Zimmer-Priorität: Erhalte Benachrichtigungen, wenn dein gestaltetes Zimmer gebucht werden soll (1 Jahr) (Wert: €600)",
-    "benefit.ai_consulting": "1:1 KI-Beratung mit Libralab CTO während Ihres Aufenthalts (Wert: €2.000)",
-    "benefit.workspace": "Premium Arbeitsplatz-Ausstattung",
-    "benefit.events": "Exklusive Gründer-Events",
-    "benefit.pioneer": "Alle Pioneer-Vorteile inklusive",
-    "benefit.parking": "Reservierter Parkplatz",
-    "benefit.cleaning": "Premium Reinigungsservice",
-    "benefit.etrike": "E-Trike Carsharing Mini (Wert: €2.400/Jahr)",
-    "benefit.etrike.description": "Kostenloser Zugang zu unserer umweltfreundlichen E-Trike-Flotte für lokale Fahrten",
-    "benefit.revenue_share": "Verdiene 20% Umsatzbeteiligung von den Buchungen deines gestalteten Zimmers (1 Jahr) (Geschätzter Wert: €2.400)",
+    "benefit": {
+      "interior_design": "Individuelle Innenarchitektur-Beratung (Wert: €3.000)",
+      "community": "Lebenslange AI-Shift Community Mitgliedschaft (Wert: €1.200/Jahr)",
+      "priority": "Zimmer-Priorität: Erhalte Benachrichtigungen, wenn dein gestaltetes Zimmer gebucht werden soll (1 Jahr) (Wert: €600)",
+      "ai_consulting": "1:1 KI-Beratung mit Libralab CTO während Ihres Aufenthalts (Wert: €2.000)",
+      "workspace": "Premium Arbeitsplatz-Ausstattung",
+      "events": "Exklusive Gründer-Events",
+      "pioneer": "Alle Pioneer-Vorteile inklusive",
+      "parking": "Reservierter Parkplatz",
+      "cleaning": "Premium Reinigungsservice",
+      "etrike": "E-Trike Carsharing Mini (Wert: €2.400/Jahr)",
+      "etrike_description": "Kostenloser Zugang zu unserer umweltfreundlichen E-Trike-Flotte für lokale Fahrten",
+      "revenue_share": "Verdiene 20% Umsatzbeteiligung von den Buchungen deines gestalteten Zimmers (1 Jahr) (Geschätzter Wert: €2.400)"
+    },
     "deposit": "Kaution",
     "founders_elite_deposit": "€1000 Anzahlung",
-    "early_bird_pre_booking": "Early Bird Pre-Booking",
+    "early_bird_pre_booking": "Early Bird Vorbuchung",
     "early_bird_description": "Sichere dir jetzt deinen Platz in der innovativsten WG Innsbrucks",
     "raised": "gesammelt",
     "campaign_ends": "Kampagne endet",
@@ -163,9 +245,9 @@
     "best_value": "Bestes Angebot",
     "powered_by": "Powered by",
     "founders_elite_title": "Founders Elite",
-    "founders_elite_price_month": "€8.999 Einmalige Investition",
+    "founders_elite_price": "€8,999 Einmalige Investition",
     "founders_elite_spots_left": "2 Plätze verfügbar",
-    "founders_elite_value": "Gesamtwert: €11.600+ (erstes Jahr)",
+    "founders_elite_value": "Gesamtwert: €11,600+ (erstes Jahr)",
     "founders_elite_ready_by": "Verfügbar ab März 2025",
     "founders_elite_apply_now": "Jetzt Investieren",
     "founders_elite_looking_for": "Suchen visionäre Gründer",
@@ -205,9 +287,9 @@
       "PIONEER": "Pioneer-Mitgliedsstatus"
     },
     "hero": {
-      "more_than_a": "Mehr als nur",
-      "forget_hostels": "Vergiss zufällige Hostels und unzuverlässiges WLAN.",
-      "join_community": "Werde Teil einer ausgewählten KI-Innovatoren-Community ",
+      "more_than_a": "Mehr als ein",
+      "forget_hostels": "Vergessen Sie zufällige Hostels und schlechtes WLAN.",
+      "join_community": "Werden Sie Teil einer kuratierten Gemeinschaft von KI-Innovatoren ",
       "in_alps": "im Herzen der Alpen.",
       "apply_now": "Jetzt bewerben"
     },
@@ -215,8 +297,8 @@
       "discover_room": "Zimmer entdecken",
       "invest": "Jetzt investieren",
       "limited": "Limitiert",
-      "home": "Home",
-      "community": "Community"
+      "home": "Startseite",
+      "community": "Gemeinschaft"
     },
     "founders_elite": {
       "title": "Founders Elite",
@@ -239,6 +321,10 @@
       "de": "Entschuldigung, ich konnte deine Frage nicht verarbeiten. Bitte versuche es erneut.",
       "en": "Sorry, I couldn't process your question. Please try again."
     },
+    "ai_faq_title": {
+      "de": "Frag unsere LIBRA",
+      "en": "Ask our LIBRA"
+    },
     "footer": {
       "company_tagline": "Österreichs erstes KI-Coliving Space",
       "our_partners": "Unsere Partner",
@@ -249,6 +335,80 @@
       "location": "Standort",
       "view_on_earth": "In Google Earth ansehen",
       "last_updated": "Februar 2025"
+    },
+    "featured_spaces": "Ausgewählte Räume",
+    "handpicked_rooms": "Handverlesene Räume für Tech-Profis",
+    "view_all_spaces": "Alle Räume ansehen",
+    "all_available_space": "Alle verfügbaren Räume",
+    "choose_room": "Wähle deinen perfekten Raum in unserem technikorientierten Coliving Space",
+    "communal_areas": {
+      "title": "Gemeinschaftsbereiche",
+      "description": "Genieße unsere gemeinsamen Räume, die für Entspannung, Produktivität und Gemeinschaftsbildung konzipiert sind",
+      "coworking": {
+        "title": "Coworking Space",
+        "description": "Hochgeschwindigkeits-Internet, ergonomische Stühle und eine produktive Atmosphäre für konzentriertes Arbeiten",
+        "features": {
+          "access": "24/7 Zugang",
+          "wifi": "Hochgeschwindigkeits-Internet",
+          "coffee": "Ergonomische Stühle"
+        }
+      },
+      "kitchen": {
+        "title": "Gemeinschaftsküche",
+        "description": "Voll ausgestattete Küche mit Geräten, Utensilien und einem Essbereich zum Austausch",
+        "features": {
+          "equipment": "Voll ausgestattet",
+          "events": "Essbereich",
+          "storage": "Stauraum"
+        }
+      },
+      "bathrooms": {
+        "title": "Badezimmer im Erdgeschoss",
+        "description": "Saubere und gut gepflegte Badezimmer mit modernen Armaturen und Annehmlichkeiten",
+        "features": {
+          "fixtures": "Moderne Armaturen",
+          "maintained": "Gut gepflegt"
+        }
+      },
+      "attic": {
+        "title": "Dachgeschoss",
+        "description": "Heller und luftiger Raum mit bequemen Sitzgelegenheiten und Panoramablick",
+        "features": {
+          "bright": "Hell und luftig",
+          "modern": "Panoramablick",
+          "views": "Bequeme Sitzgelegenheiten"
+        }
+      }
+    },
+    "reservation_successful": "Reservierung erfolgreich!",
+    "reservation_successful_description": "Wir werden uns in Kürze bei dir melden, um deinen Platz zu bestätigen.",
+    "reservation_failed": "Reservierung fehlgeschlagen",
+    "reservation_failed_description": "Bitte versuche es später noch einmal.",
+    "error": "Fehler",
+    "process_error": "Deine Reservierung konnte nicht verarbeitet werden. Bitte versuche es erneut.",
+    "invest_now": "Jetzt Investieren",
+    "rooms": {
+      "available_now": {
+        "en": "Available Now",
+        "de": "Jetzt verfügbar"
+      },
+      "available_from": {
+        "en": "Available from {{date}}",
+        "de": "Verfügbar ab: {{date}}"
+      },
+      "floor": "Etage",
+      "per_month": {
+        "en": "/month",
+        "de": "/Monat"
+      },
+      "view_details": {
+        "en": "View Details",
+        "de": "Details ansehen"
+      },
+      "features": {
+        "en": "Features",
+        "de": "Ausstattung"
+      }
     }
   }
 }

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { TablerIconsProps } from '@tabler/icons-react';
 import { OptimizedImage } from '../ui/optimized-image';
+import { useTranslation } from '@/context/TranslationContext';
 
 interface Feature {
   title: string;
@@ -12,6 +13,7 @@ interface Feature {
 interface FeatureGroup {
   title: string;
   features: Feature[];
+  translationKey?: string;
 }
 
 interface FeatureSectionProps {
@@ -21,6 +23,7 @@ interface FeatureSectionProps {
   imageUrl?: string;
   reversed?: boolean;
   onApply?: () => void;
+  translationKey?: string;
 }
 
 export const FeatureSection: React.FC<FeatureSectionProps> = ({
@@ -30,7 +33,10 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
   imageUrl,
   reversed = false,
   onApply,
+  translationKey,
 }) => {
+  const { t } = useTranslation();
+  
   return (
     <div className="py-24 overflow-hidden">
       <div className="container mx-auto px-4">
@@ -43,26 +49,35 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl font-bold mb-4">{title}</h2>
-              <p className="text-gray-600 text-lg mb-8">{description}</p>
+              <h2 className="text-3xl font-bold mb-4">
+                {translationKey ? t(`${translationKey}_title`) : title}
+              </h2>
+              <p className="text-gray-600 text-lg mb-8">
+                {translationKey ? t(`${translationKey}_description`) : description}
+              </p>
             </motion.div>
 
             <div className="grid sm:grid-cols-2 gap-8">
               {groups.map((group, idx) => (
                 <motion.div
-                  key={group.title}
+                  key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="space-y-4"
                 >
-                  <h3 className="text-xl font-semibold text-gray-800">{group.title}</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-[#2E4555]">
+                    {group.translationKey ? t(group.translationKey) : group.title}
+                  </h3>
                   <ul className="space-y-3">
                     {group.features.map((feature, featureIdx) => (
-                      <li key={featureIdx} className="flex items-start gap-2">
-                        {feature.icon && <feature.icon className="w-5 h-5 text-blue-500 mt-1" />}
-                        <span className="text-gray-600">{feature.title}</span>
+                      <li key={featureIdx} className="flex items-start">
+                        {feature.icon && (
+                          <span className="mr-2 text-[#D09467] mt-0.5">
+                            <feature.icon size={18} />
+                          </span>
+                        )}
+                        <span className="text-gray-700">{feature.title}</span>
                       </li>
                     ))}
                   </ul>
@@ -74,20 +89,21 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
           {/* Image */}
           {imageUrl && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="flex-1"
+              initial={{ opacity: 0, x: reversed ? -20 : 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="relative flex-1"
-              style={{ aspectRatio: '2.35/1' }}
             >
-              <OptimizedImage
-                src={imageUrl}
-                alt={title}
-                className="rounded-2xl shadow-2xl w-full h-full object-cover"
-                fill={true}
-                priority={true}
-              />
+              <div className="rounded-xl overflow-hidden shadow-xl">
+                <OptimizedImage
+                  src={imageUrl}
+                  alt={title}
+                  width={600}
+                  height={400}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
             </motion.div>
           )}
         </div>

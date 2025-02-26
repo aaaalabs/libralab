@@ -1,18 +1,21 @@
 export interface Room {
   id: string;
-  title: string;
-  description: string;
+  title: string | { en: string; de: string };
+  description: string | { en: string; de: string };
   size: number;
   price: number;
   deposit: number;
   floor: string;
+  roomNumber?: number;
   available: boolean;
   amenities: string[];
   images: string[];
   rating?: number;
   costRating?: number;
-  features: string[];
+  features: string[] | { title: string; icon?: string }[];
   availableFrom?: string;
+  availableNow?: boolean;
+  tag?: string;
 }
 
 export interface RoomApplication {

@@ -72,8 +72,14 @@
   "rooms": [
     {
       "id": "eg-1",
-      "title": "VIP-Platz mit Balkon",
-      "description": "Dein VIP-Platz: Balkon mit Bergkino inklusive und die Küche direkt nebenan – schneller kommst du nicht an deinen morgendlichen Kaffee!",
+      "title": {
+        "en": "VIP Spot with Balcony",
+        "de": "VIP-Platz mit Balkon"
+      },
+      "description": {
+        "en": "Your VIP spot: Balcony with mountain cinema included and the kitchen right next door - you can't get to your morning coffee faster!",
+        "de": "Dein VIP-Platz: Balkon mit Bergkino inklusive und die Küche direkt nebenan – schneller kommst du nicht an deinen morgendlichen Kaffee!"
+      },
       "size": 15,
       "price": 1250,
       "deposit": 2500,
@@ -85,12 +91,31 @@
       "images": ["/images/rooms/[Zimmer1]_15m2_01.webp"],
       "rating": 4.5,
       "costRating": 4.0,
-      "features": ["Balkon", "Direkte Küchennähe", "Bergpanorama"]
+      "features": [
+        {
+          "en": "Balcony",
+          "de": "Balkon"
+        }, 
+        {
+          "en": "Direct kitchen access",
+          "de": "Direkte Küchennähe"
+        }, 
+        {
+          "en": "Mountain panorama",
+          "de": "Bergpanorama"
+        }
+      ]
     },
     {
       "id": "eg-2",
-      "title": "Gemütlich unterm Dach",
-      "description": "Gemütlich unterm Dach: Die Schräge macht's schräg, aber der Preis macht alles wieder gerade. Sparfüchse, greift zu!",
+      "title": {
+        "en": "Cozy Under the Roof",
+        "de": "Gemütlich unterm Dach"
+      },
+      "description": {
+        "en": "Cozy under the roof: The slope makes it quirky, but the price makes everything straight again. Bargain hunters, grab it!",
+        "de": "Gemütlich unterm Dach: Die Schräge macht's schräg, aber der Preis macht alles wieder gerade. Sparfüchse, greift zu!"
+      },
       "size": 16.5,
       "price": 1110,
       "deposit": 2220,
@@ -102,7 +127,20 @@
       "images": ["/images/rooms/[Zimmer2]_16m2_01.webp"],
       "rating": 4.0,
       "costRating": 4.5,
-      "features": ["Günstigster Preis", "Ruhige Lage"]
+      "features": [
+        {
+          "en": "Affordable",
+          "de": "Günstig"
+        },
+        {
+          "en": "Roof slope",
+          "de": "Dachschräge"
+        },
+        {
+          "en": "Quiet location",
+          "de": "Ruhige Lage"
+        }
+      ]
     },
     {
       "id": "eg-3",
@@ -123,8 +161,14 @@
     },
     {
       "id": "eg-4",
-      "title": "Berghütten-Vibes",
-      "description": "Berghütten-Vibes ohne Holz hacken: Dein wassergeheizter Kachelofen ist der Star – plus Aussicht, die das Herz höherschlagen lässt.",
+      "title": {
+        "en": "Mountain Cabin Vibes",
+        "de": "Berghütten-Vibes"
+      },
+      "description": {
+        "en": "Mountain cabin vibes without chopping wood: Your water-heated tiled stove is the star - plus a view that will make your heart beat faster.",
+        "de": "Berghütten-Vibes ohne Holz hacken: Dein wassergeheizter Kachelofen ist der Star – plus Aussicht, die das Herz höherschlagen lässt."
+      },
       "size": 22,
       "price": 1430,
       "deposit": 2860,
@@ -136,12 +180,27 @@
       "images": ["/images/rooms/[Zimmer4]_22m2_01.webp"],
       "rating": 4.2,
       "costRating": 4.0,
-      "features": ["Wassergeheizter Kachelofen", "Panoramablick"]
+      "features": [
+        {
+          "en": "Water-heated tiled stove",
+          "de": "Wassergeheizter Kachelofen"
+        },
+        {
+          "en": "Panoramic view",
+          "de": "Panoramablick"
+        }
+      ]
     },
     {
       "id": "eg-5",
-      "title": "XXL-Format mit Terrasse",
-      "description": "Terrassentür auf, Berge rein: Dein Leben im XXL-Format – Platz, Panorama und Luft ohne Ende. Hier bist du der Boss!",
+      "title": {
+        "en": "XXL Size with Terrace",
+        "de": "XXL-Format mit Terrasse"
+      },
+      "description": {
+        "en": "Open the terrace door, let the mountains in: Your life in XXL format - space, panorama and endless fresh air. Here you're the boss!",
+        "de": "Terrassentür auf, Berge rein: Dein Leben im XXL-Format – Platz, Panorama und Luft ohne Ende. Hier bist du der Boss!"
+      },
       "size": 25,
       "price": 1650,
       "deposit": 3300,
@@ -153,12 +212,31 @@
       "images": ["/images/rooms/[Zimmer5]_25m2_01.webp"],
       "rating": 4.5,
       "costRating": 3.8,
-      "features": ["Terrasse", "XXL-Format", "Bergpanorama"]
+      "features": [
+        {
+          "en": "Terrace",
+          "de": "Terrasse"
+        },
+        {
+          "en": "XXL size",
+          "de": "XXL-Format"
+        },
+        {
+          "en": "Mountain panorama",
+          "de": "Bergpanorama"
+        }
+      ]
     },
     {
       "id": "eg-6",
-      "title": "Perfekt balanciert",
-      "description": "Perfekt balanciert: Nicht zu groß, nicht zu klein, aber mit Aussicht, die alles andere vergessen lässt. Ein echter Allrounder!",
+      "title": {
+        "en": "Perfectly Balanced",
+        "de": "Perfekt balanciert"
+      },
+      "description": {
+        "en": "Perfectly balanced: Not too big, not too small, but with a view that makes you forget everything else. A true all-rounder!",
+        "de": "Perfekt balanciert: Nicht zu groß, nicht zu klein, aber mit Aussicht, die alles andere vergessen lässt. Ein echter Allrounder!"
+      },
       "size": 15.5,
       "price": 1170,
       "deposit": 2340,
@@ -170,12 +248,27 @@
       "images": ["/images/rooms/[Zimmer6]_15m2_01.webp"],
       "rating": 4.3,
       "costRating": 4.2,
-      "features": ["Ausgewogene Größe", "Panoramablick"]
+      "features": [
+        {
+          "en": "Balanced size",
+          "de": "Ausgewogene Größe"
+        },
+        {
+          "en": "Panoramic view",
+          "de": "Panoramablick"
+        }
+      ]
     },
     {
       "id": "eg-7",
-      "title": "Minimalismus deluxe",
-      "description": "Minimalismus deluxe: Klein, günstig und mit der Nische so clever, dass du dich wie ein Stauraum-Genie fühlen wirst!",
+      "title": {
+        "en": "Minimalism Deluxe",
+        "de": "Minimalismus deluxe"
+      },
+      "description": {
+        "en": "Minimalism deluxe: Small, affordable, and with a niche so clever that you'll feel like a storage genius!",
+        "de": "Minimalismus deluxe: Klein, günstig und mit der Nische so clever, dass du dich wie ein Stauraum-Genie fühlen wirst!"
+      },
       "size": 10,
       "price": 950,
       "deposit": 1900,
@@ -183,16 +276,31 @@
       "roomNumber": 7,
       "amenities": ["Clever", "Stauraum", "Günstig"],
       "available": true,
-      "availableFrom": "2025-02-24",
+      "availableFrom": "2025-03-01",
       "images": ["/images/rooms/[Zimmer7]_10m2_01.webp"],
-      "rating": 4.0,
-      "costRating": 4.8,
-      "features": ["Clever", "Nische", "Minimalistisch"]
+      "rating": 3.8,
+      "costRating": 4.5,
+      "features": [
+        {
+          "en": "Clever storage",
+          "de": "Clever"
+        },
+        {
+          "en": "Affordable",
+          "de": "Günstig"
+        }
+      ]
     },
     {
       "id": "ug1-8",
-      "title": "Urlaubsfeeling garantiert",
-      "description": "Urlaubsfeeling garantiert: Terrasse, Garten und eine Aussicht, die dich jeden Morgen auf Wolke sieben weckt. Raum für alles, was Spaß macht!",
+      "title": {
+        "en": "Vacation Feeling Guaranteed",
+        "de": "Urlaubsfeeling garantiert"
+      },
+      "description": {
+        "en": "Vacation feeling guaranteed: Terrace, garden, and a view that wakes you up on cloud nine every morning. Room for everything that's fun!",
+        "de": "Urlaubsfeeling garantiert: Terrasse, Garten und eine Aussicht, die dich jeden Morgen auf Wolke sieben weckt. Raum für alles, was Spaß macht!"
+      },
       "size": 24.5,
       "price": 1630,
       "deposit": 3260,
@@ -204,12 +312,31 @@
       "images": ["/images/rooms/[Zimmer8]_24m2_01.webp"],
       "rating": 4.7,
       "costRating": 4.0,
-      "features": ["Terrasse", "Gartenzugang", "Aussicht"]
+      "features": [
+        {
+          "en": "Terrace",
+          "de": "Terrasse"
+        },
+        {
+          "en": "Garden access",
+          "de": "Gartenzugang"
+        },
+        {
+          "en": "View",
+          "de": "Aussicht"
+        }
+      ]
     },
     {
       "id": "ug1-9",
-      "title": "Clever & Kompakt",
-      "description": "Clever & Kompakt: Dein Mini-Loft mit allem, was du brauchst. Perfekt für Minimalisten und Sparfüchse!",
+      "title": {
+        "en": "Clever & Compact",
+        "de": "Clever & Kompakt"
+      },
+      "description": {
+        "en": "Clever & Compact: Your mini-loft with everything you need. Perfect for minimalists and bargain hunters!",
+        "de": "Clever & Kompakt: Dein Mini-Loft mit allem, was du brauchst. Perfekt für Minimalisten und Sparfüchse!"
+      },
       "size": 15,
       "price": 1090,
       "deposit": 2180,
@@ -221,12 +348,27 @@
       "images": ["/images/rooms/[Zimmer9]_15m2_01.webp"],
       "rating": 4.3,
       "costRating": 4.2,
-      "features": ["Clever geschnitten", "Ausgewogen"]
+      "features": [
+        {
+          "en": "View",
+          "de": "Aussicht"
+        },
+        {
+          "en": "Balanced",
+          "de": "Ausgewogen"
+        }
+      ]
     },
     {
       "id": "ug1-10",
-      "title": "Tiny House Feeling",
-      "description": "Tiny House Feeling: Klein aber oho! Mit Terrassenzugang und clever durchdachtem Layout machst du aus jedem Quadratmeter das Maximum.",
+      "title": {
+        "en": "Tiny House Feeling",
+        "de": "Tiny House Feeling"
+      },
+      "description": {
+        "en": "Tiny House Feeling: Small but mighty! With terrace access and cleverly thought-out layout, you'll make the most of every square meter.",
+        "de": "Tiny House Feeling: Klein aber oho! Mit Terrassenzugang und clever durchdachtem Layout machst du aus jedem Quadratmeter das Maximum."
+      },
       "size": 10,
       "price": 890,
       "deposit": 1780,
@@ -238,7 +380,16 @@
       "images": ["/images/rooms/[Zimmer10]_10m2_01.webp"],
       "rating": 4.0,
       "costRating": 4.8,
-      "features": ["Terrassenzugang", "Minimalistisch"]
+      "features": [
+        {
+          "en": "Terrace access",
+          "de": "Terrassenzugang"
+        },
+        {
+          "en": "Minimalist",
+          "de": "Minimalistisch"
+        }
+      ]
     }
   ],
   "commonAreas": [

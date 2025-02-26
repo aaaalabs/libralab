@@ -1,28 +1,49 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '@/context/TranslationContext';
 import { PlaceholdersAndVanishInput } from '@/components/ui/placeholders-and-vanish-input';
-import { TranslationKeys } from '@/types/i18n';
 
-const customQuestions = [
-  "Was macht LibraCoLiving so besonders?",
-  "Wie funktioniert das AI-Shift Community Konzept?",
-  "Welche Vorteile bietet die Lage in Innsbruck?",
-  "Wie sieht der Workspace-Setup aus?",
-  "Gibt es spezielle Angebote für Tech-Startups?",
-  "Welche AI-Tools und Ressourcen sind verfügbar?",
-  "Wie läuft der Bewerbungsprozess ab?",
-  "Was sind die Kosten für verschiedene Membership-Optionen?"
-];
+// Custom questions based on language
+const getCustomQuestions = (language: string) => {
+  if (language === 'en') {
+    return [
+      "What makes LibraCoLiving so special?",
+      "How does the AI-Shift Community concept work?",
+      "What are the advantages of the location in Innsbruck?",
+      "What does the workspace setup look like?",
+      "Are there special offers for tech startups?",
+      "What AI tools and resources are available?",
+      "How does the application process work?",
+      "What are the costs for different membership options?"
+    ];
+  }
+  
+  return [
+    "Was macht LibraCoLiving so besonders?",
+    "Wie funktioniert das AI-Shift Community Konzept?",
+    "Welche Vorteile bietet die Lage in Innsbruck?",
+    "Wie sieht der Workspace-Setup aus?",
+    "Gibt es spezielle Angebote für Tech-Startups?",
+    "Welche AI-Tools und Ressourcen sind verfügbar?",
+    "Wie läuft der Bewerbungsprozess ab?",
+    "Was sind die Kosten für verschiedene Membership-Optionen?"
+  ];
+};
 
 export function AiFaq({ onFocusChange }: { onFocusChange?: (focused: boolean) => void }) {
-  const { t } = useTranslation();
+  const { t, currentLanguage } = useTranslation();
   const [question, setQuestion] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const [customQuestions, setCustomQuestions] = useState<string[]>(getCustomQuestions(currentLanguage));
+
+  // Update custom questions when language changes
+  useEffect(() => {
+    setCustomQuestions(getCustomQuestions(currentLanguage));
+  }, [currentLanguage]);
 
   const handleFocusChange = (focused: boolean) => {
     setIsFocused(focused);
@@ -57,10 +78,10 @@ export function AiFaq({ onFocusChange }: { onFocusChange?: (focused: boolean) =>
         console.error('Invalid NEXT_PUBLIC_AI_FAQ_WEBHOOK environment variable');
         throw new Error('Webhook URL is not configured correctly');
       }
-
+      
       const payload = { 
         question: questionToAsk,
-        language: 'de'
+        language: currentLanguage || 'de'
       };
       console.log('Sending payload:', payload);
 
@@ -96,7 +117,7 @@ export function AiFaq({ onFocusChange }: { onFocusChange?: (focused: boolean) =>
       setResponse(data.answer);
     } catch (error) {
       console.error('Error details:', error);
-      setResponse(t('ai_faq_error'));
+      setResponse(t('ai_faq.error'));
     } finally {
       setIsLoading(false);
     }
@@ -124,7 +145,7 @@ export function AiFaq({ onFocusChange }: { onFocusChange?: (focused: boolean) =>
           animate={{ opacity: 1, y: 0 }}
           className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-6 text-[#D09467]"
         >
-          Frag unsere LIBRA <span className="text-[#EBDBC3]">AI</span>
+          {t('ai_faq.title')} <span className="text-[#EBDBC3]">AI</span>
         </motion.h2>
 
         <div className="flex flex-col items-center w-full space-y-8 px-4">
@@ -170,7 +191,7 @@ export function AiFaq({ onFocusChange }: { onFocusChange?: (focused: boolean) =>
                   <div className="text-[#EBDBC3] whitespace-pre-wrap">{response}</div>
                 ) : (
                   <div className="text-[#EBDBC3]/70 text-center">
-                    <p>{t('ai_faq_placeholder')}</p>
+                    <p>{t('ai_faq.placeholder')}</p>
                   </div>
                 )}
               </motion.div>
