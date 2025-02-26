@@ -1,0 +1,22 @@
+name: LIBRAlab AI Coliving
+description: LIBRAlab is an AI coliving community near Innsbruck, Austria. 244m² living space with spectacular mountain views for AI researchers, engineers, and entrepreneurs.
+url: https://epic.libralab.ai
+location: Omes, near Innsbruck, Austria
+coordinates: 47.2682, 11.3933
+type: coliving
+features:
+  - 244.13m² living space
+  - 160.25m² additional space
+  - 900m² garden
+  - Spectacular mountain views
+  - High-speed internet
+  - Collaborative workspace
+  - Community events
+contact: info@libralab.ai
+social:
+  - linkedin: https://www.linkedin.com/company/libralabs
+availability: open
+target_audience: AI researchers, engineers, entrepreneurs, and enthusiasts
+founded: 2023
+pricing_model: tiered (Essential, Pro, Ultimate, Founders Elite)
+languages: English, German

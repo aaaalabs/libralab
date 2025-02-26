@@ -1,0 +1,73 @@
+openapi: 3.0.1
+info:
+  title: LIBRAlab AI Coliving API
+  description: API for LIBRAlab AI Coliving Space in Austria
+  version: '1.0.0'
+  contact:
+    name: LIBRAlab Team
+    email: info@libralab.ai
+    url: https://epic.libralab.ai
+servers:
+  - url: https://epic.libralab.ai
+paths:
+  /api/info:
+    get:
+      operationId: getColivingInfo
+      summary: Get information about the LIBRAlab AI coliving space
+      description: Returns detailed information about the LIBRAlab AI coliving space in Austria
+      responses:
+        '200':
+          description: Successfully retrieved coliving information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ColivingInfo'
+components:
+  schemas:
+    ColivingInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the coliving space
+          example: LIBRAlab
+        location:
+          type: string
+          description: Location of the coliving space
+          example: Omes, near Innsbruck, Austria
+        coordinates:
+          type: object
+          properties:
+            latitude:
+              type: number
+              example: 47.2682
+            longitude:
+              type: number
+              example: 11.3933
+        livingSpace:
+          type: string
+          description: Size of the living space
+          example: 244.13m²
+        additionalSpace:
+          type: string
+          description: Size of additional space
+          example: 160.25m²
+        gardenSize:
+          type: string
+          description: Size of the garden
+          example: 900m²
+        features:
+          type: array
+          items:
+            type: string
+          example:
+            - Spectacular mountain views
+            - High-speed internet
+            - Collaborative workspace
+            - Community events
+        website:
+          type: string
+          example: https://epic.libralab.ai
+        contact:
+          type: string
+          example: info@libralab.ai
