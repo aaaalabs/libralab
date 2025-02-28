@@ -24,6 +24,8 @@ interface FeatureSectionProps {
   reversed?: boolean;
   onApply?: () => void;
   translationKey?: string;
+  titleKey?: string;
+  descriptionKey?: string;
 }
 
 export const FeatureSection: React.FC<FeatureSectionProps> = ({
@@ -34,8 +36,21 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
   reversed = false,
   onApply,
   translationKey,
+  titleKey,
+  descriptionKey,
 }) => {
   const { t } = useTranslation();
+  
+  // Updated to use a safer approach with string keys
+  const getTranslation = (key: string | undefined, fallback: string) => {
+    if (!key) return fallback;
+    try {
+      // @ts-ignore - We're intentionally allowing any string key
+      return t(key as string);
+    } catch {
+      return fallback;
+    }
+  };
   
   return (
     <div className="py-24 overflow-hidden">
@@ -50,10 +65,16 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
               transition={{ duration: 0.5 }}
             >
               <h2 className="text-3xl font-bold mb-4">
-                {translationKey ? t(`${translationKey}_title`) : title}
+                {getTranslation(
+                  titleKey || (translationKey ? `${translationKey}.title` : undefined),
+                  title
+                )}
               </h2>
               <p className="text-gray-600 text-lg mb-8">
-                {translationKey ? t(`${translationKey}_description`) : description}
+                {getTranslation(
+                  descriptionKey || (translationKey ? `${translationKey}.description` : undefined),
+                  description
+                )}
               </p>
             </motion.div>
 
@@ -67,7 +88,7 @@ export const FeatureSection: React.FC<FeatureSectionProps> = ({
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                 >
                   <h3 className="text-xl font-semibold mb-4 text-[#2E4555]">
-                    {group.translationKey ? t(group.translationKey) : group.title}
+                    {getTranslation(group.translationKey, group.title)}
                   </h3>
                   <ul className="space-y-3">
                     {group.features.map((feature, featureIdx) => (

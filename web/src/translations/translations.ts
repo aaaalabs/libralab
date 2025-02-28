@@ -469,7 +469,11 @@ export type TranslationKey =
   | 'features.knowledge_resources'
   | 'features.networking_growth'
   | 'features.tech_business'
-  | 'features.outdoor_lifestyle';
+  | 'features.outdoor_lifestyle'
+  | 'features.section.title'
+  | 'features.section.description'
+  | 'features.group.title'
+  | 'features.group.description';
 
 export type TranslationContextType = {
   t: (key: TranslationKey) => string;
