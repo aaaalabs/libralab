@@ -166,7 +166,7 @@ export function RoomCardInline({
             ? showAfterImage 
               ? room.imagesAfter[0] 
               : room.imagesBefore[0]
-            : room.images[0]
+            : (room.imagesBefore && room.imagesBefore.length > 0) ? room.imagesBefore[0] : room.images[0]
         }
         alt={typeof room.title === 'string' ? room.title : 'Room image'}
         fill
@@ -174,8 +174,8 @@ export function RoomCardInline({
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
       />
       
-      {/* Before/After toggle for rooms in progress */}
-      {room.status === 'in-progress' && room.imagesBefore && room.imagesAfter && (
+      {/* Before/After toggle for rooms in progress (only shown when an 'after' image is available) */}
+      {room.status === 'in-progress' && room.imagesBefore && room.imagesAfter && room.imagesAfter.length > 0 && (
         <div className="absolute top-4 right-4 z-30">
           <button 
             onClick={(e) => {

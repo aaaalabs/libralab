@@ -11,14 +11,18 @@ interface NewsItem {
   id: string;
   date: string;
   content: string;
-  imageUrl?: string;
+  imageUrl?: string | null;
   imageAlt?: string;
+  websiteUrl?: string | null;
 }
 
-interface NewsResponse {
+interface NewsResponseItem {
   news: NewsItem[];
   lastUpdated: string;
 }
+
+// Array of response items
+type NewsResponse = NewsResponseItem[];
 
 // Storage keys for sessionStorage
 const NEWS_STORAGE_KEY = 'libralab_news_data';
@@ -34,6 +38,8 @@ export function NewsTicker() {
   const [isOpen, setIsOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [hasNewToday, setHasNewToday] = useState(false);
+  const [expandedImage, setExpandedImage] = useState<string | null>(null);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   // Fetch news data
   const fetchNews = async () => {
@@ -67,31 +73,46 @@ export function NewsTicker() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      const data: NewsResponse = await response.json();
+      const responseData: NewsResponse = await response.json();
       
-      if (!data.news || !Array.isArray(data.news)) {
-        throw new Error('Invalid news data in response');
+      // Neues Format verarbeiten - Array von NewsResponseItems
+      if (!Array.isArray(responseData)) {
+        throw new Error('Invalid news data format: expected array');
       }
       
-      // Sort by date (newest first)
-      const sortedNews = [...data.news].sort((a, b) => 
+      // Alle News-Items aus dem Array sammeln
+      const allNewsItems: NewsItem[] = [];
+      let latestUpdate = '';
+      
+      responseData.forEach(item => {
+        if (item.news && Array.isArray(item.news)) {
+          allNewsItems.push(...item.news);
+        }
+        
+        // Track das neueste Update-Datum
+        if (!latestUpdate || new Date(item.lastUpdated) > new Date(latestUpdate)) {
+          latestUpdate = item.lastUpdated;
+        }
+      });
+      
+      // Nach Datum sortieren (neueste zuerst)
+      const sortedNews = allNewsItems.sort((a, b) => 
         new Date(b.date).getTime() - new Date(a.date).getTime()
       );
       
-      // Save to state
+      // In State speichern
       setNews(sortedNews);
-      const updatedTime = data.lastUpdated || new Date().toISOString();
-      setLastUpdated(updatedTime);
+      setLastUpdated(latestUpdate);
       
-      // Check if there are news from today
+      // Prüfen, ob es News von heute gibt
       checkForTodayNews(sortedNews);
       
-      // Save to session storage
+      // Im Session Storage speichern
       try {
         sessionStorage.setItem(NEWS_STORAGE_KEY, JSON.stringify(sortedNews));
-        sessionStorage.setItem(LAST_UPDATED_KEY, updatedTime);
+        sessionStorage.setItem(LAST_UPDATED_KEY, latestUpdate);
         
-        // Update last refresh date
+        // Aktualisierungsdatum speichern
         const today = new Date().toISOString().split('T')[0];
         sessionStorage.setItem(LAST_REFRESH_DATE_KEY, today);
       } catch (error) {
@@ -250,19 +271,21 @@ export function NewsTicker() {
                   >
                     <IconRefresh className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
                   </button>
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setExpanded(!expanded);
-                    }} 
-                    className="text-[#D09467] hover:text-[#D09467]/80 transition-colors flex items-center gap-1 text-sm"
-                  >
-                    {expanded ? 
-                      (currentLanguage === 'de' ? 'Weniger' : 'Less') : 
-                      (currentLanguage === 'de' ? 'Mehr' : 'More')
-                    }
-                    <IconArrowRight className={`w-4 h-4 transform transition-transform ${expanded ? 'rotate-90' : ''}`} />
-                  </button>
+                  {news.length > 2 && (
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setExpanded(!expanded);
+                      }} 
+                      className="text-[#D09467] hover:text-[#D09467]/80 transition-colors flex items-center gap-1 text-sm"
+                    >
+                      {expanded ? 
+                        (currentLanguage === 'de' ? 'Weniger' : 'Less') : 
+                        (currentLanguage === 'de' ? 'Mehr' : 'More')
+                      }
+                      <IconArrowRight className={`w-4 h-4 transform transition-transform ${expanded ? 'rotate-90' : ''}`} />
+                    </button>
+                  )}
                 </div>
               </div>
               {lastUpdated && (
@@ -274,7 +297,7 @@ export function NewsTicker() {
             </div>
             
             {/* Content Area */}
-            <div className={`p-4 ${expanded ? 'max-h-96' : 'max-h-80'} overflow-y-auto transition-all duration-300`}>
+            <div className={`p-4 ${expanded ? 'max-h-96' : 'max-h-80'} overflow-y-auto transition-all duration-300 relative`}>
               {/* Error message */}
               {error && (
                 <div className="text-red-500 text-sm py-2 rounded-lg bg-red-50 px-3">{error}</div>
@@ -312,6 +335,30 @@ export function NewsTicker() {
                 </div>
               )}
               
+              {/* LIBRA-Branding Bild-Overlay */}
+              {showOverlay && expandedImage ? (
+                <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50 bg-black/70"
+                  onClick={() => setShowOverlay(false)}>
+                  <div 
+                    className="bg-gradient-to-br from-[#2E4555] to-[#1A2530] p-3 rounded-lg relative shadow-xl"
+                    style={{ maxWidth: '390px' }} 
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <img 
+                      src={expandedImage} 
+                      alt="News image" 
+                      className="w-full max-h-[325px] object-contain rounded" 
+                    />
+                    <button 
+                      className="absolute top-2 right-2 bg-[#3A5A73] text-white rounded-full p-1.5 hover:bg-[#4B7497] transition-colors"
+                      onClick={() => setShowOverlay(false)}
+                    >
+                      <IconX size={16} />
+                    </button>
+                  </div>
+                </div>
+              ) : null}
+              
               {/* News items */}
               {news.length > 0 && (
                 <div className="space-y-4">
@@ -323,11 +370,21 @@ export function NewsTicker() {
                       <div className="flex gap-3">
                         {item.imageUrl && (
                           <div className="flex-shrink-0">
-                            <div className="relative w-12 h-12 rounded-md overflow-hidden">
+                            <div 
+                              className="relative w-12 h-12 rounded-md overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (item.imageUrl) {
+                                  setExpandedImage(item.imageUrl);
+                                  setShowOverlay(true);
+                                }
+                              }}
+                            >
                               <Image 
                                 src={item.imageUrl} 
                                 alt={item.imageAlt || "News image"} 
                                 fill
+                                sizes="(max-width: 768px) 48px, 64px"
                                 className="object-cover"
                               />
                             </div>
@@ -335,7 +392,21 @@ export function NewsTicker() {
                         )}
                         <div className="flex-1">
                           <div className="text-xs text-gray-500 mb-1">{formatDate(item.date)}</div>
-                          <div className="text-sm text-[#2E4555]">{item.content}</div>
+                          <div className="text-sm text-[#2E4555] inline">
+                            {item.content}{' '}
+                            {item.websiteUrl && (
+                              <a 
+                                href={item.websiteUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-[#2E4555] text-white text-xs rounded-full hover:bg-[#3A5A73] transition-colors"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <IconArrowRight size={10} />
+                                <span>{item.websiteUrl.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0]}</span>
+                              </a>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -346,6 +417,8 @@ export function NewsTicker() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Image Overlay (within the news widget) */}
     </div>
   );
 }

@@ -10,6 +10,7 @@ interface OptimizedImageProps {
   width?: number;
   height?: number;
   fill?: boolean;
+  sizes?: string;
 }
 
 export const OptimizedImage: React.FC<OptimizedImageProps> = ({
@@ -20,6 +21,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   width,
   height,
   fill = false,
+  sizes,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -31,12 +33,14 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
         className={`
           duration-700 ease-in-out
           ${isLoading ? 'scale-110 blur-2xl grayscale' : 'scale-100 blur-0 grayscale-0'}
+          ${fill ? 'object-contain' : ''}
         `}
         onLoadingComplete={() => setIsLoading(false)}
         priority={priority}
         fill={fill}
         width={width}
         height={height}
+        sizes={fill ? (sizes || '(max-width: 768px) 100vw, 50vw') : undefined}
       />
       {isLoading && (
         <motion.div

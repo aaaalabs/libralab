@@ -9,6 +9,7 @@ export const translations = {
     },
     nav: {
       discover_room: "Discover Rooms",
+      discover_room_short: "Rooms",
       invest: "Invest Now",
       limited: "Limited",
       home: "Home",
@@ -183,6 +184,7 @@ export const translations = {
     },
     nav: {
       discover_room: "Zimmer Entdecken",
+      discover_room_short: "Zimmer",
       invest: "Jetzt Investieren",
       limited: "Limitiert",
       home: "Startseite",

@@ -7,7 +7,8 @@ const nextConfig = {
   images: {
     domains: [
       'api.dicebear.com',
-      'images.unsplash.com'
+      'images.unsplash.com',
+      't9015838726.p.clickup-attachments.com'
     ],
   },
 

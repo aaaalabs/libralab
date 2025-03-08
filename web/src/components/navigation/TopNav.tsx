@@ -66,16 +66,18 @@ export function TopNav() {
                 <Image
                   src="/libralab_darkmode.svg"
                   alt="LIBRAlab"
-                  fill
-                  className={`transition-opacity duration-300 ${isScrolled || isLegalPage ? 'opacity-0' : 'opacity-100'}`}
+                  width={96}
+                  height={24}
+                  className={`transition-opacity duration-300 ${isScrolled || isLegalPage ? 'opacity-0' : 'opacity-100'} w-full h-auto`}
                   priority
                 />
                 {/* Light mode logo - visible when scrolled */}
                 <Image
                   src="/libralab_lightmode.svg"
                   alt="LIBRAlab"
-                  fill
-                  className={`transition-opacity duration-300 ${isScrolled || isLegalPage ? 'opacity-100' : 'opacity-0'}`}
+                  width={96}
+                  height={24}
+                  className={`transition-opacity duration-300 ${isScrolled || isLegalPage ? 'opacity-100' : 'opacity-0'} w-full h-auto`}
                   priority
                 />
               </div>
@@ -124,7 +126,8 @@ export function TopNav() {
                   )}
                 </div>
                 <span className="relative z-10 flex items-center gap-2">
-                  {t('nav.discover_room')}
+                  <span className="hidden sm:inline">{t('nav.discover_room')}</span>
+                  <span className="inline sm:hidden">{t('nav.discover_room_short')}</span>
                   <svg 
                     className="w-4 h-4 transform transition-transform group-hover:translate-x-1" 
                     fill="none" 

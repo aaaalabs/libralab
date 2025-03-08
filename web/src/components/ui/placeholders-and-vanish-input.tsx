@@ -51,6 +51,12 @@ export function PlaceholdersAndVanishInput({
   const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState("");
   const [animating, setAnimating] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const draw = useCallback(() => {
     if (!inputRef.current) return;
@@ -214,24 +220,26 @@ export function PlaceholdersAndVanishInput({
         )}
       />
       <div className="relative w-full h-full flex items-center">
-        <input
-          ref={inputRef}
-          type="text"
-          value={value}
-          onChange={(e) => {
-            if (!animating) {
-              setValue(e.target.value);
-              onChange(e);
-            }
-          }}
-          onKeyDown={handleKeyDown}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          className={cn(
-            "w-full h-full bg-transparent text-white px-4 sm:px-8 pr-12 focus:outline-none text-base",
-            animating && "text-transparent"
-          )}
-        />
+        {isMounted && (
+          <input
+            ref={inputRef}
+            type="text"
+            value={value}
+            onChange={(e) => {
+              if (!animating) {
+                setValue(e.target.value);
+                onChange(e);
+              }
+            }}
+            onKeyDown={handleKeyDown}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            className={cn(
+              "w-full h-full bg-transparent text-white px-4 sm:px-8 pr-12 focus:outline-none text-base",
+              animating && "text-transparent"
+            )}
+          />
+        )}
         <AnimatePresence mode="wait">
           {!value && (
             <motion.div
