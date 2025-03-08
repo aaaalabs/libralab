@@ -27,8 +27,15 @@ const renderRoomStatusBadge = (room: Room, currentLanguage: string, t: any) => {
       </span>
     );
   } else if (room.availableFrom) {
+    if (room.availableFrom === "2025") {
+      return (
+        <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#979C94]/80 text-white backdrop-blur-sm">
+          {currentLanguage === 'de' ? "Verfügbar dieses Jahr" : "Available this Year"}
+        </span>
+      );
+    }
     return (
-      <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#979C94]/80 text-white backdrop-blur-sm">
+      <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#4CAF50]/80 text-white backdrop-blur-sm border border-[#4CAF50]">
         {t('rooms.available_from')} {new Date(room.availableFrom).toLocaleDateString(
           currentLanguage === 'de' ? 'de-DE' : 'en-US', 
           { month: 'short', day: 'numeric', year: 'numeric' }
