@@ -24,7 +24,7 @@ export function FeaturedRooms({
   activeRoomId, 
   toggleRoomDetail, 
   handleApplyForRoom,
-  featuredRoomNumbers = [1, 4, 5] // Default featured room numbers
+  featuredRoomNumbers = [6, 1, 4] // Default featured room numbers
 }: FeaturedRoomsProps) {
   const typedRooms = adaptRoomsArray(rooms);
   const filteredRooms = typedRooms.filter(room => featuredRoomNumbers.includes(room.roomNumber || 0));

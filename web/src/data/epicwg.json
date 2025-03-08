@@ -98,13 +98,14 @@
         }, 
         {
           "en": "Direct kitchen access",
-          "de": "Direkte Küchennähe"
+          "de": "Direkte Küchennahe"
         }, 
         {
           "en": "Mountain panorama",
           "de": "Bergpanorama"
         }
-      ]
+      ],
+      "status": "backlog"
     },
     {
       "id": "eg-2",
@@ -140,7 +141,9 @@
           "en": "Quiet location",
           "de": "Ruhige Lage"
         }
-      ]
+      ],
+      "status": "backlog",
+      "kickoffDate": "2025-04-01"
     },
     {
       "id": "eg-3",
@@ -157,7 +160,8 @@
       "images": ["/images/rooms/[Zimmer3]_24m2_01.webp"],
       "rating": 4.5,
       "costRating": 4.0,
-      "features": ["Kleiderschrank", "Dachschräge", "Geräumig"]
+      "features": ["Kleiderschrank", "Dachschräge", "Geräumig"],
+      "status": "backlog"
     },
     {
       "id": "eg-4",
@@ -189,7 +193,8 @@
           "en": "Panoramic view",
           "de": "Panoramablick"
         }
-      ]
+      ],
+      "status": "backlog"
     },
     {
       "id": "eg-5",
@@ -225,7 +230,8 @@
           "en": "Mountain panorama",
           "de": "Bergpanorama"
         }
-      ]
+      ],
+      "status": "backlog"
     },
     {
       "id": "eg-6",
@@ -246,6 +252,8 @@
       "available": false,
       "availableFrom": "2025-04-01",
       "images": ["/images/rooms/[Zimmer6]_15m2_01.webp"],
+      "imagesBefore": ["/images/rooms/[Zimmer6]_15m2_01.webp"],
+      "imagesAfter": [],
       "rating": 4.3,
       "costRating": 4.2,
       "features": [
@@ -257,7 +265,10 @@
           "en": "Panoramic view",
           "de": "Panoramablick"
         }
-      ]
+      ],
+      "status": "in-progress",
+      "kickoffDate": "2025-03-01",
+      "progressPercentage": 25
     },
     {
       "id": "eg-7",
@@ -289,7 +300,8 @@
           "en": "Affordable",
           "de": "Günstig"
         }
-      ]
+      ],
+      "status": "backlog"
     },
     {
       "id": "ug1-8",
@@ -325,7 +337,8 @@
           "en": "View",
           "de": "Aussicht"
         }
-      ]
+      ],
+      "status": "backlog"
     },
     {
       "id": "ug1-9",
@@ -357,7 +370,8 @@
           "en": "Balanced",
           "de": "Ausgewogen"
         }
-      ]
+      ],
+      "status": "backlog"
     },
     {
       "id": "ug1-10",
@@ -389,7 +403,8 @@
           "en": "Minimalist",
           "de": "Minimalistisch"
         }
-      ]
+      ],
+      "status": "backlog"
     }
   ],
   "commonAreas": [

@@ -12,6 +12,15 @@ module.exports = {
       fontFamily: {
         sans: ['futura-pt', 'sans-serif'],
       },
+      animation: {
+        'pulse-slow': 'pulseProgress 3s ease-in-out infinite',
+      },
+      keyframes: {
+        pulseProgress: {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0.7 },
+        },
+      },
       fontSize: {
         base: ['1.125rem', '1.75rem'],  // 18px base size (up from 16px)
         sm: ['1rem', '1.5rem'],         // 16px

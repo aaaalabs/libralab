@@ -64,6 +64,7 @@ import { AnimatedHero } from "@/components/hero/AnimatedHero";
 import { CommunalAreas } from '@/components/sections/CommunalAreas';
 import { FeaturedRooms } from '@/components/sections/FeaturedRooms';
 import { AvailableRooms } from '@/components/sections/AvailableRooms';
+import { NewsTicker } from '@/components/NewsTicker';
 // End IMPORTS COMPONENT
 
 // Start ANIMATION VARIANTS COMPONENT
@@ -545,6 +546,7 @@ export default function LibraLabPage() {
     <div className="min-h-screen bg-gray-50">
       <TopNav />
       <AnimatedHero />
+      <NewsTicker />
 
      {/* Showcase Section - Featured Rooms Highlight */}
 <FeaturedRooms 
