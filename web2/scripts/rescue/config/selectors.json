@@ -1,0 +1,194 @@
+{
+  "rooms": {
+    "container": [
+      ".rooms-container",
+      ".listings-grid",
+      "[data-rooms]",
+      ".grid",
+      "main"
+    ],
+    "card": [
+      ".room-card",
+      ".listing-card",
+      "[data-room]",
+      ".card",
+      "article"
+    ],
+    "title": [
+      "h2",
+      "h3",
+      ".title",
+      ".room-title",
+      ".heading",
+      "[data-title]"
+    ],
+    "price": [
+      ".price",
+      "[data-price]",
+      ".cost",
+      ".rent",
+      ".monthly-price"
+    ],
+    "size": [
+      ".size",
+      "[data-size]",
+      ".sqm",
+      ".area",
+      ".square-meters"
+    ],
+    "availability": [
+      ".availability",
+      "[data-availability]",
+      ".available-from",
+      ".move-in-date"
+    ],
+    "description": [
+      ".description",
+      "[data-description]",
+      ".room-description",
+      "p"
+    ],
+    "amenities": [
+      ".amenities",
+      "[data-amenities]",
+      ".features",
+      ".room-features",
+      "ul"
+    ],
+    "location": [
+      ".location",
+      "[data-location]",
+      ".address",
+      ".room-location"
+    ],
+    "image": [
+      "img",
+      "[data-image]",
+      ".image",
+      ".room-image",
+      "picture img"
+    ],
+    "link": [
+      "a",
+      "[data-link]",
+      ".room-link"
+    ]
+  },
+  "navigation": {
+    "container": [
+      "nav",
+      ".navbar",
+      ".navigation",
+      "header nav",
+      "[role='navigation']"
+    ],
+    "links": [
+      "nav a",
+      ".nav-link",
+      ".menu-item",
+      "nav li a"
+    ],
+    "logo": [
+      ".logo",
+      ".brand",
+      "nav img",
+      "[data-logo]"
+    ]
+  },
+  "footer": {
+    "container": [
+      "footer",
+      ".footer",
+      "[role='contentinfo']"
+    ],
+    "links": [
+      "footer a",
+      ".footer-link"
+    ]
+  },
+  "filters": {
+    "container": [
+      ".filters",
+      ".search-filters",
+      "[data-filters]",
+      "aside"
+    ],
+    "priceRange": [
+      "[type='range']",
+      ".price-filter",
+      "[data-price-range]"
+    ],
+    "sizeRange": [
+      ".size-filter",
+      "[data-size-range]"
+    ],
+    "availability": [
+      ".availability-filter",
+      "[data-availability-filter]"
+    ]
+  },
+  "images": {
+    "room": [
+      "img[src*='room']",
+      "img[alt*='room']",
+      ".room-image img",
+      "[data-room-image]"
+    ],
+    "profile": [
+      "img[src*='profile']",
+      "img[alt*='profile']",
+      ".profile-image img",
+      "[data-profile-image]"
+    ],
+    "gallery": [
+      ".gallery img",
+      "[data-gallery] img",
+      ".image-gallery img"
+    ]
+  },
+  "forms": {
+    "contact": [
+      "form[name='contact']",
+      ".contact-form",
+      "[data-contact-form]"
+    ],
+    "application": [
+      "form[name='application']",
+      ".application-form",
+      "[data-application-form]"
+    ],
+    "input": [
+      "input",
+      "textarea",
+      "select"
+    ],
+    "submit": [
+      "button[type='submit']",
+      ".submit-button",
+      "input[type='submit']"
+    ]
+  },
+  "meta": {
+    "title": [
+      "title",
+      "meta[property='og:title']"
+    ],
+    "description": [
+      "meta[name='description']",
+      "meta[property='og:description']"
+    ],
+    "image": [
+      "meta[property='og:image']",
+      "meta[name='twitter:image']"
+    ]
+  },
+  "data": {
+    "json": [
+      "script[type='application/ld+json']",
+      "script[type='application/json']"
+    ],
+    "attributes": [
+      "[data-*]"
+    ]
+  }
+}

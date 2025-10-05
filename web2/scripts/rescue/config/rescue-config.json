@@ -1,0 +1,39 @@
+{
+  "mode": "autonomous",
+  "productionUrl": "https://epic.libralab.ai",
+  "confidence": {
+    "minimumOverall": 0.70,
+    "minimumPerPhase": 0.60,
+    "minimumForDeployment": 0.80
+  },
+  "risk": {
+    "autoMitigate": true,
+    "maxAutoMitigationAttempts": 3,
+    "blockOnCritical": true,
+    "acceptableLevels": ["LOW", "MEDIUM"]
+  },
+  "fallback": {
+    "enableMultiStrategy": true,
+    "maxStrategiesPerAgent": 5,
+    "preferSafetyOverSpeed": true
+  },
+  "healing": {
+    "enabled": true,
+    "maxAttempts": 3,
+    "autoTranslate": true,
+    "autoFixImages": true,
+    "autoFixSchema": true
+  },
+  "validation": {
+    "buildRequired": true,
+    "visualComparisonRequired": false,
+    "maxVisualDifference": 0.05,
+    "dataVerificationRequired": true
+  },
+  "deployment": {
+    "autoCommit": true,
+    "autoPush": false,
+    "createPR": false,
+    "requireManualApproval": false
+  }
+}
