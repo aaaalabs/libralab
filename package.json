@@ -1,0 +1,27 @@
+{
+  "name": "libralab-epic",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "compare:visual": "ts-node scripts/visual-compare.ts",
+    "compare:quick": "./compare.sh",
+    "compare:data": "ts-node scripts/compare-web-versions.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.3.1",
+    "@vercel/postgres": "^0.10.0",
+    "prisma": "^6.3.1"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.2",
+    "cheerio": "^1.1.2",
+    "deep-diff": "^1.0.2",
+    "inquirer": "^8.2.7",
+    "ora": "^5.4.1",
+    "pixelmatch": "^7.1.0",
+    "puppeteer": "^24.23.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "@types/node": "^20.11.19"
+  }
+}
