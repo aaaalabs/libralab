@@ -1,0 +1,34 @@
+{
+  "name": "libralab-rescue-system",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Autonomous production content rescue system for LIBRAlab",
+  "scripts": {
+    "rescue:setup": "ts-node scripts/rescue/orchestrator.ts --phase=setup",
+    "rescue:discover": "ts-node scripts/rescue/orchestrator.ts --phase=discover",
+    "rescue:extract": "ts-node scripts/rescue/orchestrator.ts --phase=extract",
+    "rescue:compare": "ts-node scripts/rescue/orchestrator.ts --phase=compare",
+    "rescue:implement": "ts-node scripts/rescue/orchestrator.ts --phase=implement",
+    "rescue:validate": "ts-node scripts/rescue/orchestrator.ts --phase=validate",
+    "rescue:all": "ts-node scripts/rescue/orchestrator.ts --all",
+    "rescue:autonomous": "ts-node scripts/rescue/orchestrator.ts --all --mode=autonomous",
+    "rescue:rollback": "ts-node scripts/rescue/orchestrator.ts --rollback",
+    "rescue:dry-run": "ts-node scripts/rescue/orchestrator.ts --all --dry-run"
+  },
+  "dependencies": {
+    "@mendable/firecrawl-js": "1.17.0",
+    "dotenv": "^16.4.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "chalk": "^4.1.2",
+    "cheerio": "^1.1.2",
+    "deep-diff": "^1.0.2",
+    "inquirer": "^8.2.7",
+    "ora": "^5.4.1",
+    "pixelmatch": "^7.1.0",
+    "puppeteer": "^24.23.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
