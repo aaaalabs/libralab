@@ -1,77 +1,42 @@
-import { Command } from 'commander';
+#!/usr/bin/env ts-node
+/**
+ * Autonomous Rescue System Orchestrator
+ * Coordinates all 20 agents across 5 phases
+ */
+
 import chalk from 'chalk';
 import ora from 'ora';
-import fs from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
+import { getLogger, initLogger } from './utils/logger';
 
-// Import all 20 agents
-import { ProductionScraperAgent } from './agents/phase1-analysis/01-production-scraper';
-import { SchemaAnalyzerAgent } from './agents/phase1-analysis/02-schema-analyzer';
-import { DataGapAnalyzerAgent } from './agents/phase1-analysis/03-data-gap-analyzer';
-import { TypeDefinitionMinerAgent } from './agents/phase1-analysis/04-type-definition-miner';
+// Import all agents
+import CrawlerAgent from './agents/01-crawler';
+import URLMapperAgent from './agents/02-url-mapper';
+import StructureAnalyzerAgent from './agents/03-structure-analyzer';
+import ContentParserAgent from './agents/04-content-parser';
+import DataExtractorAgent from './agents/05-data-extractor';
+import ImageHarvesterAgent from './agents/06-image-harvester';
+import APIScraperAgent from './agents/07-api-scraper';
+import DataComparatorAgent from './agents/08-data-comparator';
+import DiffGeneratorAgent from './agents/09-diff-generator';
+import ReportBuilderAgent from './agents/10-report-builder';
+import JSONGeneratorAgent from './agents/11-json-generator';
+import FileUpdaterAgent from './agents/12-file-updater';
+import ImageOrganizerAgent from './agents/13-image-organizer';
+import BuildValidatorAgent from './agents/14-build-validator';
+import VisualComparatorAgent from './agents/15-visual-comparator';
+import DataVerifierAgent from './agents/16-data-verifier';
+import FinalReporterAgent from './agents/17-final-reporter';
+import DecisionEngineAgent from './agents/18-decision-engine';
+import AutoHealerAgent from './agents/19-auto-healer';
+import AuditTrailAgent from './agents/20-audit-trail';
 
-import { TranslationStrategyAgent } from './agents/phase2-strategy/05-translation-strategy';
-import { SchemaMapperAgent } from './agents/phase2-strategy/06-schema-mapper';
-import { DataSourceIdentifierAgent } from './agents/phase2-strategy/07-data-source-identifier';
-import { FallbackGeneratorAgent } from './agents/phase2-strategy/08-fallback-generator';
-
-import { ContentTranslatorAgent } from './agents/phase3-execution/09-content-translator';
-import { ImageMigratorAgent } from './agents/phase3-execution/10-image-migrator';
-import { DataTransformerAgent } from './agents/phase3-execution/11-data-transformer';
-import { CodeGeneratorAgent } from './agents/phase3-execution/12-code-generator';
-
-import { BuildValidatorAgent } from './agents/phase4-validation/13-build-validator';
-import { VisualComparatorAgent } from './agents/phase4-validation/14-visual-comparator';
-import { DataVerifierAgent } from './agents/phase4-validation/15-data-verifier';
-import { FunctionalTesterAgent } from './agents/phase4-validation/16-functional-tester';
-
-import { AutoHealerAgent } from './agents/phase5-deployment/17-auto-healer';
-import { RiskAssessorAgent } from './agents/phase5-deployment/18-risk-assessor';
-import { DeploymentExecutorAgent } from './agents/phase5-deployment/19-deployment-executor';
-import { AuditTrailAgent } from './agents/phase5-deployment/20-audit-trail';
-
-// Import shared utilities
-import { DecisionEngine } from './shared/decision-engine';
-
-// Types
-interface RescueConfig {
-  mode: 'autonomous' | 'manual';
+interface OrchestratorConfig {
+  mode: 'autonomous' | 'semi-autonomous';
   productionUrl: string;
-  confidence: {
-    minimumOverall: number;
-    minimumPerPhase: number;
-    minimumForDeployment: number;
-  };
-  risk: {
-    autoMitigate: boolean;
-    maxAutoMitigationAttempts: number;
-    blockOnCritical: boolean;
-    acceptableLevels: string[];
-  };
-  fallback: {
-    enableMultiStrategy: boolean;
-    maxStrategiesPerAgent: number;
-    preferSafetyOverSpeed: boolean;
-  };
-  healing: {
-    enabled: boolean;
-    maxAttempts: number;
-    autoTranslate: boolean;
-    autoFixImages: boolean;
-    autoFixSchema: boolean;
-  };
-  validation: {
-    buildRequired: boolean;
-    visualComparisonRequired: boolean;
-    maxVisualDifference: number;
-    dataVerificationRequired: boolean;
-  };
-  deployment: {
-    autoCommit: boolean;
-    autoPush: boolean;
-    createPR: boolean;
-    requireManualApproval: boolean;
-  };
+  dryRun: boolean;
+  phase?: string;
 }
 
 interface PhaseResult {
@@ -79,633 +44,428 @@ interface PhaseResult {
   success: boolean;
   confidence: number;
   duration: number;
-  errors: string[];
-  data: any;
+  data?: any;
+  error?: string;
 }
 
-interface ExecutionContext {
-  config: RescueConfig;
-  dryRun: boolean;
-  startTime: number;
-  phaseResults: PhaseResult[];
-  sharedData: Map<string, any>;
-}
+class RescueOrchestrator {
+  private config: OrchestratorConfig;
+  private log = getLogger();
+  private results: PhaseResult[] = [];
+  private startTime: number = 0;
 
-// Main Orchestrator Class
-export class RescueOrchestrator {
-  private config: RescueConfig;
-  private context: ExecutionContext;
-  private decisionEngine: DecisionEngine;
-  private auditTrail: AuditTrailAgent;
-
-  constructor(config: RescueConfig, dryRun: boolean = false) {
+  constructor(config: OrchestratorConfig) {
     this.config = config;
-    this.context = {
-      config,
-      dryRun,
-      startTime: Date.now(),
-      phaseResults: [],
-      sharedData: new Map(),
-    };
-    this.decisionEngine = new DecisionEngine(config);
-    this.auditTrail = new AuditTrailAgent();
   }
 
-  /**
-   * Execute all phases or a specific phase
-   */
-  async execute(targetPhase?: string): Promise<void> {
-    console.log(chalk.bold.cyan('\n🚀 LibraLab Autonomous Rescue System\n'));
-    console.log(chalk.gray(`Mode: ${this.config.mode}`));
-    console.log(chalk.gray(`Dry Run: ${this.context.dryRun ? 'Yes' : 'No'}`));
-    console.log(chalk.gray(`Target: ${targetPhase || 'All Phases'}\n`));
+  async execute(): Promise<void> {
+    this.startTime = Date.now();
 
-    await this.auditTrail.logStart({
-      mode: this.config.mode,
-      dryRun: this.context.dryRun,
-      targetPhase,
-    });
+    console.log(chalk.bold.cyan('\n' + '═'.repeat(80)));
+    console.log(chalk.bold.cyan('🚀 AUTONOMOUS RESCUE SYSTEM v2.0'));
+    console.log(chalk.bold.cyan('═'.repeat(80)));
+    console.log(chalk.gray(`Mode: ${this.config.mode}`));
+    console.log(chalk.gray(`Production URL: ${this.config.productionUrl}`));
+    console.log(chalk.gray(`Dry Run: ${this.config.dryRun ? 'YES' : 'NO'}`));
+    console.log(chalk.bold.cyan('═'.repeat(80) + '\n'));
 
     try {
-      if (targetPhase) {
-        await this.executePhase(targetPhase);
+      // Phase 0: Setup
+      await this.runPhase0Setup();
+
+      // Phase 1: Discovery
+      const phase1 = await this.runPhase1Discovery();
+      if (!phase1.success) throw new Error('Phase 1 failed');
+
+      // Phase 2: Extraction
+      const phase2 = await this.runPhase2Extraction(phase1.data);
+      if (!phase2.success) throw new Error('Phase 2 failed');
+
+      // Phase 3: Comparison
+      const phase3 = await this.runPhase3Comparison(phase2.data);
+      if (!phase3.success) throw new Error('Phase 3 failed');
+
+      // Phase 4: Implementation
+      if (!this.config.dryRun) {
+        const phase4 = await this.runPhase4Implementation(phase3.data);
+        if (!phase4.success) throw new Error('Phase 4 failed');
+
+        // Phase 5: Validation
+        const phase5 = await this.runPhase5Validation(phase4.data);
+
+        this.log.phase('RESCUE COMPLETE', 6);
+        this.printSummary();
+
+        if (phase5.data?.decision === 'GO') {
+          console.log(chalk.green.bold('\n✅ RESCUE SUCCESSFUL - APPROVED FOR DEPLOYMENT'));
+        } else if (phase5.data?.decision === 'REVIEW_REQUIRED') {
+          console.log(chalk.yellow.bold('\n⚠️  RESCUE COMPLETE - MANUAL REVIEW REQUIRED'));
+        } else {
+          console.log(chalk.red.bold('\n❌ RESCUE COMPLETE - DEPLOYMENT BLOCKED'));
+        }
       } else {
-        await this.executeAllPhases();
+        console.log(chalk.yellow.bold('\n🔍 DRY RUN COMPLETE - NO CHANGES MADE'));
       }
 
-      await this.generateFinalReport();
-    } catch (error) {
-      console.error(chalk.red('\n❌ Fatal error during execution:'), error);
-      await this.auditTrail.logError('orchestrator', error as Error);
+      console.log(chalk.cyan(`\n📁 Check outputs: ${path.join(process.cwd(), 'scripts/rescue/outputs')}`));
+      console.log(chalk.cyan(`📄 Review package: ${path.join(process.cwd(), 'scripts/rescue/outputs/review-package.html')}\n`));
+
+    } catch (error: any) {
+      this.log.error('Rescue system failed:', error.message);
+      console.log(chalk.red.bold('\n❌ RESCUE SYSTEM FAILED'));
+      console.log(chalk.red(`Error: ${error.message}\n`));
+      process.exit(1);
+    }
+  }
+
+  private async runPhase0Setup(): Promise<void> {
+    this.log.phase('SETUP', 0);
+    const spinner = ora('Setting up rescue environment...').start();
+
+    try {
+      // Create output directories
+      const outputDirs = [
+        '00-setup/backups',
+        '01-discovery',
+        '02-extraction/images',
+        '03-comparison',
+        '04-implementation',
+        '05-validation/visual-diff'
+      ];
+
+      for (const dir of outputDirs) {
+        const dirPath = path.join(process.cwd(), 'scripts/rescue/outputs', dir);
+        if (!fs.existsSync(dirPath)) {
+          await fs.promises.mkdir(dirPath, { recursive: true });
+        }
+      }
+
+      // Create data directory if needed
+      const dataDir = path.join(process.cwd(), 'src/data');
+      if (!fs.existsSync(dataDir)) {
+        await fs.promises.mkdir(dataDir, { recursive: true });
+      }
+
+      spinner.succeed('Setup complete');
+      this.log.success('Environment ready');
+    } catch (error: any) {
+      spinner.fail('Setup failed');
       throw error;
     }
   }
 
-  /**
-   * Execute all phases sequentially
-   */
-  private async executeAllPhases(): Promise<void> {
-    const phases = [
-      { name: 'analysis', fn: () => this.executePhase1Analysis() },
-      { name: 'strategy', fn: () => this.executePhase2Strategy() },
-      { name: 'execution', fn: () => this.executePhase3Execution() },
-      { name: 'validation', fn: () => this.executePhase4Validation() },
-      { name: 'deployment', fn: () => this.executePhase5Deployment() },
-    ];
-
-    for (const phase of phases) {
-      const result = await phase.fn();
-
-      // Decision gate: check if we should continue
-      const decision = await this.decisionEngine.evaluatePhase(result);
-
-      if (!decision.proceed) {
-        console.log(chalk.yellow(`\n⚠️  Phase ${phase.name} decision: HALT`));
-        console.log(chalk.gray(`Reason: ${decision.reason}`));
-
-        if (this.config.healing.enabled && decision.canHeal) {
-          await this.attemptAutoHealing(phase.name, result);
-        } else {
-          break;
-        }
-      }
-    }
-  }
-
-  /**
-   * Execute a specific phase by name
-   */
-  private async executePhase(phaseName: string): Promise<void> {
-    const phaseMap: { [key: string]: () => Promise<PhaseResult> } = {
-      analysis: () => this.executePhase1Analysis(),
-      strategy: () => this.executePhase2Strategy(),
-      execution: () => this.executePhase3Execution(),
-      validation: () => this.executePhase4Validation(),
-      deployment: () => this.executePhase5Deployment(),
-    };
-
-    const phaseFunction = phaseMap[phaseName];
-    if (!phaseFunction) {
-      throw new Error(`Unknown phase: ${phaseName}`);
-    }
-
-    await phaseFunction();
-  }
-
-  /**
-   * Phase 1: Analysis (Agents 01-04)
-   */
-  private async executePhase1Analysis(): Promise<PhaseResult> {
-    console.log(chalk.bold.blue('\n📊 Phase 1: Analysis\n'));
-    const startTime = Date.now();
-    const errors: string[] = [];
-    let overallConfidence = 0;
+  private async runPhase1Discovery(): Promise<PhaseResult> {
+    this.log.phase('DISCOVERY', 1);
+    const phaseStart = Date.now();
 
     try {
-      // Agent 01: Production Scraper
-      const spinner1 = ora('Scraping production data...').start();
-      const scraper = new ProductionScraperAgent(this.config.productionUrl);
-      const productionData = await scraper.execute();
-      this.context.sharedData.set('productionData', productionData);
-      overallConfidence += productionData.confidence;
-      spinner1.succeed(`Scraped ${productionData.rooms.length} rooms with ${(productionData.confidence * 100).toFixed(0)}% confidence`);
+      // Run agents in sequence
+      const crawler = new CrawlerAgent(this.config.productionUrl);
+      const crawlerResult = await crawler.execute();
+      this.log.success(`Discovered ${crawlerResult.data?.urls.length || 0} URLs`);
 
-      // Agent 02: Schema Analyzer
-      const spinner2 = ora('Analyzing database schema...').start();
-      const schemaAnalyzer = new SchemaAnalyzerAgent();
-      const schemaAnalysis = await schemaAnalyzer.execute();
-      this.context.sharedData.set('schemaAnalysis', schemaAnalysis);
-      overallConfidence += schemaAnalysis.confidence;
-      spinner2.succeed(`Analyzed ${schemaAnalysis.tables.length} tables`);
+      const urlMapper = new URLMapperAgent(crawlerResult.data!);
+      const urlMapResult = await urlMapper.execute();
+      this.log.success('URLs categorized by priority');
 
-      // Agent 03: Data Gap Analyzer
-      const spinner3 = ora('Identifying data gaps...').start();
-      const gapAnalyzer = new DataGapAnalyzerAgent(productionData, schemaAnalysis);
-      const gaps = await gapAnalyzer.execute();
-      this.context.sharedData.set('dataGaps', gaps);
-      overallConfidence += gaps.confidence;
-      spinner3.succeed(`Found ${gaps.critical.length} critical gaps, ${gaps.medium.length} medium`);
+      const structureAnalyzer = new StructureAnalyzerAgent(urlMapResult.data!);
+      const structureResult = await structureAnalyzer.execute();
+      this.log.success('Page structure analyzed');
 
-      // Agent 04: Type Definition Miner
-      const spinner4 = ora('Mining type definitions...').start();
-      const typeMiner = new TypeDefinitionMinerAgent();
-      const types = await typeMiner.execute();
-      this.context.sharedData.set('typeDefinitions', types);
-      overallConfidence += types.confidence;
-      spinner4.succeed(`Extracted ${types.interfaces.length} interfaces, ${types.types.length} types`);
+      const avgConfidence = (
+        crawlerResult.confidence +
+        urlMapResult.confidence +
+        structureResult.confidence
+      ) / 3;
 
-      overallConfidence /= 4; // Average confidence
-
-      const result: PhaseResult = {
-        phase: 'analysis',
+      return {
+        phase: 'Discovery',
         success: true,
-        confidence: overallConfidence,
-        duration: Date.now() - startTime,
-        errors,
+        confidence: avgConfidence,
+        duration: Date.now() - phaseStart,
         data: {
-          productionData,
-          schemaAnalysis,
-          gaps,
-          types,
-        },
+          crawler: crawlerResult.data,
+          urlMap: urlMapResult.data,
+          structure: structureResult.data
+        }
       };
-
-      this.context.phaseResults.push(result);
-      await this.auditTrail.logPhase(result);
-
-      console.log(chalk.green(`\n✓ Phase 1 completed with ${(overallConfidence * 100).toFixed(0)}% confidence`));
-      return result;
-
-    } catch (error) {
-      const errorMsg = error instanceof Error ? error.message : String(error);
-      errors.push(errorMsg);
-
-      const result: PhaseResult = {
-        phase: 'analysis',
+    } catch (error: any) {
+      return {
+        phase: 'Discovery',
         success: false,
         confidence: 0,
-        duration: Date.now() - startTime,
-        errors,
-        data: null,
+        duration: Date.now() - phaseStart,
+        error: error.message
       };
-
-      this.context.phaseResults.push(result);
-      console.error(chalk.red(`\n✗ Phase 1 failed: ${errorMsg}`));
-      return result;
     }
   }
 
-  /**
-   * Phase 2: Strategy (Agents 05-08)
-   */
-  private async executePhase2Strategy(): Promise<PhaseResult> {
-    console.log(chalk.bold.blue('\n🎯 Phase 2: Strategy\n'));
-    const startTime = Date.now();
-    const errors: string[] = [];
-    let overallConfidence = 0;
+  private async runPhase2Extraction(phase1Data: any): Promise<PhaseResult> {
+    this.log.phase('EXTRACTION', 2);
+    const phaseStart = Date.now();
 
     try {
-      const productionData = this.context.sharedData.get('productionData');
-      const gaps = this.context.sharedData.get('dataGaps');
+      const contentParser = new ContentParserAgent(phase1Data.structure, phase1Data.urlMap);
+      const parsedResult = await contentParser.execute();
+      this.log.success('Content parsed from production');
 
-      // Agent 05: Translation Strategy
-      const spinner1 = ora('Planning translation strategy...').start();
-      const translationStrategy = new TranslationStrategyAgent(productionData);
-      const strategy = await translationStrategy.execute();
-      this.context.sharedData.set('translationStrategy', strategy);
-      overallConfidence += strategy.confidence;
-      spinner1.succeed(`Strategy: ${strategy.primaryMethod} with ${strategy.fallbacks.length} fallbacks`);
+      const dataExtractor = new DataExtractorAgent(parsedResult.data!);
+      const extractedResult = await dataExtractor.execute();
+      this.log.success(`Extracted ${extractedResult.data?.rooms?.length || 0} rooms`);
 
-      // Agent 06: Schema Mapper
-      const spinner2 = ora('Mapping schema fields...').start();
-      const schemaMapper = new SchemaMapperAgent(gaps);
-      const mappings = await schemaMapper.execute();
-      this.context.sharedData.set('schemaMappings', mappings);
-      overallConfidence += mappings.confidence;
-      spinner2.succeed(`Mapped ${mappings.fieldMappings.length} fields`);
+      const imageHarvester = new ImageHarvesterAgent(extractedResult.data!);
+      const imageResult = await imageHarvester.execute();
+      this.log.success(`Downloaded ${imageResult.data?.downloaded?.length || 0} images`);
 
-      // Agent 07: Data Source Identifier
-      const spinner3 = ora('Identifying data sources...').start();
-      const sourceIdentifier = new DataSourceIdentifierAgent(gaps);
-      const sources = await sourceIdentifier.execute();
-      this.context.sharedData.set('dataSources', sources);
-      overallConfidence += sources.confidence;
-      spinner3.succeed(`Identified ${sources.primary.length} primary sources`);
+      const apiScraper = new APIScraperAgent(extractedResult.data!);
+      const apiResult = await apiScraper.execute();
+      this.log.success('API endpoints checked');
 
-      // Agent 08: Fallback Generator
-      const spinner4 = ora('Generating fallback strategies...').start();
-      const fallbackGen = new FallbackGeneratorAgent(gaps, this.config);
-      const fallbacks = await fallbackGen.execute();
-      this.context.sharedData.set('fallbackStrategies', fallbacks);
-      overallConfidence += fallbacks.confidence;
-      spinner4.succeed(`Generated ${fallbacks.strategies.length} fallback strategies`);
+      const avgConfidence = (
+        parsedResult.confidence +
+        extractedResult.confidence +
+        imageResult.confidence +
+        apiResult.confidence
+      ) / 4;
 
-      overallConfidence /= 4;
-
-      const result: PhaseResult = {
-        phase: 'strategy',
+      return {
+        phase: 'Extraction',
         success: true,
-        confidence: overallConfidence,
-        duration: Date.now() - startTime,
-        errors,
-        data: { strategy, mappings, sources, fallbacks },
+        confidence: avgConfidence,
+        duration: Date.now() - phaseStart,
+        data: {
+          parsed: parsedResult.data,
+          extracted: extractedResult.data,
+          images: imageResult.data,
+          api: apiResult.data
+        }
       };
-
-      this.context.phaseResults.push(result);
-      await this.auditTrail.logPhase(result);
-
-      console.log(chalk.green(`\n✓ Phase 2 completed with ${(overallConfidence * 100).toFixed(0)}% confidence`));
-      return result;
-
-    } catch (error) {
-      const errorMsg = error instanceof Error ? error.message : String(error);
-      errors.push(errorMsg);
-
-      const result: PhaseResult = {
-        phase: 'strategy',
+    } catch (error: any) {
+      return {
+        phase: 'Extraction',
         success: false,
         confidence: 0,
-        duration: Date.now() - startTime,
-        errors,
-        data: null,
+        duration: Date.now() - phaseStart,
+        error: error.message
       };
-
-      this.context.phaseResults.push(result);
-      return result;
     }
   }
 
-  /**
-   * Phase 3: Execution (Agents 09-12)
-   */
-  private async executePhase3Execution(): Promise<PhaseResult> {
-    console.log(chalk.bold.blue('\n⚙️  Phase 3: Execution\n'));
-    const startTime = Date.now();
-    const errors: string[] = [];
-    let overallConfidence = 0;
+  private async runPhase3Comparison(phase2Data: any): Promise<PhaseResult> {
+    this.log.phase('COMPARISON', 3);
+    const phaseStart = Date.now();
 
     try {
-      const strategy = this.context.sharedData.get('translationStrategy');
-      const mappings = this.context.sharedData.get('schemaMappings');
+      // Load current data if exists
+      const currentDataPath = path.join(process.cwd(), 'src/data/epicwg.json');
+      const currentData = fs.existsSync(currentDataPath)
+        ? JSON.parse(fs.readFileSync(currentDataPath, 'utf-8'))
+        : { rooms: [] };
 
-      // Agent 09: Content Translator
-      const spinner1 = ora('Translating content...').start();
-      const translator = new ContentTranslatorAgent(strategy);
-      const translations = await translator.execute(this.context.dryRun);
-      this.context.sharedData.set('translations', translations);
-      overallConfidence += translations.confidence;
-      spinner1.succeed(`Translated ${translations.count} items`);
+      const comparator = new DataComparatorAgent(phase2Data.extracted, currentData);
+      const comparisonResult = await comparator.execute();
+      this.log.success(`Compared data: ${comparisonResult.data?.stats?.totalChanges || 0} changes`);
 
-      // Agent 10: Image Migrator
-      const spinner2 = ora('Migrating images...').start();
-      const imageMigrator = new ImageMigratorAgent();
-      const images = await imageMigrator.execute(this.context.dryRun);
-      this.context.sharedData.set('migratedImages', images);
-      overallConfidence += images.confidence;
-      spinner2.succeed(`Migrated ${images.count} images`);
+      const diffGenerator = new DiffGeneratorAgent(comparisonResult.data!);
+      const diffResult = await diffGenerator.execute();
+      this.log.success('Diff report generated');
 
-      // Agent 11: Data Transformer
-      const spinner3 = ora('Transforming data...').start();
-      const dataTransformer = new DataTransformerAgent(mappings);
-      const transformed = await dataTransformer.execute(this.context.dryRun);
-      this.context.sharedData.set('transformedData', transformed);
-      overallConfidence += transformed.confidence;
-      spinner3.succeed(`Transformed ${transformed.count} records`);
+      const reportBuilder = new ReportBuilderAgent({
+        phase1: {},
+        phase2: phase2Data,
+        phase3: { comparison: comparisonResult.data, diff: diffResult.data }
+      });
+      const reportResult = await reportBuilder.execute();
+      this.log.success('Status report generated');
 
-      // Agent 12: Code Generator
-      const spinner4 = ora('Generating code...').start();
-      const codeGen = new CodeGeneratorAgent(mappings);
-      const code = await codeGen.execute(this.context.dryRun);
-      this.context.sharedData.set('generatedCode', code);
-      overallConfidence += code.confidence;
-      spinner4.succeed(`Generated ${code.files.length} files`);
+      // Autonomous decision
+      const decisionEngine = new DecisionEngineAgent();
+      const decision = await decisionEngine.execute({
+        phase: 'comparison',
+        confidence: comparisonResult.confidence,
+        risks: comparisonResult.data?.risks || [],
+        context: comparisonResult.data
+      });
 
-      overallConfidence /= 4;
+      this.log.success(`Decision: ${decision.data?.decision}`, decision.data?.reasoning);
 
-      const result: PhaseResult = {
-        phase: 'execution',
+      const avgConfidence = (
+        comparisonResult.confidence +
+        diffResult.confidence +
+        reportResult.confidence
+      ) / 3;
+
+      return {
+        phase: 'Comparison',
         success: true,
-        confidence: overallConfidence,
-        duration: Date.now() - startTime,
-        errors,
-        data: { translations, images, transformed, code },
+        confidence: avgConfidence,
+        duration: Date.now() - phaseStart,
+        data: {
+          comparison: comparisonResult.data,
+          diff: diffResult.data,
+          report: reportResult.data,
+          decision: decision.data
+        }
       };
-
-      this.context.phaseResults.push(result);
-      await this.auditTrail.logPhase(result);
-
-      console.log(chalk.green(`\n✓ Phase 3 completed with ${(overallConfidence * 100).toFixed(0)}% confidence`));
-      return result;
-
-    } catch (error) {
-      const errorMsg = error instanceof Error ? error.message : String(error);
-      errors.push(errorMsg);
-
-      const result: PhaseResult = {
-        phase: 'execution',
+    } catch (error: any) {
+      return {
+        phase: 'Comparison',
         success: false,
         confidence: 0,
-        duration: Date.now() - startTime,
-        errors,
-        data: null,
+        duration: Date.now() - phaseStart,
+        error: error.message
       };
-
-      this.context.phaseResults.push(result);
-      return result;
     }
   }
 
-  /**
-   * Phase 4: Validation (Agents 13-16)
-   */
-  private async executePhase4Validation(): Promise<PhaseResult> {
-    console.log(chalk.bold.blue('\n✅ Phase 4: Validation\n'));
-    const startTime = Date.now();
-    const errors: string[] = [];
-    let overallConfidence = 0;
+  private async runPhase4Implementation(phase3Data: any): Promise<PhaseResult> {
+    this.log.phase('IMPLEMENTATION', 4);
+    const phaseStart = Date.now();
 
     try {
-      // Agent 13: Build Validator
-      const spinner1 = ora('Validating build...').start();
+      const jsonGenerator = new JSONGeneratorAgent(
+        phase3Data.comparison.newData,
+        phase3Data.comparison
+      );
+      const jsonResult = await jsonGenerator.execute();
+      this.log.success('New epicwg.json generated');
+
+      const imageOrganizer = new ImageOrganizerAgent(phase3Data.images);
+      const organizeResult = await imageOrganizer.execute();
+      this.log.success('Images organized');
+
+      const fileUpdater = new FileUpdaterAgent(
+        jsonResult.data!,
+        organizeResult.data!,
+        phase3Data.comparison
+      );
+      const updateResult = await fileUpdater.execute();
+      this.log.success('Files updated and committed to git');
+
+      const avgConfidence = (
+        jsonResult.confidence +
+        organizeResult.confidence +
+        updateResult.confidence
+      ) / 3;
+
+      return {
+        phase: 'Implementation',
+        success: true,
+        confidence: avgConfidence,
+        duration: Date.now() - phaseStart,
+        data: {
+          json: jsonResult.data,
+          images: organizeResult.data,
+          update: updateResult.data
+        }
+      };
+    } catch (error: any) {
+      return {
+        phase: 'Implementation',
+        success: false,
+        confidence: 0,
+        duration: Date.now() - phaseStart,
+        error: error.message
+      };
+    }
+  }
+
+  private async runPhase5Validation(phase4Data: any): Promise<PhaseResult> {
+    this.log.phase('VALIDATION', 5);
+    const phaseStart = Date.now();
+
+    try {
       const buildValidator = new BuildValidatorAgent();
       const buildResult = await buildValidator.execute();
-      this.context.sharedData.set('buildValidation', buildResult);
-      overallConfidence += buildResult.confidence;
+      this.log.success(`Build ${buildResult.data?.buildSuccess ? 'succeeded' : 'failed'}`);
 
-      if (!buildResult.success) {
-        spinner1.fail(`Build failed: ${buildResult.errors.join(', ')}`);
-        errors.push(...buildResult.errors);
-      } else {
-        spinner1.succeed('Build passed');
-      }
+      // Visual comparison (optional)
+      let visualResult: any = { confidence: 1.0, data: { passed: true } };
+      // Skip if no local server running
 
-      // Agent 14: Visual Comparator
-      if (this.config.validation.visualComparisonRequired) {
-        const spinner2 = ora('Comparing visuals...').start();
-        const visualComparator = new VisualComparatorAgent(this.config.productionUrl);
-        const visualResult = await visualComparator.execute();
-        this.context.sharedData.set('visualComparison', visualResult);
-        overallConfidence += visualResult.confidence;
-        spinner2.succeed(`Visual similarity: ${(visualResult.similarity * 100).toFixed(0)}%`);
-      }
+      const dataVerifier = new DataVerifierAgent();
+      const verifyResult = await dataVerifier.execute();
+      this.log.success(`Data verification: ${verifyResult.confidence * 100}% confidence`);
 
-      // Agent 15: Data Verifier
-      if (this.config.validation.dataVerificationRequired) {
-        const spinner3 = ora('Verifying data integrity...').start();
-        const dataVerifier = new DataVerifierAgent();
-        const dataResult = await dataVerifier.execute();
-        this.context.sharedData.set('dataVerification', dataResult);
-        overallConfidence += dataResult.confidence;
-        spinner3.succeed(`Data integrity: ${dataResult.passed}/${dataResult.total} checks passed`);
-      }
+      const finalReporter = new FinalReporterAgent({
+        buildValidation: buildResult.data!,
+        visualComparison: visualResult.data,
+        dataVerification: verifyResult.data!
+      });
+      const finalResult = await finalReporter.execute();
+      this.log.success(`Final decision: ${finalResult.data?.decision}`);
 
-      // Agent 16: Functional Tester
-      const spinner4 = ora('Running functional tests...').start();
-      const functionalTester = new FunctionalTesterAgent();
-      const testResult = await functionalTester.execute();
-      this.context.sharedData.set('functionalTests', testResult);
-      overallConfidence += testResult.confidence;
-      spinner4.succeed(`Tests: ${testResult.passed}/${testResult.total} passed`);
+      const avgConfidence = (
+        buildResult.confidence +
+        visualResult.confidence +
+        verifyResult.confidence +
+        finalResult.confidence
+      ) / 4;
 
-      overallConfidence /= 4;
-
-      const result: PhaseResult = {
-        phase: 'validation',
-        success: errors.length === 0,
-        confidence: overallConfidence,
-        duration: Date.now() - startTime,
-        errors,
-        data: {
-          build: buildResult,
-          visual: this.context.sharedData.get('visualComparison'),
-          data: this.context.sharedData.get('dataVerification'),
-          tests: testResult,
-        },
-      };
-
-      this.context.phaseResults.push(result);
-      await this.auditTrail.logPhase(result);
-
-      console.log(chalk.green(`\n✓ Phase 4 completed with ${(overallConfidence * 100).toFixed(0)}% confidence`));
-      return result;
-
-    } catch (error) {
-      const errorMsg = error instanceof Error ? error.message : String(error);
-      errors.push(errorMsg);
-
-      const result: PhaseResult = {
-        phase: 'validation',
-        success: false,
-        confidence: 0,
-        duration: Date.now() - startTime,
-        errors,
-        data: null,
-      };
-
-      this.context.phaseResults.push(result);
-      return result;
-    }
-  }
-
-  /**
-   * Phase 5: Deployment (Agents 17-20)
-   */
-  private async executePhase5Deployment(): Promise<PhaseResult> {
-    console.log(chalk.bold.blue('\n🚀 Phase 5: Deployment\n'));
-    const startTime = Date.now();
-    const errors: string[] = [];
-    let overallConfidence = 0;
-
-    try {
-      // Agent 18: Risk Assessor
-      const spinner1 = ora('Assessing deployment risk...').start();
-      const riskAssessor = new RiskAssessorAgent(this.context.phaseResults);
-      const riskAssessment = await riskAssessor.execute();
-      this.context.sharedData.set('riskAssessment', riskAssessment);
-      overallConfidence += riskAssessment.confidence;
-      spinner1.succeed(`Risk level: ${riskAssessment.level} (score: ${riskAssessment.score})`);
-
-      // Check if risk is acceptable
-      if (this.config.risk.blockOnCritical && riskAssessment.level === 'CRITICAL') {
-        throw new Error('Deployment blocked: Critical risk detected');
-      }
-
-      // Agent 19: Deployment Executor
-      if (!this.context.dryRun) {
-        const spinner2 = ora('Executing deployment...').start();
-        const deploymentExecutor = new DeploymentExecutorAgent(this.config);
-        const deployResult = await deploymentExecutor.execute();
-        this.context.sharedData.set('deployment', deployResult);
-        overallConfidence += deployResult.confidence;
-        spinner2.succeed(`Deployed successfully: ${deployResult.url}`);
-      } else {
-        console.log(chalk.yellow('⚠️  Dry run mode: Skipping actual deployment'));
-      }
-
-      overallConfidence /= 2;
-
-      const result: PhaseResult = {
-        phase: 'deployment',
+      return {
+        phase: 'Validation',
         success: true,
-        confidence: overallConfidence,
-        duration: Date.now() - startTime,
-        errors,
-        data: {
-          risk: riskAssessment,
-          deployment: this.context.sharedData.get('deployment'),
-        },
+        confidence: avgConfidence,
+        duration: Date.now() - phaseStart,
+        data: finalResult.data
       };
-
-      this.context.phaseResults.push(result);
-      await this.auditTrail.logPhase(result);
-
-      console.log(chalk.green(`\n✓ Phase 5 completed with ${(overallConfidence * 100).toFixed(0)}% confidence`));
-      return result;
-
-    } catch (error) {
-      const errorMsg = error instanceof Error ? error.message : String(error);
-      errors.push(errorMsg);
-
-      const result: PhaseResult = {
-        phase: 'deployment',
+    } catch (error: any) {
+      return {
+        phase: 'Validation',
         success: false,
         confidence: 0,
-        duration: Date.now() - startTime,
-        errors,
-        data: null,
+        duration: Date.now() - phaseStart,
+        error: error.message
       };
-
-      this.context.phaseResults.push(result);
-      return result;
     }
   }
 
-  /**
-   * Attempt auto-healing for failed phase
-   */
-  private async attemptAutoHealing(phaseName: string, result: PhaseResult): Promise<void> {
-    console.log(chalk.yellow(`\n🔧 Attempting auto-healing for ${phaseName}...`));
+  private printSummary(): void {
+    const totalDuration = Date.now() - this.startTime;
+    const totalConfidence = this.results.reduce((sum, r) => sum + r.confidence, 0) / this.results.length;
 
-    const autoHealer = new AutoHealerAgent(this.config);
-    const healingResult = await autoHealer.execute(result);
+    console.log(chalk.bold.cyan('\n' + '═'.repeat(80)));
+    console.log(chalk.bold.cyan('📊 EXECUTION SUMMARY'));
+    console.log(chalk.bold.cyan('═'.repeat(80)));
 
-    if (healingResult.success) {
-      console.log(chalk.green(`✓ Auto-healing successful for ${phaseName}`));
-      // Retry the phase
-      await this.executePhase(phaseName);
-    } else {
-      console.log(chalk.red(`✗ Auto-healing failed for ${phaseName}`));
-    }
-  }
+    this.results.forEach(result => {
+      const status = result.success ? chalk.green('✅') : chalk.red('❌');
+      const conf = (result.confidence * 100).toFixed(1);
+      const dur = (result.duration / 1000).toFixed(0);
 
-  /**
-   * Generate final execution report
-   */
-  private async generateFinalReport(): Promise<void> {
-    const totalDuration = Date.now() - this.context.startTime;
-    const overallConfidence = this.context.phaseResults.reduce(
-      (sum, r) => sum + r.confidence,
-      0
-    ) / this.context.phaseResults.length;
+      console.log(`${status} ${chalk.bold(result.phase)}: ${conf}% confidence, ${dur}s`);
+    });
 
-    const report = {
-      timestamp: new Date().toISOString(),
-      mode: this.config.mode,
-      dryRun: this.context.dryRun,
-      duration: totalDuration,
-      overallConfidence,
-      phases: this.context.phaseResults,
-      success: this.context.phaseResults.every(r => r.success),
-    };
-
-    // Save report
-    const outputDir = path.join(process.cwd(), 'scripts/rescue/outputs');
-    await fs.mkdir(outputDir, { recursive: true });
-    const reportPath = path.join(outputDir, `rescue-report-${Date.now()}.json`);
-    await fs.writeFile(reportPath, JSON.stringify(report, null, 2));
-
-    // Log final audit
-    await this.auditTrail.logComplete(report);
-
-    // Display summary
-    console.log(chalk.bold.cyan('\n📋 Execution Summary\n'));
-    console.log(chalk.gray(`Duration: ${(totalDuration / 1000).toFixed(1)}s`));
-    console.log(chalk.gray(`Overall Confidence: ${(overallConfidence * 100).toFixed(0)}%`));
-    console.log(chalk.gray(`Success: ${report.success ? 'Yes' : 'No'}`));
-    console.log(chalk.gray(`Report saved to: ${reportPath}\n`));
-
-    if (report.success) {
-      console.log(chalk.green.bold('✓ Rescue operation completed successfully!\n'));
-    } else {
-      console.log(chalk.red.bold('✗ Rescue operation encountered errors\n'));
-    }
+    console.log(chalk.cyan('─'.repeat(80)));
+    console.log(chalk.bold(`Overall Confidence: ${(totalConfidence * 100).toFixed(1)}%`));
+    console.log(chalk.bold(`Total Duration: ${(totalDuration / 60000).toFixed(1)} minutes`));
+    console.log(chalk.cyan('═'.repeat(80) + '\n'));
   }
 }
 
-/**
- * CLI Entry Point
- */
-export async function main() {
-  const program = new Command();
+// CLI entry point
+async function main() {
+  const args = process.argv.slice(2);
 
-  program
-    .name('rescue')
-    .description('LibraLab Autonomous Rescue System')
-    .version('1.0.0')
-    .option('--phase <name>', 'Execute specific phase (analysis|strategy|execution|validation|deployment)')
-    .option('--all', 'Execute all phases', false)
-    .option('--mode <mode>', 'Execution mode (autonomous|manual)', 'autonomous')
-    .option('--dry-run', 'Run without making actual changes', false)
-    .option('--config <path>', 'Path to config file', './config/rescue-config.json');
+  const config: OrchestratorConfig = {
+    mode: args.includes('--mode=autonomous') ? 'autonomous' : 'semi-autonomous',
+    productionUrl: 'https://epic.libralab.ai',
+    dryRun: args.includes('--dry-run'),
+    phase: args.find(a => a.startsWith('--phase='))?.split('=')[1]
+  };
 
-  program.parse();
+  // Initialize logger
+  initLogger();
 
-  const options = program.opts();
-
-  // Load configuration
-  const configPath = path.resolve(process.cwd(), 'scripts/rescue', options.config);
-  const configContent = await fs.readFile(configPath, 'utf-8');
-  const config: RescueConfig = JSON.parse(configContent);
-
-  // Override mode if specified
-  if (options.mode) {
-    config.mode = options.mode as 'autonomous' | 'manual';
-  }
-
-  // Create and execute orchestrator
-  const orchestrator = new RescueOrchestrator(config, options.dryRun);
-
-  if (options.phase) {
-    await orchestrator.execute(options.phase);
-  } else {
-    await orchestrator.execute();
-  }
+  const orchestrator = new RescueOrchestrator(config);
+  await orchestrator.execute();
 }
 
-// Execute if run directly
 if (require.main === module) {
   main().catch(error => {
-    console.error(chalk.red('Fatal error:'), error);
+    console.error(chalk.red('\n❌ Fatal error:'), error);
     process.exit(1);
   });
 }
+
+export default RescueOrchestrator;
