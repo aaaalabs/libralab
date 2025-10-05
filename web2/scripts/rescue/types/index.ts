@@ -261,3 +261,54 @@ export interface AgentResult<T> {
   confidence: number;
   timestamp: Date;
 }
+
+// Phase 4: Implementation outputs
+export interface GeneratedJSON {
+  newJSON: any;
+  validated: boolean;
+  schemaValidation: {
+    valid: boolean;
+    errors: string[];
+    warnings: string[];
+    autoFixed: boolean;
+  };
+  backupPath: string;
+  confidence: number;
+  timestamp: Date;
+}
+
+export interface GeneratorResult {
+  newJSON: any;
+  validated: boolean;
+  schemaValidation: {
+    valid: boolean;
+    errors: string[];
+    warnings: string[];
+    autoFixed: boolean;
+  };
+  backupPath: string;
+  confidence: number;
+}
+
+export interface UpdateResult {
+  filesUpdated: string[];
+  filesCreated: string[];
+  backups: string[];
+  gitStatus: {
+    branch: string;
+    staged: string[];
+    commitMessage: string;
+  };
+  confidence: number;
+}
+
+export interface OrganizedImages {
+  structure: {
+    rooms: string[];
+    epicwg: string[];
+    partners: string[];
+  };
+  nameMapping: Record<string, string>;
+  totalOrganized: number;
+  confidence: number;
+}
