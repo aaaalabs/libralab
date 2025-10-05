@@ -45,6 +45,49 @@ export interface StructureMap {
   timestamp: Date;
 }
 
+// Phase 2: Extraction outputs
+export interface ParsedContent {
+  rooms: any[];
+  features: string[];
+  text: {
+    en: string;
+    de: string;
+  };
+  metrics: {
+    totalRooms: number;
+    totalImages: number;
+    contentLength: number;
+  };
+  confidence: number;
+  timestamp: Date;
+}
+
+export interface APIData {
+  endpoints: {
+    rooms?: any[];
+    commonAreas?: any[];
+    location?: any;
+  };
+  available: string[];
+  confidence: number;
+  timestamp: Date;
+}
+
+export interface ImageManifest {
+  downloaded: {
+    url: string;
+    path: string;
+    size: number;
+  }[];
+  missing: string[];
+  errors: {
+    url: string;
+    error: string;
+  }[];
+  confidence: number;
+  timestamp: Date;
+}
+
 // Phase 2: Migration planning
 export interface MigrationPlan {
   routes: RouteMapping[];
@@ -97,6 +140,117 @@ export interface ExecutionDetail {
   status: 'success' | 'failed';
   message: string;
   data?: any;
+}
+
+// Phase 2: Extraction outputs
+export interface RoomData {
+  id: string;
+  title: string;
+  price: number;
+  size: number;
+  description: string;
+  images: string[];
+  features: string[];
+  availability: 'available' | 'occupied' | 'reserved';
+  floor?: number;
+  furnished?: boolean;
+  [key: string]: any;
+}
+
+export interface ExtractedData {
+  rooms: RoomData[];
+  metadata: {
+    source: string;
+    extractedAt: Date;
+    totalRooms: number;
+    confidence: number;
+  };
+}
+
+export interface EpicWGData {
+  rooms: RoomData[];
+  lastUpdated: Date;
+  version: string;
+}
+
+// Phase 3: Comparison outputs
+export interface ChangeDetail {
+  field: string;
+  oldValue: any;
+  newValue: any;
+  severity: 'critical' | 'warning' | 'info';
+}
+
+export interface RoomComparison {
+  roomId: string;
+  status: 'added' | 'removed' | 'modified' | 'unchanged';
+  changes: ChangeDetail[];
+  confidence: number;
+}
+
+export interface ComparisonResult {
+  added: RoomData[];
+  removed: RoomData[];
+  modified: RoomComparison[];
+  unchanged: string[];
+  criticalChanges: ChangeDetail[];
+  stats: {
+    totalRooms: number;
+    changedRooms: number;
+    addedRooms: number;
+    removedRooms: number;
+    unchangedRooms: number;
+  };
+  confidence: number;
+  timestamp: Date;
+}
+
+export interface DiffSection {
+  title: string;
+  items: string[];
+  severity: 'critical' | 'warning' | 'info';
+}
+
+export interface DiffReport {
+  summary: string;
+  sections: {
+    rooms: DiffSection[];
+    pricing: DiffSection[];
+    features: DiffSection[];
+    images: DiffSection[];
+  };
+  markdown: string;
+  json: string;
+  timestamp: Date;
+}
+
+export interface Finding {
+  category: 'data' | 'structure' | 'content' | 'technical';
+  severity: 'critical' | 'warning' | 'info';
+  message: string;
+  details?: any;
+}
+
+export interface Risk {
+  level: 'high' | 'medium' | 'low';
+  category: string;
+  description: string;
+  mitigation?: string;
+}
+
+export interface StatusReport {
+  phase: string;
+  progress: number;
+  findings: Finding[];
+  risks: Risk[];
+  nextSteps: string[];
+  artifacts: {
+    path: string;
+    type: string;
+    description: string;
+  }[];
+  summary: string;
+  timestamp: Date;
 }
 
 // Agent base class
