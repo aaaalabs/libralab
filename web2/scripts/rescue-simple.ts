@@ -4,6 +4,7 @@
  * Gets production content running NOW without complex agent coordination
  */
 
+import 'dotenv/config';
 import FirecrawlApp from '@mendable/firecrawl-js';
 import fs from 'fs';
 import path from 'path';
@@ -11,7 +12,7 @@ import * as cheerio from 'cheerio';
 import chalk from 'chalk';
 
 const PRODUCTION_URL = 'https://epic.libralab.ai';
-const API_KEY = process.env.FIRECRAWL_API_KEY!;
+const API_KEY = process.env.FIRECRAWL_API_KEY || 'fc-bbe5576ee3944e15bd7dafb234eb129b';
 
 async function main() {
   console.log(chalk.bold.cyan('\n🚀 Starting Simple Autonomous Rescue\n'));

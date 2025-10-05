@@ -1,0 +1,415 @@
+{
+  "lastUpdated": "2025-10-05T07:05:36.520Z",
+  "version": "2.0-rescued",
+  "source": "production-rescue",
+  "rooms": [
+    {
+      "id": "room-1",
+      "title": "Featured Spaces",
+      "description": "Handpicked rooms for tech professionals [View all spaces](https://epic.libralab.ai/#rooms) Room 6Available Now ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-2",
+      "title": "Claude",
+      "description": "15.5m²Balanced size €1170/mo View Details ",
+      "images": [],
+      "features": [],
+      "size": 5,
+      "price": 1170
+    },
+    {
+      "id": "room-3",
+      "title": "Claude",
+      "description": "Room 615.5m²€1170/moCompleted Perfectly balanced: Not too big, not too small, but with a view that makes you forget everything else. A true all-rounder! ",
+      "images": [],
+      "features": [],
+      "price": 1170,
+      "size": 5
+    },
+    {
+      "id": "room-4",
+      "title": "Features",
+      "description": "Balanced sizePanoramic view [Book on Airbnb](https://airbnb.at/h/libralab-r6) Apply Now Room 2Rented ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-5",
+      "title": "Transformer Loft",
+      "description": "16.5m²Affordable €1110/mo View Details ",
+      "images": [],
+      "features": [],
+      "size": 5,
+      "price": 1110
+    },
+    {
+      "id": "room-6",
+      "title": "Transformer Loft",
+      "description": "Room 216.5m²€1110/moRented Cozy under the roof: The slope makes it quirky, but the price makes everything straight again. Bargain hunters, grab it! ",
+      "images": [],
+      "features": [],
+      "price": 1110,
+      "size": 5
+    },
+    {
+      "id": "room-7",
+      "title": "Features",
+      "description": "AffordableRoof slopecentral location [Book on Airbnb](https://airbnb.at/h/libralab-r2) Apply Now Room 5Coming Soon ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-8",
+      "title": "GPT-4 Suite",
+      "description": "25m²Terrace €1650/mo View Details ",
+      "images": [],
+      "features": [],
+      "size": 25,
+      "price": 1650
+    },
+    {
+      "id": "room-9",
+      "title": "GPT-4 Suite",
+      "description": "Room 525m²€1650/moComing Soon Open the terrace door, let the mountains in: Your life in XXL format - space, panorama and endless fresh air. Here you're the boss! ",
+      "images": [],
+      "features": [],
+      "price": 1650,
+      "size": 525
+    },
+    {
+      "id": "room-10",
+      "title": "Features",
+      "description": "TerraceXXL sizeMountain panorama Apply Now Join a thriving community of tech founders, AI researchers, and innovators [11+\\\\ \\\\ Monthly AI workshop modules in our ai\\_shift community\\\\ \\\\ Tech Education](https://ai-shift.de/) 500+ AI Agency founders in our global AAA network Network Reach [10\\\\ \\\\ Tech-ready rooms launching in 2025\\\\ \\\\ Living Spaces](https://epic.libralab.ai/#available-rooms) [12\\\\ \\\\ Episodes of our \"Spark\" AI founders podcast\\\\ \\\\ Community Content](https://open.spotify.com/show/1BD4pUfxWWyj9yYGpvE9Oe) ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-11",
+      "title": "Living Space",
+      "description": "Modern, comfortable living spaces designed for tech professionals. View rooms ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-12",
+      "title": "Mobility",
+      "description": "Sustainable transportation solutions for our community. [Learn more](https://www.wemovenow.com/e-trike/) ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-13",
+      "title": "Events",
+      "description": "Regular community events and tech meetups. [Learn more](https://aiaustria.com/event-calendar) Join LIBRAlab ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-14",
+      "title": "Want to join a community of tech innovators?",
+      "description": "Join our community of tech professionals in the heart of the Alps. Apply Now ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-15",
+      "title": "Deep Work, Maximum Focus",
+      "description": "Productivity starts with the right environment. At LIBRAlab, you get a space designed for deep work, creativity, and high-level innovation. ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-16",
+      "title": "Workspace Essentials",
+      "description": "- Height-adjustable desk - Ergonomic chair - Ultra-wide monitor - Skylink high-speed internet - Smart lighting ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-17",
+      "title": "Coworking & Collaboration",
+      "description": "- Open workspace - Whiteboards & brainstorming zones - Private meeting room - Freeflow coffee & snacks Your browser does not support the video tag. ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-18",
+      "title": "AI Innovation Hub & Tech Community",
+      "description": "LIBRAlab is an innovation hub for AI professionals, tech founders, and remote entrepreneurs. It's where new ideas take shape, connections are built, and breakthroughs happen. ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-19",
+      "title": "Knowledge & Resources",
+      "description": "- AI & tech workshops - Access to local GPU power - Partnerships with universities & incubators ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-20",
+      "title": "Networking & Growth",
+      "description": "- Live & work alongside AI professionals - Exclusive startup & investor events - Mastermind sessions Your browser does not support the video tag. ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-21",
+      "title": "Innsbruck – Where Innovation Meets Adventure",
+      "description": "A place where cutting-edge technology, outdoor adventure, and high-quality living go hand in hand. Innsbruck offers the perfect balance between urban energy and Alpine nature. ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-22",
+      "title": "Tech & Business",
+      "description": "- AI & quantum research hub - Startup accelerators - International connectivity ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-23",
+      "title": "Outdoor & Lifestyle",
+      "description": "- Ski resorts & mountain bike trails - Hiking & climbing - Vibrant city with culture & events Your browser does not support the video tag. ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-24",
+      "title": "Ask our LIBRAAI",
+      "description": "What makes LibraCoLiving so special? ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-25",
+      "title": "All Available Space",
+      "description": "Choose Room Room 6Available Now ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-26",
+      "title": "Claude",
+      "description": "15.5m²Balanced size €1170/mo View Details ",
+      "images": [],
+      "features": [],
+      "size": 5,
+      "price": 1170
+    },
+    {
+      "id": "room-27",
+      "title": "Claude",
+      "description": "Room 615.5m²€1170/moCompleted Perfectly balanced: Not too big, not too small, but with a view that makes you forget everything else. A true all-rounder! ",
+      "images": [],
+      "features": [],
+      "price": 1170,
+      "size": 5
+    },
+    {
+      "id": "room-28",
+      "title": "Features",
+      "description": "Balanced sizePanoramic view [Book on Airbnb](https://airbnb.at/h/libralab-r6) Apply Now Original Room 9In Progress 80% ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-29",
+      "title": "Anthropic Mini",
+      "description": "15m²View €1090/mo View Details Progress: 80%Started: Mar 2025 ",
+      "images": [],
+      "features": [],
+      "size": 15,
+      "price": 1090
+    },
+    {
+      "id": "room-30",
+      "title": "Anthropic Mini",
+      "description": "Room 915m²€1090/moIn Progress 80% Clever & Compact: Your mini-loft with everything you need. Perfect for minimalists and bargain hunters! ",
+      "images": [],
+      "features": [],
+      "price": 1090,
+      "size": 915
+    },
+    {
+      "id": "room-31",
+      "title": "Features",
+      "description": "ViewBalanced Apply Now Room 3In Progress 40% ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-32",
+      "title": "Diffusion Studio",
+      "description": "24m²Wardrobe €1510/mo View Details Progress: 40%Started: May 2025 ",
+      "images": [],
+      "features": [],
+      "size": 24,
+      "price": 1510
+    },
+    {
+      "id": "room-33",
+      "title": "Diffusion Studio",
+      "description": "Room 324m²€1510/moIn Progress 40% Live like a fashion pro: Massive wardrobe, slanted ceiling for extra charm, and enough space for your private fashion show (or your private lab where you work on taking over the world). ",
+      "images": [],
+      "features": [],
+      "price": 1510,
+      "size": 324
+    },
+    {
+      "id": "room-34",
+      "title": "Features",
+      "description": "WardrobeSlanted CeilingSpacious Apply Now Room 10In Progress 30% ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-35",
+      "title": "Llama Cabin",
+      "description": "10m²Terrace access €890/mo View Details Progress: 30%Started: Apr 2025 ",
+      "images": [],
+      "features": [],
+      "size": 10,
+      "price": 890
+    },
+    {
+      "id": "room-36",
+      "title": "Llama Cabin",
+      "description": "Room 1010m²€890/moIn Progress 30% Tiny House Feeling: Small but mighty! With terrace access and cleverly thought-out layout, you'll make the most of every square meter. ",
+      "images": [],
+      "features": [],
+      "price": 890,
+      "size": 1010
+    },
+    {
+      "id": "room-37",
+      "title": "Features",
+      "description": "Terrace accessMinimalist Apply Now Room 1Coming Soon ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-38",
+      "title": "DALL-E Suite",
+      "description": "15m²Balcony €1250/mo View Details ",
+      "images": [],
+      "features": [],
+      "size": 15,
+      "price": 1250
+    },
+    {
+      "id": "room-39",
+      "title": "DALL-E Suite",
+      "description": "Room 115m²€1250/moComing Soon Your VIP spot: Balcony with mountain cinema included and the kitchen right next door - you can't get to your morning coffee faster! ",
+      "images": [],
+      "features": [],
+      "price": 1250,
+      "size": 115
+    },
+    {
+      "id": "room-40",
+      "title": "Features",
+      "description": "BalconyDirect kitchen accessMountain panorama Apply Now Room 2Rented ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-41",
+      "title": "Transformer Loft",
+      "description": "16.5m²Affordable €1110/mo View Details ",
+      "images": [],
+      "features": [],
+      "size": 5,
+      "price": 1110
+    },
+    {
+      "id": "room-42",
+      "title": "Transformer Loft",
+      "description": "Room 216.5m²€1110/moRented Cozy under the roof: The slope makes it quirky, but the price makes everything straight again. Bargain hunters, grab it! ",
+      "images": [],
+      "features": [],
+      "price": 1110,
+      "size": 5
+    },
+    {
+      "id": "room-43",
+      "title": "Features",
+      "description": "AffordableRoof slopecentral location [Book on Airbnb](https://airbnb.at/h/libralab-r2) Apply Now Room 8Coming Soon ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-44",
+      "title": "Gemini Retreat",
+      "description": "24.5m²Terrace €1630/mo View Details ",
+      "images": [],
+      "features": [],
+      "size": 5,
+      "price": 1630
+    },
+    {
+      "id": "room-45",
+      "title": "Gemini Retreat",
+      "description": "Room 824.5m²€1630/moComing Soon Vacation feeling guaranteed: Terrace, garden, and a view that wakes you up on cloud nine every morning. Room for everything that's fun! ",
+      "images": [],
+      "features": [],
+      "price": 1630,
+      "size": 5
+    },
+    {
+      "id": "room-46",
+      "title": "Features",
+      "description": "TerraceGarden accessView Apply Now ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-47",
+      "title": "Communal Areas",
+      "description": "Enjoy our shared spaces designed for relaxation, productivity, and community building ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-48",
+      "title": "Coworking Space",
+      "description": "High-speed internet, ergonomic chairs, and a productive atmosphere for focused work 24/7 AccessHigh-Speed InternetErgonomic Chairs ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-49",
+      "title": "Community Kitchen",
+      "description": "Fully equipped kitchen with appliances, utensils, and a dining area for socializing Fully EquippedDining AreaStorage Space ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-50",
+      "title": "Ground Floor Bathrooms",
+      "description": "Clean and well-maintained bathrooms with modern fixtures and amenities Modern FixturesWell Maintained ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-51",
+      "title": "Basement & Garden",
+      "description": "Storage space and garden area with bike parking Storage SpaceGarden AccessBike Parking Join LIBRAlab ",
+      "images": [],
+      "features": []
+    },
+    {
+      "id": "room-52",
+      "title": "Tired of the usual startup hubs?",
+      "description": "Discover a fresh perspective in our Alpine tech paradise. Apply Now ",
+      "images": [],
+      "features": []
+    }
+  ],
+  "location": {
+    "description": "AI-Powered Co-Living Space near Innsbruck, Austria",
+    "address": "Omes, near Innsbruck"
+  }
+}
